@@ -1,0 +1,46 @@
+.contAll {
+    flex-direction: row;
+    font-family: Inter;
+  }
+  
+  .central {
+    background: #ffffff;
+    border-radius: 20px;
+  }
+  
+  .containerInput {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  
+  /*PHONE*/
+  @media only screen and (min-width: 300px) and (max-width: 600px) {
+    .contAll {
+      flex-direction: column-reverse;
+    }
+  
+    .col {
+      width: 100%;
+    }
+  
+    .containerInput {
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      display: contents;
+    }
+  
+    .input-btn {
+      width: 50vw;
+    }
+  }
+  
+  /*TABLET*/
+  @media only screen and (min-width: 601px) and (max-width: 1300px) {
+    .input-btn {
+      width: 20vw;
+    }
+  }
+  

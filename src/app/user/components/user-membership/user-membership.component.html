@@ -1,0 +1,222 @@
+<app-menu></app-menu>
+<div
+  class="w-100 d-flex mb-5 flex-column align-items-center justify-content-center mt-5"
+>
+  <div *ngIf="currentMembership" class="col-md-12 col-sm-12 card vacio">
+    <div class="card-body text-center">
+      <h5>Su membresía actual es {{ currentMembership.name }}</h5>
+      <span *ngIf="validDate"
+        >Válido hasta el: <b> {{ validDate }} </b></span
+      >
+    </div>
+  </div>
+
+  <ng-container *ngIf="membresias">
+    <div *ngIf="membresias.length > 0">
+      <div class="w-100 d-flex flex-wrap justify-content-center">
+        <div
+          *ngFor="let item of membresias"
+          class="card p-0 mx-2 d-flex justify-content-center"
+        >
+          <div class="card-header text-center text-white p-2 m-0 nuevo">
+            <h3>{{ item.name | uppercase }}</h3>
+          </div>
+          <div class="card-body">
+            <div [innerHTML]="item.description"></div>
+            <div
+              *ngIf="item.code != 'BRONCE'"
+              class="text-center mt-1 fs-4 fw-bold w-100 text"
+            >
+              {{ item.price | currency }}
+            </div>
+            <div
+              *ngIf="item.code == 'BRONCE'"
+              class="text-center mt-1 fs-4 fw-bold w-100 text"
+            >
+              {{ "0" | currency }}
+            </div>
+          </div>
+          <ng-container *ngIf="item.state === true">
+            <div
+              data-bs-toggle="modal"
+              data-bs-target="#warningModal"
+              *ngIf="item.code != 'BRONCE'"
+              class="card-footer d-flex aling-items-center justify-content-center"
+            >
+              <button
+                class="btn nuevo"
+                (click)="setMembershipBuy(item)"
+                type="button"
+              >
+                COMPRAR
+              </button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="membresias.length === 0">
+      <div class="col-md-12 col-sm-12 card vacio">
+        <div class="card-body text-center">
+          <h4>No hay membresías disponibles</h4>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <br /><br />
+</div>
+
+<div class="w-100 position-fixed bottom-0">
+  <app-footer></app-footer>
+</div>
+
+<!-- ADVERTENCIA -->
+<div class="modal" id="warningModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Comprar membresía</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form #frmCupo="ngForm">
+        <p class="text-justify-center">Tiempo de la membresía.</p>
+        <select
+          name="tiempom"
+          id="tiempom"
+          class="form-select"
+          #tiempom="ngModel"
+          [(ngModel)]="selectedTipo"
+          (change)="onSelectTipo()"
+        >
+          <option disabled>Seleccione una opción</option>
+          <option value="1">Un mes</option>
+          <option value="2">Un año</option>
+        </select>
+        <div
+            *ngIf="
+            tiempom.invalid && (tiempom.dirty || tiempom.touched)
+            "
+            class="text-danger form-group"
+          >
+            <small class="form-group" *ngIf="tiempom.errors?.['required']">
+              Seleccione una opción
+            </small>
+          </div>
+        <ng-container *ngIf="this.valorM">
+          <p class="text-justify-center mt-4">
+            El valor de la membresía es de : {{ this.valorM }}$
+          </p>
+        </ng-container>
+        <p class="text-justify-center mt-4">Elija la forma de pago.</p>
+        <select
+          name="pagom"
+          id="pagom"
+          class="form-select"
+          [(ngModel)]="selectedPago"
+          #pagom="ngModel"
+          (change)="onSelectPago()"
+        >
+          <option disabled>Seleccione una opción</option>
+          <option value="1">Billetera</option>
+          <option value="2">Cupo</option>
+          <option value="3">Tarjeta de crédito</option>
+        </select>
+        <div
+            *ngIf="
+            pagom.invalid && (pagom.dirty || pagom.touched)
+            "
+            class="text-danger form-group"
+          >
+            <small class="form-group" *ngIf="pagom.errors?.['required']">
+              Seleccione una opción
+            </small>
+          </div>
+        <ng-container *ngIf="this.cupo === true">
+          <p class="text-justify-center mt-4">Ingrese el código del cupo.</p>
+          <div class="d-flex justify-content-center align-items-center">
+            <input
+              id="codigoC"
+              type="number"
+              class="form-control"
+              placeholder=" Código cupo"
+              required
+              email
+              ngModel
+              name="codigoC"
+              #codigoC="ngModel"
+              [ngClass]="'input'"
+              (change)="onValidateCodigo(codigoC.value)"
+            />
+            <div
+            *ngIf="
+            codigoC.invalid && (codigoC.dirty || codigoC.touched)
+            "
+            class="text-danger form-group"
+          >
+            <small class="form-group" *ngIf="codigoC.errors?.['required']">
+              Ingrese el codigo.
+            </small>
+          </div>
+          </div>
+          <ng-container *ngIf="this.statusCodigo ===true">
+            <p class="text-justify-center mt-4">
+              Cupón del {{ this.porcentaje }}% de descuento.
+            </p>
+          </ng-container>
+          <ng-container *ngIf="this.statusCodigo ===false">
+            <p class="text-justify-center mt-4 text-danger">
+              El código ingresado es incorrecto.
+            </p>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="this.pagar === false">
+          <p class="text-justify-center mt-4 text-danger">
+            Tú saldo es insuficiente para realizar esta transacción.
+          </p>
+        </ng-container>
+        <div class="form-group text-center">
+          <button type="button" (click)="onBuyMembership()" class="btn nuevo mt-3"  [disabled]="botonDeshabilitado">
+            Aceptar
+          </button>
+        </div>
+      </form>
+    </div>
+    
+    </div>
+  </div>
+</div>
+
+<app-modal-alerts
+  [idModal]="'infoBuyMembership'"
+  [icono]="'./assets/img/warning.png'"
+  [titulo]="'¿Esta seguro?'"
+  [descripcion]="''"
+  (successModal)="onBuyMembership()"
+  [tipo]="0"
+  #infoBuyMembership
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'successBuyM'"
+  [icono]="'./assets/img/success.png'"
+  [titulo]="'Proceso Exitoso'"
+  [descripcion]="message"
+  (successModal)="onRedirigir()"
+  [tipo]="0"
+  #successBuyM
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'failBuyM'"
+  [icono]="'./assets/img/fail.png'"
+  [titulo]="'Proceso No Exitoso'"
+  [descripcion]="message"
+  [tipo]="0"
+  #failBuyM
+></app-modal-alerts>

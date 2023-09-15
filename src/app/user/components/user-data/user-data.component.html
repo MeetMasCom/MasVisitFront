@@ -1,0 +1,1370 @@
+<app-menu></app-menu>
+<div class="d-flex contAll" style="min-height: 35vw">
+  <div class="col-md-12 col-sm-12 d-flex flex-column align-items-center">
+    <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="pills-home-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-home"
+          type="button"
+          role="tab"
+          aria-controls="pills-home"
+          aria-selected="true"
+        >
+          Datos Básicos
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="pills-profile-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-profile"
+          type="button"
+          role="tab"
+          aria-controls="pills-profile"
+          aria-selected="false"
+        >
+          Datos Adicionales
+        </button>
+      </li>
+      <!-- <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="pills-redes-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-redes"
+          type="button"
+          role="tab"
+          aria-controls="pills-redes"
+          aria-selected="false"
+        >
+          Ganar Comisión
+        </button>
+      </li> -->
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="pills-password-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-password"
+          type="button"
+          role="tab"
+          aria-controls="pills-password"
+          aria-selected="false"
+        >
+          Cambiar Contraseña
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="pills-user-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-user"
+          type="button"
+          role="tab"
+          aria-controls="pills-user"
+          aria-selected="false"
+        >
+          Verificar Usuario
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="pills-tabContent">
+      <div
+        class="tab-pane fade show active"
+        id="pills-home"
+        role="tabpanel"
+        aria-labelledby="pills-home-tab"
+      >
+        <div class="container">
+          <div class="card p-4">
+            <form
+              #fmrUpdateBasic="ngForm"
+              (ngSubmit)="onUpdateBasic(fmrUpdateBasic)"
+              aria-disabled
+            >
+              <div class="col-12 containerInput mt-2 mb-3">
+                <div class="form-group col-md-6 col-sm-12 p-2">
+                  <label class="mb-1">Imagen</label>
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="imagen"
+                    name="imagen"
+                    required
+                    ngModel
+                    #imagen="ngModel"
+                    [ngClass]="'input'"
+                    (change)="onChange($event)"
+                    accept="image/png"
+                  />
+                  <ng-container *ngIf="dataU?.image !== ''">
+                    <span>Ya tiene cargada una imagen</span>
+                  </ng-container>
+                </div>
+                <div class="form-group col-md-6 col-sm-12 p-2">
+                  <label class="mb-1">Descripción</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Descripción Breve"
+                    id="description"
+                    name="description"
+                    required
+                    ngModel="{{ dataU?.description }}"
+                    #description="ngModel"
+                    [ngClass]="'input'"
+                  />
+                  <div
+                    *ngIf="
+                      description.invalid &&
+                      (description.dirty || description.touched)
+                    "
+                    class="text-danger form-group position-absolute"
+                  >
+                    <small
+                      class="form-group"
+                      *ngIf="description.errors?.['required']"
+                    >
+                      Campo requerido.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 containerInput mt-2 mb-3">
+                <div class="form-group col-md-6 col-sm-12 p-2">
+                  <label class="mb-1">Nombres</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nombres Completos"
+                    id="firstname"
+                    name="firstname"
+                    required
+                    ngModel="{{ dataU?.firstname }}"
+                    #firstname="ngModel"
+                    [ngClass]="'input'"
+                  />
+                  <div
+                    *ngIf="
+                      firstname.invalid &&
+                      (firstname.dirty || firstname.touched)
+                    "
+                    class="text-danger form-group position-absolute"
+                  >
+                    <small
+                      class="form-group"
+                      *ngIf="firstname.errors?.['required']"
+                    >
+                      Campo requerido.
+                    </small>
+                  </div>
+                </div>
+                <div class="form-group col-md-6 col-sm-12 p-2">
+                  <label class="mb-1">Apellidos</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Apellidos Completos"
+                    id="lastname"
+                    required
+                    ngModel="{{ dataU?.lastname }}"
+                    name="lastname"
+                    #lastname="ngModel"
+                    [ngClass]="'input'"
+                  />
+                  <div
+                    *ngIf="
+                      lastname.invalid && (lastname.dirty || lastname.touched)
+                    "
+                    class="text-danger form-group position-absolute"
+                  >
+                    <small
+                      class="form-group"
+                      *ngIf="lastname.errors?.['required']"
+                    >
+                      Campo requerido.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 containerInput mt-2 mb-3">
+                <div class="form-group col-md-6 col-sm-12 p-2">
+                  <label class="mb-1">Estudios</label>
+                  <ng-container>
+                    <select
+                      class="form-control"
+                      id="studies"
+                      required
+                      ngModel
+                      name="studies"
+                      #studies="ngModel"
+                      [ngClass]="'select'"
+                    >
+                      <option value="" disabled selected>
+                        Seleccione una opción
+                      </option>
+                      <option *ngFor="let item of studiesU" [value]="item.id">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                    <div
+                      *ngIf="
+                        studies.invalid && (studies.dirty || studies.touched)
+                      "
+                      class="text-danger form-group position-absolute"
+                    >
+                      <small
+                        class="form-group"
+                        *ngIf="studies.errors?.['required']"
+                      >
+                        Campo requerido.
+                      </small>
+                    </div>
+                  </ng-container>
+                </div>
+                <div class="form-group col-md-6 col-sm-12 p-2">
+                  <label class="mb-1">Idioma nativo</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Idioma nativo"
+                    id="inativo"
+                    required
+                    ngModel="{{ dataU?.motherLanguague }}"
+                    name="inativo"
+                    #inativo="ngModel"
+                    [ngClass]="'input'"
+                  />
+                  <div
+                    *ngIf="
+                      inativo.invalid && (inativo.dirty || inativo.touched)
+                    "
+                    class="text-danger form-group position-absolute"
+                  >
+                    <small
+                      class="form-group"
+                      *ngIf="inativo.errors?.['required']"
+                    >
+                      Campo requerido.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 containerInput mt-2 mb-3">
+                <div class="form-group col-md-6 col-sm-12 p-2">
+                  <label class="mb-1">Jornada Laboral</label>
+                  <ng-container>
+                    <select
+                      class="form-control"
+                      id="journal"
+                      required
+                      ngModel
+                      name="journal"
+                      #journal="ngModel"
+                      [ngClass]="'select'"
+                    >
+                      <option value="" disabled selected>
+                        Seleccione una opción
+                      </option>
+                      <option *ngFor="let item of jornadas" [value]="item.name">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                    <div
+                      *ngIf="
+                        journal.invalid && (journal.dirty || journal.touched)
+                      "
+                      class="text-danger form-group position-absolute"
+                    >
+                      <small
+                        class="form-group"
+                        *ngIf="journal.errors?.['required']"
+                      >
+                        Campo requerido.
+                      </small>
+                    </div>
+                  </ng-container>
+                </div>
+                <div class="form-group col-md-6 col-sm-12 p-2">
+                  <label class="mb-1">Dependencia Laboral</label>
+                  <ng-container>
+                    <select
+                      class="form-control"
+                      id="deplab"
+                      required
+                      ngModel
+                      name="deplab"
+                      #deplab="ngModel"
+                      [ngClass]="'select'"
+                    >
+                      <option value="" disabled selected>
+                        Seleccione una opción
+                      </option>
+                      <option
+                        *ngFor="let item of dependencia"
+                        [value]="item.name"
+                      >
+                        {{ item.name }}
+                      </option>
+                    </select>
+                    <div
+                      *ngIf="deplab.invalid && (deplab.dirty || deplab.touched)"
+                      class="text-danger form-group position-absolute"
+                    >
+                      <small
+                        class="form-group"
+                        *ngIf="deplab.errors?.['required']"
+                      >
+                        Campo requerido.
+                      </small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="form-group text-center">
+                  <input
+                    type="submit"
+                    class="btn"
+                    value="Actualizar"
+                    [disabled]="!fmrUpdateBasic['valid']"
+                    [ngClass]="'input-btn'"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="pills-profile"
+        role="tabpanel"
+        aria-labelledby="pills-profile-tab"
+      >
+        <!-- <div class="container d-none">
+        <form
+          #fmrUpdateAddres="ngForm"
+          (ngSubmit)="onUpdateAddress(fmrUpdateAddres)"
+        >
+          <div class="col-12 containerInput mt-2 mb-3">
+            <div class="form-group col-md-6 col-sm-12 p-2">
+              <label class="mb-1">Tipo dirección</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Casa, Oficina, etc."
+                id="address"
+                name="address"
+                required
+                ngModel
+                #address="ngModel"
+                [ngClass]="'input'"
+              />
+              <div
+                *ngIf="address.invalid && (address.dirty || address.touched)"
+                class="text-danger form-group position-absolute"
+              >
+                <small class="form-group" *ngIf="address.errors?.['required']">
+                  Campo requerido.
+                </small>
+              </div>
+            </div>
+            <div class="form-group col-md-6 col-sm-12 p-2">
+              <label class="mb-1">Calle principal</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Calle principal"
+                id="principal"
+                required
+                ngModel
+                name="principal"
+                #principal="ngModel"
+                [ngClass]="'input'"
+              />
+              <div
+                *ngIf="
+                  principal.invalid && (principal.dirty || principal.touched)
+                "
+                class="text-danger form-group position-absolute"
+              >
+                <small
+                  class="form-group"
+                  *ngIf="principal.errors?.['required']"
+                >
+                  Campo requerido.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 containerInput mt-2 mb-3">
+            <div class="form-group col-md-6 col-sm-12 p-2">
+              <label class="mb-1">Calle secundaria</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Calle secundaria"
+                id="secundaria"
+                name="secundaria"
+                required
+                ngModel
+                #secundaria="ngModel"
+                [ngClass]="'input'"
+              />
+              <div
+                *ngIf="
+                  secundaria.invalid && (secundaria.dirty || secundaria.touched)
+                "
+                class="text-danger form-group position-absolute"
+              >
+                <small
+                  class="form-group"
+                  *ngIf="secundaria.errors?.['required']"
+                >
+                  Campo requerido.
+                </small>
+              </div>
+            </div>
+            <div class="form-group col-md-6 col-sm-12 p-2">
+              <label class="mb-1">Referencia</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Referencia"
+                id="referencia"
+                required
+                ngModel
+                name="referencia"
+                #referencia="ngModel"
+                [ngClass]="'input'"
+              />
+              <div
+                *ngIf="
+                  referencia.invalid && (referencia.dirty || referencia.touched)
+                "
+                class="text-danger form-group position-absolute"
+              >
+                <small
+                  class="form-group"
+                  *ngIf="referencia.errors?.['required']"
+                >
+                  Campo requerido.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 containerInput mt-2 mb-3">
+            <div class="form-group col-md-6 col-sm-12 p-2">
+              <label class="mb-1">Identificación</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Cédula / DNI / Pasaporte"
+                id="identification"
+                required
+                ngModel
+                name="identification"
+                #identification="ngModel"
+                [ngClass]="'input'"
+              />
+              <div
+                *ngIf="
+                  identification.invalid &&
+                  (identification.dirty || identification.touched)
+                "
+                class="text-danger form-group position-absolute"
+              >
+                <small
+                  class="form-group"
+                  *ngIf="identification.errors?.['required']"
+                >
+                  Campo requerido.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-group text-center">
+              <input
+                type="submit"
+                class="btn"
+                value="Actualizar"
+                [disabled]="!fmrUpdateAddres['valid']"
+                [ngClass]="'input-btn'"
+              />
+            </div>            
+          </div>
+              <div class="form-group text-center">
+                <input
+                  type="submit"
+                  class="btn"
+                  value="Actualizar"
+                  [disabled]="!fmrUpdateAddres['valid']"
+                  [ngClass]="'input-btn'"
+                />
+              </div>            
+            </div>
+        </form>
+      </div> -->
+
+        <div class="container card p-4">
+          <form #fmrUpdate="ngForm" (ngSubmit)="onUpdate(fmrUpdate)">
+            <!-- <div class="col-12 containerInput mb-3">
+              <div class="form-group col-md-6 col-sm-12 p-2 d-none">
+                <label class="mb-1">Peso</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Peso (Kg)"
+                  id="weight"
+                  required
+                  ngModel="{{ dataU?.weight }}"
+                  name="weight"
+                  #weight="ngModel"
+                  [ngClass]="'input'"
+                />
+                <div
+                  *ngIf="weight.invalid && (weight.dirty || weight.touched)"
+                  class="text-danger form-group position-absolute"
+                >
+                  <small class="form-group" *ngIf="weight.errors?.['required']">
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+              <div class="form-group col-md-6 col-sm-12 p-2 d-none">
+                <label class="mb-1">Talla</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Talla / Altura"
+                  id="talla"
+                  required
+                  ngModel="{{ dataU?.height }}"
+                  name="talla"
+                  #talla="ngModel"
+                  [ngClass]="'input'"
+                />
+                <div
+                  *ngIf="talla.invalid && (talla.dirty || talla.touched)"
+                  class="text-danger form-group position-absolute"
+                >
+                  <small class="form-group" *ngIf="talla.errors?.['required']">
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+            </div> -->
+            <div class="col-12 containerInput mb-3 ">
+              <!-- <div class="form-group col-md-6 col-sm-12 p-2 d-none">
+                <label class="mb-1">Color de ojos</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Color de ojos"
+                  id="ojoscolor"
+                  required
+                  ngModel="{{ dataU?.eyeColor }}"
+                  name="ojoscolor"
+                  #ojoscolor="ngModel"
+                  [ngClass]="'input'"
+                />
+                <div
+                  *ngIf="
+                    ojoscolor.invalid && (ojoscolor.dirty || ojoscolor.touched)
+                  "
+                  class="text-danger form-group position-absolute"
+                >
+                  <small
+                    class="form-group"
+                    *ngIf="ojoscolor.errors?.['required']"
+                  >
+                    Campo requerido.
+                  </small>
+                </div>
+              </div> -->
+              <div class="form-group col-md-6 col-sm-12 p-2">
+                <label class="mb-1">Política</label>
+
+                <select
+                  class="form-select"
+                  id="policy"
+                  required
+                  ngModel
+                  name="policy"
+                  #policy="ngModel"
+                  [ngClass]="'select'"
+                >
+                  <option value="" disabled selected>
+                    Seleccione una opción
+                  </option>
+                  <option *ngFor="let item of policies" [value]="item.id">
+                    {{ item.name }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="policy.invalid && (policy.dirty || policy.touched)"
+                  class="text-danger form-group position-absolute"
+                >
+                  <small class="form-group" *ngIf="policy.errors?.['required']">
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+              <div class="form-group col-md-6 col-sm-12 p-2">
+                <label class="mb-1">Residencia actual</label>
+
+                <select
+                  class="form-select d-flex"
+                  id="residencia"
+                  required
+                  ngModel
+                  name="residencia"
+                  #residencia="ngModel"
+                  [ngClass]="'select'"
+                >
+                  <option value="" selected disabled>
+                    Seleccione una opción
+                  </option>
+                  <option *ngFor="let item of countries" [value]="item._id">
+                    {{ item.name }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="
+                    residencia.invalid &&
+                    (residencia.dirty || residencia.touched)
+                  "
+                  class="text-danger form-group position-absolute"
+                >
+                  <small
+                    class="form-group"
+                    *ngIf="residencia.errors?.['required']"
+                  >
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+              
+            </div>
+            <!-- <div class="col-12 containerInput mb-3">
+              <div class="form-group col-md-6 col-sm-12 p-2 d-none">
+                <label class="mb-1">Estado Civil</label>
+                <select
+                  class="form-select"
+                  id="statecivil"
+                  required
+                  ngModel
+                  name="statecivil"
+                  #statecivil="ngModel"
+                  [ngClass]="'select'"
+                >
+                  <option value="" disabled selected>
+                    Seleccione una opción
+                  </option>
+                  <option *ngFor="let item of stateCivil" [value]="item.id">
+                    {{ item.name }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="
+                    statecivil.invalid &&
+                    (statecivil.dirty || statecivil.touched)
+                  "
+                  class="text-danger form-group position-absolute"
+                >
+                  <small
+                    class="form-group"
+                    *ngIf="statecivil.errors?.['required']"
+                  >
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+              
+            </div> -->
+            <!-- <div class="col-12 containerInput mb-3">
+              <div class="form-group col-md-6 col-sm-12 p-2 d-none">
+                <label class="mb-1">Hijos</label>
+                <select
+                  class="form-select"
+                  id="children"
+                  required
+                  ngModel
+                  name="children"
+                  #children="ngModel"
+                  [ngClass]="'select'"
+                >
+                  <option value="" disabled selected>
+                    Seleccione una opción
+                  </option>
+                  <option *ngFor="let item of childrens" [value]="item.id">
+                    {{ item.name }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="
+                    children.invalid && (children.dirty || children.touched)
+                  "
+                  class="text-danger form-group position-absolute"
+                >
+                  <small
+                    class="form-group"
+                    *ngIf="children.errors?.['required']"
+                  >
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+              <div class="form-group col-md-6 col-sm-12 p-2 d-none">
+                <label class="mb-1">Etnia</label>
+                <select
+                  class="form-select"
+                  id="etnia"
+                  required
+                  ngModel
+                  name="etnia"
+                  [ngClass]="'select'"
+                >
+                  <option value="" disabled selected>
+                    Seleccione una opción
+                  </option>
+                  <option *ngFor="let item of etnia" [value]="item.name">
+                    {{ item.name }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="etnia.invalid && (etnia.dirty || etnia.touched)"
+                  class="text-danger form-group position-absolute"
+                >
+                  <small class="form-group" *ngIf="etnia.errors?.['required']">
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 containerInput mb-3">
+              <div class="form-group col-md-6 col-sm-12 p-2 d-none">
+                <label class="mb-1">Tipo de cuerpo</label>
+                <select
+                  class="form-select"
+                  id="bodyform"
+                  required
+                  ngModel
+                  name="bodyform"
+                  #bodyform="ngModel"
+                  [ngClass]="'select'"
+                >
+                  <option value="" disabled selected>
+                    Seleccione una opción
+                  </option>
+                  <option *ngFor="let item of bodysF" [value]="item.id">
+                    {{ item.name }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="
+                    bodyform.invalid && (bodyform.dirty || bodyform.touched)
+                  "
+                  class="text-danger form-group position-absolute"
+                >
+                  <small
+                    class="form-group"
+                    *ngIf="bodyform.errors?.['required']"
+                  >
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+              <div class="form-group col-md-6 col-sm-12 p-2 d-none">
+                <label class="mb-1">Signo zodiacal</label>
+                <select
+                  class="form-select"
+                  id="signz"
+                  required
+                  ngModel
+                  name="signz"
+                  #signz="ngModel"
+                  [ngClass]="'select'"
+                >
+                  <option value="" disabled selected>
+                    Seleccione una opción
+                  </option>
+                  <option *ngFor="let item of zodiacal" [value]="item.id">
+                    {{ item.name }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="signz.invalid && (signz.dirty || signz.touched)"
+                  class="text-danger form-group position-absolute"
+                >
+                  <small class="form-group" *ngIf="signz.errors?.['required']">
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+            </div> -->
+            <div class="col-12 containerInput mb-3">
+              <div class="form-group col-md-6 col-sm-12 p-2">
+                <label class="mb-1">Profesión</label>
+                <select
+                  class="form-select"
+                  id="profesion"
+                  required
+                  ngModel
+                  name="profesion"
+                  #profesion="ngModel"
+                  [ngClass]="'select'"
+                >
+                  <option value="" disabled selected>
+                    Seleccione una opción
+                  </option>
+                  <option *ngFor="let item of job" [value]="item.id">
+                    {{ item.name }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="
+                    profesion.invalid && (profesion.dirty || profesion.touched)
+                  "
+                  class="text-danger form-group position-absolute"
+                >
+                  <small
+                    class="form-group"
+                    *ngIf="profesion.errors?.['required']"
+                  >
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+              <div class="form-group col-md-6 col-sm-12 p-2">
+                <label class="mb-1">Practica Deporte</label>
+                <select
+                  class="form-select"
+                  id="sport"
+                  required
+                  ngModel
+                  name="sport"
+                  #sport="ngModel"
+                  [ngClass]="'select'"
+                >
+                  <option value="" disabled selected>
+                    Seleccione una opción
+                  </option>
+                  <option *ngFor="let item of deportes" [value]="item.id">
+                    {{ item.name }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="sport.invalid && (sport.dirty || sport.touched)"
+                  class="text-danger form-group position-absolute"
+                >
+                  <small class="form-group" *ngIf="sport.errors?.['required']">
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 containerInput mb-3">
+              <div class="form-group col-md-6 col-sm-12 p-2">
+                <label class="mb-1">Idiomas</label>
+                <ng-multiselect-dropdown
+                  [placeholder]="'Seleccione una opción'"
+                  [settings]="dropdownSettings"
+                  [data]="idiomasList"
+                  [(ngModel)]="selectedIdioma"
+                  (onSelect)="onSelectIdioma($event)"
+                  (onSelectAll)="onSelectAllIdioma($event)"
+                  (onDeSelect)="onDeSelectIdioma($event)"
+                  [ngModelOptions]="{ standalone: true }"
+                >
+                </ng-multiselect-dropdown>
+              </div>
+              <div class="form-group col-md-6 col-sm-12 p-2">
+                <label class="mb-1">Ciudad</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Ciudad"
+                    id="ciudad"
+                    required
+                    ngModel="{{ dataU?.city }}"
+                    name="ciudad"
+                    #ciudad="ngModel"
+                    [ngClass]="'input'"
+                  />
+                  <div
+                  *ngIf="
+                    ciudad.invalid && (ciudad.dirty || ciudad.touched)
+                  "
+                  class="text-danger form-group position-absolute"
+                >
+                  <small
+                    class="form-group"
+                    *ngIf="ciudad.errors?.['required']"
+                  >
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+              <!-- <div class="form-group col-md-6 col-sm-12 p-2 d-none">
+                <label class="mb-1">Pasatiempos</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Pasatiempos (separe con comas)"
+                  id="hobies"
+                  ngModel
+                  name="hobies"
+                  #hobies="ngModel"
+                  [ngClass]="'input'"
+                />
+                <div
+                  *ngIf="hobies.invalid && (hobies.dirty || hobies.touched)"
+                  class="text-danger form-group position-absolute"
+                >
+                  <small class="form-group" *ngIf="hobies.errors?.['required']">
+                    Campo requerido.
+                  </small>
+                </div>
+              </div> -->
+            </div>
+            <div class="col-12 containerInput mb-3">
+              <div class="form-group col-md-6 col-sm-12 p-2 d-none">
+                <label class="mb-1">Comida</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Comida que le gusta (separe con comas)"
+                  id="food"
+                  ngModel
+                  name="food"
+                  #food="ngModel"
+                  [ngClass]="'input'"
+                />
+                <div
+                  *ngIf="food.invalid && (food.dirty || food.touched)"
+                  class="text-danger form-group position-absolute"
+                >
+                  <small class="form-group" *ngIf="food.errors?.['required']">
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+             
+            </div>
+            
+
+            <div class="col-sm-12">
+              <div class="form-group text-center">
+                <input
+                  type="submit"
+                  class="btn"
+                  value="Actualizar Datos"
+                  [disabled]="!fmrUpdate['valid']"
+                  [ngClass]="'input-btn'"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="pills-redes"
+        role="tabpanel"
+        aria-labelledby="pills-redes-tab"
+      >
+        <ng-container>
+          <div class="container mt-2 p-5 card">
+            <form #fmrPasswordUD="ngForm" (ngSubmit)="onRecoverUD()">
+              <strong>Ingrese el nombre de usuario registrado</strong><br />
+              <div class="col-12 containerInput mt-2 mb-3">
+                <div class="form-group col-md-12 col-sm-12 mt-3">
+                  <label class="form-label">Usuario</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Usuario"
+                    id="userUD"
+                    name="userUD"
+                    required
+                    ngModel
+                    #userUD="ngModel"
+                    [ngClass]="'input'"
+                  />
+                  <div
+                    *ngIf="userUD.invalid && (userUD.dirty || userUD.touched)"
+                    class="text-danger form-group position-absolute"
+                  >
+                    <small
+                      class="form-group"
+                      *ngIf="userUD.errors?.['required']"
+                    >
+                      Campo requerido.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 mt-5">
+                <div class="form-group text-center">
+                  <input
+                    type="submit"
+                    class="btn"
+                    value="ENVIAR"
+                    [disabled]="!fmrPasswordUD['valid']"
+                    [ngClass]="'input-btn'"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </ng-container>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="pills-password"
+        role="tabpanel"
+        aria-labelledby="pills-password-tab"
+      >
+        <ng-container *ngIf="showPass1">
+          <div class="container card mt-2 p-5">
+            <form #fmrPasswordUD="ngForm" (ngSubmit)="onRecoverUD()">
+              <strong>Ingrese el nombre de usuario registrado</strong><br />
+              <div class="col-12 containerInput mt-2 mb-3">
+                <div class="form-group col-md-12 col-sm-12 mt-3">
+                  <label class="form-label">Usuario</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Usuario"
+                    id="userUD"
+                    name="userUD"
+                    required
+                    ngModel
+                    #userUD="ngModel"
+                    [ngClass]="'input'"
+                  />
+                  <div
+                    *ngIf="userUD.invalid && (userUD.dirty || userUD.touched)"
+                    class="text-danger form-group position-absolute"
+                  >
+                    <small
+                      class="form-group"
+                      *ngIf="userUD.errors?.['required']"
+                    >
+                      Campo requerido.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 mt-5">
+                <div class="form-group text-center">
+                  <input
+                    type="submit"
+                    class="btn"
+                    value="ENVIAR"
+                    [disabled]="!fmrPasswordUD['valid']"
+                    [ngClass]="'input-btn'"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="showPass2">
+          <div class="container card p-5">
+            <form #fmrResetUD="ngForm" (ngSubmit)="onResetUD(fmrResetUD)">
+              <div class="col-12 containerInput mt-2 mb-3">
+                <div class="form-group col-md-12 col-sm-12 mt-3">
+                  <label class="form-label">Código</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Código"
+                    id="codeUD"
+                    name="codeUD"
+                    required
+                    ngModel
+                    #codeUD="ngModel"
+                    [ngClass]="'input'"
+                  />
+                  <div
+                    *ngIf="codeUD.invalid && (codeUD.dirty || codeUD.touched)"
+                    class="text-danger form-group position-absolute mb-3"
+                  >
+                    <small
+                      class="form-group"
+                      *ngIf="codeUD.errors?.['required']"
+                    >
+                      Campo requerido.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 containerInput mt-3 mb-3">
+                <div class="form-group col-md-12 col-sm-12 mt-3">
+                  <label class="form-label">Contraseña Nueva</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Contraseña Nueva"
+                    id="passNewUD"
+                    name="passNewUD"
+                    required
+                    ngModel
+                    minlength="8"
+                    #passNewUD="ngModel"
+                    [ngClass]="'input'"
+                  />
+                  <div
+                    *ngIf="
+                      passNewUD.invalid &&
+                      (passNewUD.dirty || passNewUD.touched)
+                    "
+                    class="text-danger form-group position-absolute mb-3"
+                  >
+                    <small
+                      class="form-group"
+                      *ngIf="passNewUD.errors?.['required']"
+                    >
+                      Campo requerido.
+                    </small>
+                    <small
+                      class="form-group"
+                      *ngIf="passNewUD.errors?.['minlength']"
+                    >
+                      Debe tener mínino 8 caracteres.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 containerInput mt-3 mb-3">
+                <div class="form-group col-md-12 col-sm-12 mt-3">
+                  <label class="form-label">Repita la Contraseña</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Repita la Contraseña"
+                    id="passRUD"
+                    name="passRUD"
+                    required
+                    minlength="8"
+                    ngModel
+                    #passRUD="ngModel"
+                    [ngClass]="'input'"
+                  />
+                  <div
+                    *ngIf="
+                      passRUD.invalid && (passRUD.dirty || passRUD.touched)
+                    "
+                    class="text-danger form-group position-absolute"
+                  >
+                    <small
+                      class="form-group"
+                      *ngIf="passRUD.errors?.['required']"
+                    >
+                      Campo requerido.
+                    </small>
+                    <small
+                      class="form-group"
+                      *ngIf="passRUD.errors?.['minlength']"
+                    >
+                      Debe tener mínino 8 caracteres.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 mt-5">
+                <div class="form-group text-center">
+                  <input
+                    type="submit"
+                    class="btn"
+                    value="ENVIAR"
+                    [disabled]="!fmrResetUD['valid']"
+                    [ngClass]="'input-btn'"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </ng-container>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="pills-user"
+        role="tabpanel"
+        aria-labelledby="pills-user-tab"
+      >
+        <div class="container card p-4">
+          <ng-container *ngIf="this.verify === false">
+            <p class="p-4">Ingrese el documento de identidad</p>
+            <form
+              #fmrRegisterDNI="ngForm"
+              (ngSubmit)="onRegisterDni(fmrRegisterDNI)"
+            >
+              <div class="form-group mt-4">
+                <label class="form-label">Cargar Documento / DNI</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="hdoc"
+                  required
+                  ngModel
+                  name="hdoc"
+                  #hdoc="ngModel"
+                  (change)="onFileSelected($event)"
+                  [ngClass]="'input'"
+                />
+                <div
+                  *ngIf="hdoc.invalid && (hdoc.dirty || hdoc.touched)"
+                  class="text-danger form-group position-absolute"
+                >
+                  <small class="form-group" *ngIf="hdoc.errors?.['required']">
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="form-group text-center">
+                  <input
+                    type="submit"
+                    class="btn"
+                    value="GUARDAR"
+                    [ngClass]="'input-btn'"
+                  />
+                </div>
+              </div>
+            </form>
+          </ng-container>
+          <ng-container *ngIf="this.verify === true">
+            <div
+              class="btn-success border rounded-3 border-success p-3 d-flex justify-content-center align-items-center"
+            >
+              <!-- <button class="btn border-0 mx-1" (click)="onCopy()">
+              <fa-icon [icon]="['fas', 'paste']"></fa-icon>
+            </button>
+            <span class="fw-light">
+              {{getUrl()}}
+            </span> -->
+              <span> Ya cuenta con un documento cargado de verificación </span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <!-- 
+    <div class="d-flex justify-content-center align-items-center">
+      <ul class="nav">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link disabled">Datos Básicos</a>
+        </li>
+        <li class="nav-item d-none" role="presentation">
+          <a class="nav-link disabled">Datos Hotel</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link disabled">Datos Pareja</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link btn border-0">Ganar Comisión</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link btn border-0" (click)="onShowPass1()">
+            Cambiar Contraseña
+          </a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link btn border-0" (click)="verificarUser()">
+            Verificar Usuario
+          </a>
+        </li>
+      </ul>
+    </div> -->
+    <!-- <div
+      *ngIf="estado !== undefined"
+      class="d-flex justify-content-center align-items-center mt-5"
+    >
+      <h3>ACTUALIZA TUS DATOS</h3>
+    </div> -->
+  </div>
+
+</div>
+
+<app-modal-alerts
+  [idModal]="'successP'"
+  [icono]="'./assets/img/success.png'"
+  [titulo]="'Datos actualizados correctamente'"
+  [descripcion]="''"
+  (successModal)="onRedirigir()"
+  [tipo]="0"
+  #successPModal
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'failP'"
+  [icono]="'./assets/img/fail.png'"
+  [titulo]="'No se pudo actualizar los datos'"
+  [descripcion]="errMsj"
+  [tipo]="0"
+  #failPModal
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'successPassUD'"
+  [icono]="'./assets/img/success.png'"
+  [titulo]="'Proceso Exitoso'"
+  [descripcion]="msj"
+  [tipo]="0"
+  (successModal)="onShowPass2()"
+  #successPassUD
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'failPassUD'"
+  [icono]="'./assets/img/fail.png'"
+  [titulo]="'Proceso No Exitoso'"
+  [descripcion]="msj"
+  [tipo]="0"
+  #failPassUD
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'recoverSuccessUD'"
+  [icono]="'./assets/img/success.png'"
+  [titulo]="'Proceso Exitoso'"
+  [descripcion]="msj"
+  [tipo]="0"
+  (successModal)="onReload()"
+  #recoverSuccessUD
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'recoverFailUD'"
+  [icono]="'./assets/img/fail.png'"
+  [titulo]="'Proceso No Exitoso'"
+  [descripcion]="msj"
+  [tipo]="0"
+  (successModal)="onReload()"
+  #recoverFailUD
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'recoverWarningUD'"
+  [icono]="'./assets/img/warning.png'"
+  [titulo]="''"
+  [descripcion]="'Las contraseñas deben ser iguales.'"
+  [tipo]="0"
+  #recoverWarningUD
+></app-modal-alerts>
+
+<app-footer></app-footer>

@@ -1,0 +1,96 @@
+<app-menu></app-menu>
+<div class="container" style="min-height: 37vw">
+  <div class="row">
+    <!-- <div class="col col-lg-3">
+      <app-columns [tipo]="1"></app-columns>
+    </div> -->
+    <div class="col-md-12">
+
+        <div class="row p-5 mt-5">
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="col ">
+                <div class="container card p-4">
+                    <form #fmrRegister="ngForm" (ngSubmit)="registerFeedback(fmrRegister)">
+                      <div class="col-12">
+                        <span><h4 class="text-center">Escribenos tus comentarios y sugerencias</h4></span>
+                      </div>
+                      <div class="col-12 containerInput mt-2 mb-3">
+                        
+                        <div class="form-group col-md-12 col-sm-12 mt-3">
+                          <label class="form-label">Título</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Título"
+                            id="titulo"
+                            name="titulo"
+                            required
+                            ngModel
+                            #titulo="ngModel"
+                            [ngClass]="'input'"
+                          />
+                          <div
+                            *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)"
+                            class="text-danger form-group position-absolute mb-3"
+                          >
+                            <small
+                              class="form-group"
+                              *ngIf="titulo.errors?.['required']"
+                            >
+                              Campo requerido.
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 containerInput mt-3 mb-3">
+                        <div class="form-group col-md-12 col-sm-12 mt-3">
+                          <label class="form-label">Mensaje</label>
+                          <textarea
+                            type="text"
+                            class="form-control"
+                            placeholder="Mensaje"
+                            id="mensaje"
+                            name="mensaje"
+                            required
+                            ngModel
+                            minlength="8"
+                            #mensaje="ngModel"
+                            [ngClass]="'input'"
+                          ></textarea>
+                          <div
+                            *ngIf="
+                            mensaje.invalid &&
+                              (mensaje.dirty || mensaje.touched)
+                            "
+                            class="text-danger form-group position-absolute mb-3"
+                          >
+                            <small
+                              class="form-group"
+                              *ngIf="mensaje.errors?.['required']"
+                            >
+                              Campo requerido.
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 mt-5">
+                        <div class="form-group text-center">
+                          <input
+                            type="submit"
+                            class="btn nuevo"
+                            value="ENVIAR"
+                            [disabled]="!fmrRegister['valid']"
+                          />
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

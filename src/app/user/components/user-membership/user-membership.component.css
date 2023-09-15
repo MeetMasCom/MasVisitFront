@@ -1,0 +1,58 @@
+/*styles*/
+
+.containerInput {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.card {
+  margin-bottom: 2vw;
+  width: 25vw;
+}
+
+.vacio {
+  width: 90vw;
+}
+
+/*PHONE*/
+@media only screen and (min-width: 300px) and (max-width: 600px) {
+  .containerInput {
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    display: contents;
+  }
+
+  .card {
+    margin-bottom: 4vw;
+    width: 100vw;
+  }
+
+  .vacio {
+    width: 94vw;
+  }
+}
+
+/*TABLET*/
+@media only screen and (min-width: 601px) and (max-width: 1100px) {
+  .containerInput {
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+  }
+
+  .card {
+    margin-bottom: 6vw;
+    width: 30vw;
+  }
+
+  .vacio {
+    width: 85vw;
+  }
+}

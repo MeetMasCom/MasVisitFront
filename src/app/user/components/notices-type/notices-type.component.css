@@ -1,0 +1,23 @@
+/*styles for type notice*/
+
+img {
+    height: 15vw;
+    width: 15vw;
+  }
+  
+  /*PHONE*/
+  @media only screen and (min-width: 300px) and (max-width: 600px) {
+    img {
+      margin-top: 3vw;
+      height: 30vw;
+      width: 30vw;
+    }
+  
+    .card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+  }
+  

@@ -1,0 +1,286 @@
+<div class="mt-4">
+    <h4 *ngIf="auxItem">Datos del anuncio</h4>
+    <h4 *ngIf="!auxItem">Ingrese los datos del anuncio</h4>
+  </div>
+  <div class="container">
+    <form #fmrNotices="ngForm" (ngSubmit)="onRegister(fmrNotices)">
+      <div class="col-12 containerInput mt-2 mb-3">
+        <div class="form-group col-md-12 col-sm-12 p-2">
+          <label class="mb-1">Edad</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Seleccione una opción'"
+            [settings]="dropdownSettings"
+            [data]="ageList"
+            [(ngModel)]="selectedAge"
+            (onSelect)="onSelectAge($event)"
+            (onSelectAll)="onSelectAllAge($event)"
+            (onDeSelect)="onDeSelectAge($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+      <div class="col-12 containerInput mt-2 mb-3">
+        <div class="form-group col-md-12 col-sm-12 p-2">
+          <label class="mb-1">Profesión</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Seleccione una opción'"
+            [settings]="dropdownSettings"
+            [data]="profsList"
+            [(ngModel)]="selectedProfs"
+            (onSelect)="onSelectProf($event)"
+            (onSelectAll)="onSelectAllProf($event)"
+            (onDeSelect)="onDeSelectProf($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+      <div class="col-12 containerInput mt-2 mb-3">
+        <div class="form-group col-md-12 col-sm-12 p-2">
+          <label class="mb-1">País</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Seleccione una opción'"
+            [settings]="dropdownSettings"
+            [data]="countriesList"
+            [(ngModel)]="selectedCountry"
+            (onSelect)="onSelectCountry($event)"
+            (onSelectAll)="onSelectAllCountry($event)"
+            (onDeSelect)="onDeSelectCountry($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+      <div class="col-12 containerInput mt-2 mb-3">
+        <div class="form-group col-md-12 col-sm-12 p-2">
+          <label class="mb-1">Título</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            name="title"
+            placeholder="Título del anuncio"
+            required
+            ngModel
+            #title="ngModel"
+            [(ngModel)]="auxTitle"
+          />
+        </div>
+      </div>
+      <div class="col-12 containerInput mt-2 mb-3">
+        <div class="form-group col-md-12 col-sm-12 p-2">
+          <label class="mb-1">Descripción</label>
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            name="description"
+            placeholder="Descripción del anuncio"
+            required
+            ngModel
+            maxlength="250"
+            #description="ngModel"
+            [(ngModel)]="auxDesc"
+          />
+        </div>
+      </div>
+      <div class="col-12 containerInput mt-2 mb-3">
+        <div class="form-group col-md-12 col-sm-12 p-2">
+          <label class="mb-1">Enalce Anuncio</label>
+          <input
+            type="text"
+            class="form-control"
+            id="alink"
+            name="alink"
+            placeholder="Enalce del Anuncio"
+            required
+            ngModel
+            #alink="ngModel"
+            [(ngModel)]="auxLink1"
+          />
+        </div>
+      </div>
+      <div class="col-12 containerInput mt-2 mb-3">
+        <div class="form-group col-md-12 col-sm-12 p-2">
+          <label class="mb-1">Enalce Conversión</label>
+          <input
+            type="text"
+            class="form-control"
+            id="alinkc"
+            name="alinkc"
+            placeholder="Enalce de la Conversión"
+            ngModel
+            #alinkc="ngModel"
+            [(ngModel)]="auxLink2"
+          />
+        </div>
+      </div>
+      <div class="col-12 containerInput mt-2 mb-3">
+        <div class="form-group col-md-12 col-sm-12 p-2">
+          <label class="mb-1" for="imgA">Imagen</label>
+          <input
+            type="file"
+            class="form-control"
+            id="imgA"
+            name="imgA"
+            accept="image/png, image/jpeg image/jpg"
+            ngModel
+            #imgA="ngModel"
+            (change)="onChangeIng($event)"
+          />
+          <small *ngIf="auxImg" class="text-success">
+            Ya tiene una imagen cargada
+          </small>
+        </div>
+      </div>
+      <div class="col-12 containerInput mt-2 mb-3">
+        <div class="form-group col-md-12 col-sm-12 p-2">
+          <label class="mb-1">Idioma</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Seleccione una opción'"
+            [settings]="dropdownSettings"
+            [data]="languageList"
+            [(ngModel)]="selectedLanguage"
+            (onSelect)="onSelectLanguage($event)"
+            (onSelectAll)="onSelectAllLanguage($event)"
+            (onDeSelect)="onDeSelectLanguage($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+      <div class="col-12 containerInput mt-2 mb-3">
+        <div class="form-group col-md-12 col-sm-12 p-2">
+          <label class="mb-1">Pasatiempos</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Seleccione una opción'"
+            [settings]="dropdownSettings"
+            [data]="hobbiesList"
+            [(ngModel)]="selectedHobbies"
+            (onSelect)="onSelectHobbies($event)"
+            (onSelectAll)="onSelectAllHobbies($event)"
+            (onDeSelect)="onDeSelectHobbies($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+      <div class="col-12 containerInput mt-2 mb-3">
+        <div class="form-group col-md-12 col-sm-12 p-2">
+          <label class="mb-1">Sexo</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Seleccione una opción'"
+            [settings]="dropdownSettings"
+            [data]="generoList"
+            [(ngModel)]="selectedGenero"
+            (onSelect)="onSelectGenero($event)"
+            (onSelectAll)="onSelectAllGenero($event)"
+            (onDeSelect)="onDeSelectGenero($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+      <div class="col-12 containerInput mt-2 mb-3">
+        <div class="form-group col-md-12 col-sm-12 p-2">
+          <label class="mb-1">Religión</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Seleccione una opción'"
+            [settings]="dropdownSettings"
+            [data]="religionList"
+            [(ngModel)]="selectedReligion"
+            (onSelect)="onSelectReligion($event)"
+            (onSelectAll)="onSelectAllReligion($event)"
+            (onDeSelect)="onDeSelectReligion($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+      <div class="col-12 containerInput mt-2 mb-3">
+        <div class="form-group col-md-12 col-sm-12 p-2">
+          <label class="mb-1">Jornada Laboral</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Seleccione una opción'"
+            [settings]="dropdownSettings"
+            [data]="journalList"
+            [(ngModel)]="selectedJournal"
+            (onSelect)="onSelectJournal($event)"
+            (onSelectAll)="onSelectAllJournal($event)"
+            (onDeSelect)="onDeSelectJournal($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+      <div class="col-12 containerInput mt-2 mb-3">
+        <div class="form-group col-md-12 col-sm-12 p-2">
+          <label class="mb-1">Tipo de Dependencia</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Seleccione una opción'"
+            [settings]="dropdownSettings"
+            [data]="dependecyList"
+            [(ngModel)]="selectedDependency"
+            (onSelect)="onSelectDep($event)"
+            (onSelectAll)="onSelectAllDep($event)"
+            (onDeSelect)="onDeSelectDep($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+      <div class="col-12 containerInput mt-2 mb-3">
+        <div class="form-group col-md-12 col-sm-12 p-2">
+          <label class="mb-1">Paquete Visitas</label>
+          <select
+            class="form-select"
+            id="visit"
+            required
+            ngModel
+            name="visit"
+            #visit="ngModel"
+            [(ngModel)]="auxPackage"
+          >
+            <option value="" disabled selected>Seleccione una opción</option>
+            <option value="50">50 visitas</option>
+            <option value="100">100 visitas</option>
+            <option value="500">500 visitas</option>
+            <option value="1000">1000 visitas</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="form-group text-center">
+          <input
+            type="submit"
+            class="btn enviar"
+            value="Guardar"
+            [disabled]="!fmrNotices['valid']"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  <!--Modales-->
+  <app-modal-alerts
+    [idModal]="'successNotices'"
+    [icono]="'./assets/img/success.png'"
+    [titulo]="''"
+    [descripcion]="'Se envió correctamente el anuncio'"
+    [tipo]="0"
+    (successModal)="onSuccess()"
+    #successNotices
+  ></app-modal-alerts>
+  
+  <app-modal-alerts
+    [idModal]="'failNotices'"
+    [icono]="'./assets/img/fail.png'"
+    [titulo]="''"
+    [descripcion]="errMsj"
+    [tipo]="0"
+    (successModal)="onSuccess()"
+    #failNotices
+  ></app-modal-alerts>
+  
