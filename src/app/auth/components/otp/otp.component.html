@@ -1,0 +1,76 @@
+<button
+  type="button"
+  class="hidden"
+  data-bs-toggle="modal"
+  [attr.data-bs-target]="'#' + idModal"
+  id="modalOtpButton"
+  #modalOtpButton
+>
+  Modal
+</button>
+
+<div
+  class="modal fade"
+  id="modalOtp"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body justify-content-center d-flex">
+        <form #frmOtp="ngForm" (ngSubmit)="validateOtp()">
+          <div class="form-group">
+            <label class="label">Ingrese el OTP</label>
+            <ng-otp-input
+              #otp
+              (onInputChange)="onOtpChange($event)"
+              [config]="{ length: 6, allowNumbersOnly: true }"
+            ></ng-otp-input>
+          </div>
+          <div class="modal-footer justify-content-center d-flex border-0">
+            <div class="form-group text-center">
+              <input
+                type="submit"
+                class="btn nuevo"
+                value="Validar OTP"
+                [disabled]="!frmOtp.valid"
+                [ngClass]="'input-btn'"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal-alerts
+  [idModal]="'exito'"
+  [icono]="'./assets/img/success.png'"
+  [titulo]="'OTP Correcto'"
+  [descripcion]="message"
+  (successModal)="onRedirigir()"
+  [tipo]="0"
+  #exitoModal
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'fail'"
+  [icono]="'./assets/img/fail.png'"
+  [titulo]="'OTP Incorrecto'"
+  [descripcion]="message"
+  (successModal)="onFail()"
+  [tipo]="0"
+  #failModal
+></app-modal-alerts>

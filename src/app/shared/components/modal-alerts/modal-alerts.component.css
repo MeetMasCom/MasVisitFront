@@ -1,0 +1,67 @@
+.hidden {
+    visibility: hidden;
+  }
+  
+  .overflow-y-auto {
+    max-height: 80% !important;
+    overflow-y: auto !important;
+  }
+  
+  .icon-confirm {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .icon-confirm img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .descripcion {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Inter;
+  }
+  
+  .descripcion h3 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    font-family: Inter;
+  }
+  
+  .descripcion p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 22px;
+    font-family: Inter;
+  }
+  
+  .buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Inter;
+  }
+  
+  .modal-body {
+    padding: 40px;
+  }
+  
+  
+  /* PHONE */
+  @media only screen and (min-width: 250px) and (max-width: 600px) {
+    .btn {
+      width: 30vw;
+    }
+  }
+  

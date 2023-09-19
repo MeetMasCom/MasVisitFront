@@ -1,0 +1,744 @@
+<app-menu></app-menu>
+<div class="container mt-4" style="min-height: 37vw">
+  <div class="row">
+    <!-- <div class="col col-lg-3">
+      <app-columns [tipo]="1"></app-columns>
+    </div> -->
+    <div class="col-md-12">
+      <div class="contenido rounded p-4">
+        <div class="row">
+          <div class="container">
+            <div class="row">
+              <div
+                class="col-md-4 d-flex justify-content-center align-items-center"
+              >
+                <ng-container *ngIf="dataUser?.image !== ''">
+                  <img
+                    [src]="this.imageBase64"
+                    width="200vw"
+                    height="200vw"
+                    alt="..."
+                    class="rounded-circle"
+                  />
+                </ng-container>
+                <ng-container *ngIf="dataUser?.image === ''">
+                  <img
+                    [src]="'../../../../assets/user.png'"
+                    width="200vw"
+                    height="200vw"
+                    alt="..."
+                    class="rounded-circle"
+                  />
+                </ng-container>
+              </div>
+              <div class="col-md-5">
+                <div>
+                  <h4 class="font-weight-bold">{{ dataUser.userName }}</h4>
+                </div>
+                <div>{{ dataUser.firstname }}</div>
+                <br />
+                <div class="col-md-12">
+                  <p>{{ dataUser.description }}</p>
+                </div>
+              </div>
+              <div class="col-md-3 p-2">
+                <ng-container *ngIf="seguidor === true">
+                  <label class="nuevo btnSeguir rounded">Siguiendo</label>
+                </ng-container>
+                <ng-container *ngIf="seguidor === false">
+                  <button
+                    type="button"
+                    class="btn nuevo"
+                    (click)="addLike(dataUser._id, true)"
+                  >
+                    Seguir
+                  </button>
+                </ng-container>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div
+                  class="col-md-12 d-flex justify-content-center align-items-center"
+                >
+                  <div *ngFor="let social of dataUser?.rsocials">
+                    <ng-container *ngIf="social.red === '1'">
+                      <a
+                        href="https://www.facebook.com/{{ social.user }}"
+                        class="text-decoration-none text-dark mx-3"
+                        target="_blank"
+                      >
+                        <fa-icon
+                          class="fa-3x"
+                          [icon]="['fab', 'facebook']"
+                        ></fa-icon>
+                      </a>
+                    </ng-container>
+                    <ng-container *ngIf="social.red === '2'">
+                      <a
+                        href="https://www.instagram.com/{{ social.user }}"
+                        class="text-decoration-none text-dark mx-3"
+                        target="_blank"
+                      >
+                        <fa-icon
+                          class="fa-3x"
+                          [icon]="['fab', 'instagram']"
+                        ></fa-icon
+                      ></a>
+                    </ng-container>
+                    <ng-container *ngIf="social.red === '3'">
+                      <a
+                        href="https://www.tiktok.com/@{{ social.user }} "
+                        class="text-decoration-none text-dark mx-3"
+                        target="_blank"
+                      >
+                        <fa-icon
+                          class="fa-3x"
+                          [icon]="['fab', 'tiktok']"
+                        ></fa-icon
+                      ></a>
+                    </ng-container>
+
+                    <ng-container *ngIf="social.red === '4'">
+                      <a
+                        href="https://www.twitter.com/{{ social.user }} "
+                        class="text-decoration-none text-dark mx-3"
+                        target="_blank"
+                      >
+                        <fa-icon
+                          class="fa-3x"
+                          [icon]="['fab', 'twitter']"
+                        ></fa-icon
+                      ></a>
+                    </ng-container>
+                    <ng-container *ngIf="social.red === '5'">
+                      <a
+                        href="https://www.youtube.com/{{ social.user }}"
+                        class="text-decoration-none text-dark mx-3"
+                        target="_blank"
+                      >
+                        <fa-icon
+                          class="fa-3x"
+                          [icon]="['fab', 'youtube']"
+                        ></fa-icon
+                      ></a>
+                    </ng-container>
+                    <ng-container *ngIf="social.red === '6'">
+                      <a
+                        href="https://www.pinterest.com/{{ social.user }}"
+                        class="text-decoration-none text-dark mx-3"
+                        target="_blank"
+                      >
+                        <fa-icon
+                          class="fa-3x"
+                          [icon]="['fab', 'pinterest']"
+                        ></fa-icon
+                      ></a>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+      </div>
+
+  <div class="rounded">
+    <div class="row mt-3">
+      <div class="d-flex justify-content-center align-items-center">
+        <nav
+          class="navbar navbar-expand-lg"
+          style="background-color: blanchedalmond; width: 100%"
+        >
+          <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-link manito btn" (click)="album()"
+                  >Albúm</a
+                >
+                <a class="nav-link manito btn" (click)="detalle()"
+                  >Detalle Usuario</a
+                >
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <ng-container *ngIf="ban == 1">
+      <div class="row contenido">
+        <div class="col-md-12">
+          <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active"
+                id="pills-basic-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-basic"
+                type="button"
+                role="tab"
+                aria-controls="pills-basic"
+                aria-selected="true"
+              >
+                Información Básica
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="pills-study-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-study"
+                type="button"
+                role="tab"
+                aria-controls="pills-study"
+                aria-selected="false"
+              >
+                Estudios
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="pills-add-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-add"
+                type="button"
+                role="tab"
+                aria-controls="pills-add"
+                aria-selected="false"
+              >
+                Información Adicional
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="pills-hobbies-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-hobbies"
+                type="button"
+                role="tab"
+                aria-controls="pills-hobbies"
+                aria-selected="false"
+              >
+                Hobbies
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="pills-tabContent">
+            <div
+              class="tab-pane fade show active"
+              id="pills-basic"
+              role="tabpanel"
+              aria-labelledby="pills-basic-tab"
+            >
+            <div class="det">
+              <div class="row p-4 ">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                  <div><fa-icon
+                    class="fa-3x"
+                    [icon]="faUser"
+                  ></fa-icon> Nombre de usuario: {{ dataUser.userName }}</div>
+                </div>
+              </div>
+              <div class="row p-4">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                  <div><fa-icon
+                    class="fa-3x"
+                    [icon]="faLocationDot"
+                  ></fa-icon> País: {{ dataUser.country[0].name }}</div>
+                </div>
+                <div class="col-md-5">
+                  <div><fa-icon
+                    class="fa-3x"
+                    [icon]="faPeopleArrows"
+                  ></fa-icon> Genero: {{ dataUser.genero[0].name }}</div>
+                </div>
+                <div class="col-md-1"></div>
+              </div>
+              <div class="row p-4">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                  <div><fa-icon
+                    class="fa-3x"
+                    [icon]="faCakeCandles"
+                  ></fa-icon> Fecha de Nacimiento: {{ dataUser.dateBirth }}</div>
+                </div>
+                <div class="col-md-5">
+                  <div><fa-icon
+                    class="fa-3x"
+                    [icon]="faCalendar"
+                  ></fa-icon> Edad: {{ calcularEdad(dataUser.dateBirth) }}</div>
+                </div>
+                <div class="col-md-1"></div>
+              </div>
+              <div class="row p-4">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                  <div><fa-icon
+                    class="fa-3x"
+                    [icon]="faAsterisk"
+                  ></fa-icon> Preferencias: {{ dataUser.prefer[0].name }}</div>
+                </div>
+                <div class="col-md-5">
+
+                </div>
+                <div class="col-md-1"></div>
+              </div>
+            </div>
+            </div>
+
+            <div
+              class="tab-pane fade show"
+              id="pills-study"
+              role="tabpanel"
+              aria-labelledby="pills-study-tab"
+            >
+            <div class="det">
+              <ng-container *ngIf="estado > 0">
+                <div class="row p-4">
+                  <div class="col-md-2"></div>
+                  <div class="col-md-10">
+                    <div><fa-icon
+                      class="fa-3x"
+                      [icon]="faCircleArrowRight"
+                    ></fa-icon> Descripción: {{ dataUser.description }}</div>
+                  </div>
+                </div>
+                <div class="row p-4">
+                  <div class="col-md-2"></div>
+                  <div class="col-md-4">
+                    <div><fa-icon
+                      class="fa-3x"
+                      [icon]="faUser"
+                    ></fa-icon> Nombres: {{ dataUser.firstname }}</div>
+                  </div>
+                  <div class="col-md-4">
+                    <div><fa-icon
+                      class="fa-3x"
+                      [icon]="faUser"
+                    ></fa-icon> Apellidos: {{ dataUser.lastname }}</div>
+                  </div>
+                  <div class="col-md-2"></div>
+                </div>
+                <div class="row p-4">
+                  <div class="col-md-2"></div>
+                  <div class="col-md-4">
+                    <div><fa-icon
+                      class="fa-3x"
+                      [icon]="faLanguage"
+                    ></fa-icon>
+                      Lenguaje Nativo: {{ dataUser.motherLanguague }}
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div><fa-icon
+                      class="fa-3x"
+                      [icon]="faGraduationCap"
+                    ></fa-icon> Estudios: {{ dataUser.studies[0].name }}</div>
+                  </div>
+                  <div class="col-md-2"></div>
+                </div>
+                <div class="row p-4">
+                  <div class="col-md-2"></div>
+                  <div class="col-md-4">
+                    <div><fa-icon
+                      class="fa-3x"
+                      [icon]="faBriefcase"
+                    ></fa-icon> Jornada Laboral: {{ dataUser.journal }}</div>
+                  </div>
+                  <div class="col-md-4">
+                    <div><fa-icon
+                      class="fa-3x"
+                      [icon]="faLaptopFile"
+                    ></fa-icon> Dependencia Laboral: {{ dataUser.time_work }}</div>
+                  </div>
+                  <div class="col-md-2"></div>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="estado === 0">
+                <div class="row p-4">
+                  <span>No cuenta con esta información</span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+            <div
+            class="tab-pane fade show"
+            id="pills-add"
+            role="tabpanel"
+            aria-labelledby="pills-add-tab"
+          >
+          <div class="det">
+          <ng-container *ngIf="estado > 1">
+            <div class="row p-4">
+              <div class="col-md-2"></div>
+              <div class="col-md-4">
+                <div><fa-icon
+                  class="fa-3x"
+                  [icon]="faWeightScale"
+                ></fa-icon> Peso: {{ dataUser.weight }}</div>
+              </div>
+              <div class="col-md-4">
+                <div><fa-icon
+                  class="fa-3x"
+                  [icon]="faLineChart"
+                ></fa-icon> Talla: {{ dataUser.height }}</div>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row p-4">
+              <div class="col-md-2"></div>
+              <div class="col-md-4">
+                <div><fa-icon
+                  class="fa-3x"
+                  [icon]="faUserPlus"
+                ></fa-icon> Etnia: {{ dataUser.ethnicity }}</div>
+              </div>
+              <div class="col-md-4">
+                <div><fa-icon
+                  class="fa-3x"
+                  [icon]="faHandsPraying"
+                ></fa-icon> Religion: {{ dataUser.religion }}</div>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+
+            <ng-container *ngIf="this.data.type === 0">
+            <div class="row p-4">
+              <div class="col-md-2"></div>
+              <div class="col-md-4">
+                <div><fa-icon
+                  class="fa-3x"
+                  [icon]="faCalendar"
+                ></fa-icon>
+                  Signo Zodiacal: {{ dataUser.signe[0].name }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div><fa-icon
+                  class="fa-3x"
+                  [icon]="faPerson"
+                ></fa-icon> Estado Civil: {{ dataUser.civil_status[0].name }}</div>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row p-4">
+              <div class="col-md-2"></div>
+              <div class="col-md-4">
+                <div><fa-icon
+                  class="fa-3x"
+                  [icon]="faEye"
+                ></fa-icon> Color de ojos: {{ dataUser.eyeColor }}</div>
+              </div>
+              <div class="col-md-4">
+                <div><fa-icon
+                  class="fa-3x"
+                  [icon]="faChild"
+                ></fa-icon> Tipo de cuerpo: {{ dataUser.cuerpo[0].name }}</div>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row p-4">
+              <div class="col-md-2"></div>
+              <div class="col-md-4">
+                <div><fa-icon
+                  class="fa-3x"
+                  [icon]="faGraduationCap"
+                ></fa-icon>  Carrera: {{ dataUser.career[0].name }}</div>
+
+              </div>
+              <div class="col-md-4">
+                <!-- <div>Residencia Actual: {{ dataUser.residence[0].name }}</div> -->
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+          </ng-container>
+          </ng-container>
+          <ng-container *ngIf="estado === 1">
+            <div class="row p-4">
+              <span>No cuenta con esta información</span>
+            </div>
+          </ng-container>
+        </div>
+          </div>
+            <div
+              class="tab-pane fade show"
+              id="pills-hobbies"
+              role="tabpanel"
+              aria-labelledby="pills-hobbies-tab"
+            >
+            <div class="det">
+            <ng-container *ngIf="estado > 1">
+              <div class="row p-4">
+                <div class="col-md-2"></div>
+                <div class="col-md-4"><div>
+                  <fa-icon
+                  class="fa-3x"
+                  [icon]="faClockFour"
+                ></fa-icon>  Hobbies </div>
+                <ng-container *ngIf="this.dataUser.type === 0">
+                  <div> {{dataUser?.hobbies[0]}}</div>
+
+                </ng-container>
+                <ng-container *ngIf="this.dataUser.type > 0">
+                  <div *ngFor="let hobbies of dataUser.hobbies">
+                    {{hobbies}}
+                </div></ng-container>
+                </div>
+                <div class="col-md-4">
+                  <div><fa-icon
+                    class="fa-3x"
+                    [icon]="faPlateWheat"
+                  ></fa-icon>  Comidas</div>
+                  <ng-container *ngIf="this.dataUser.type === 0">
+                    <div> {{dataUser?.foods[0]}}</div>
+
+                  </ng-container>
+                  <ng-container *ngIf="this.dataUser.type > 0">
+                  <div *ngFor="let food of dataUser.foods">
+                    {{food}}
+                  </div>
+                </ng-container>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+              <div class="row p-4">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                  <div><fa-icon
+                    class="fa-3x"
+                    [icon]="faMedal"
+                  ></fa-icon>  Deportes</div>
+                  <ng-container *ngIf="this.dataUser.type === 0">
+                    <div> {{dataUser?.sports[0].item_text}}</div>
+                  </ng-container>
+                  <ng-container *ngIf="this.dataUser.type > 0">
+                  <div *ngFor="let sport of dataUser.sports">
+                   <div >
+                    {{sport.item_text}}
+                   </div>
+                  </div></ng-container>
+                </div>
+                <div class="col-md-4">
+                  <div><fa-icon
+                    class="fa-3x"
+                    [icon]="faShirt"
+                  ></fa-icon>  Ropa</div>
+                  <ng-container *ngIf="this.dataUser.type === 0">
+                    <div> {{dataUser?.tasteOfClothes[0]}}</div>
+                  </ng-container>
+                  <ng-container *ngIf="this.dataUser.type > 0">
+                  <div *ngFor="let ropa of dataUser.tasteOfClothes">
+                    {{ropa}}
+                  </div></ng-container>
+
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+              <div class="row p-4">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                  <div><fa-icon
+                    class="fa-3x"
+                    [icon]="faPersonWalking"
+                  ></fa-icon>
+                    Practica Deporte: {{ dataUser.sport[0].name }}
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div><fa-icon
+                    class="fa-3x"
+                    [icon]="faSmoking"
+                  ></fa-icon>  Fuma: {{ dataUser.smoke[0].name }}</div>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+              <div class="row p-4">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                  <div><fa-icon
+                    class="fa-3x"
+                    [icon]="faMartiniGlass"
+                  ></fa-icon>  Bebe: {{ dataUser?.drink[0].name }}</div>
+                </div>
+                <div class="col-md-4">
+                  <div><fa-icon
+                    class="fa-3x"
+                    [icon]="faChildren"
+                  ></fa-icon>  Hijos: {{ dataUser.childs[0].name }}</div>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="estado === 1">
+              <div class="row p-4">
+                <span>No cuenta con esta información</span>
+              </div>
+            </ng-container>
+            </div>
+          </div>
+            <div
+              class="tab-pane fade show"
+              id="pills-other"
+              role="tabpanel"
+              aria-labelledby="pills-other-tab"
+            >
+              otra informacion
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="ban == 0">   
+      <div class="row">
+        <div class="col-md-12">
+          <ng-container *ngIf="Post?.length > 0">
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-4 p-2" *ngFor="let post of Post">
+                <div class="contenido rounded p-3">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-2 p-2">
+                        <ng-container *ngIf="img !== ''">
+                          <img
+                            [src]="this.imageBase64"
+                            width="30px"
+                            height="30px"
+                            alt="..."
+                            class="rounded-circle"
+                          />
+                        </ng-container>
+                        <ng-container *ngIf="img === ''">
+                          <img
+                            [src]="'../../../../assets/user.png'"
+                            width="30px"
+                            height="30px"
+                            alt="..."
+                            class="rounded-circle"
+                          />
+                        </ng-container>
+                      </div>
+                      <div class="col-md-10 d-flex align-items-center">
+                        <h6 class="font-weight-bold">
+                          {{ dataUser.userName }}
+                        </h6>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="h-100 d-inline-block card d-flex col-12 p-2">
+                        <div
+                          class="row manito"
+                          (click)="selectedPost(post._id)"
+                        >
+                          <img
+                            [src]="'data:image/png;base64,' + post.photo"
+                            width="100%"
+                            height="200px"
+                            class="card-img-top"
+                            alt="..."
+                          />
+                        </div>
+
+                        <div class="card-body">
+                          <p class="card-text">{{ post.title }}</p>
+                          <div class="container">
+                            <div class="row manito">
+                              <div
+                                class="col d-flex justify-content-center align-items-center"
+                              >
+                                <div>
+                                  <ng-container *ngIf="post.like === true">
+                                    <fa-icon
+                                      class="fa-3x active"
+                                      [icon]="faCircleCheck"
+                                      (click)="
+                                        deleteLikePost(
+                                          post._id,
+                                          post.user_id,
+                                          true
+                                        )
+                                      "
+                                    ></fa-icon>
+                                  </ng-container>
+
+                                  <ng-container *ngIf="post.like === false">
+                                    <fa-icon
+                                      class="fa-3x"
+                                      [icon]="faCircleCheck"
+                                      (click)="
+                                        addLikePost(
+                                          post._id,
+                                          post.user_id,
+                                          true
+                                        )
+                                      "
+                                    ></fa-icon>
+                                  </ng-container>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <ng-container *ngIf="!post.count">
+                                  <div
+                                    class="col d-flex justify-content-center align-items-center"
+                                  >
+                                    <span> 0 like</span>
+                                  </div>
+                                </ng-container>
+                                <ng-container *ngIf="post.count">
+                                  <div
+                                    class="col d-flex justify-content-center align-items-center"
+                                  >
+                                    <span> {{post.count}} like</span>
+                                  </div>
+                                </ng-container>
+                              </div>
+
+                              <!-- <div
+                                class="col d-flex justify-content-center align-items-center"
+                              >
+                                <fa-icon
+                                  class="fa-3x"
+                                  [icon]="faCircleXmark"
+                                  (click)="addLikePost(post._id,post.user_id,false)"
+                                ></fa-icon>
+                              </div>  -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="Post?.length === 0">
+            <div class="d-flex justify-content-center" style="min-height: 30vw">
+              <Span>No hay publicaciones disponibles</Span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+    </div>
+
+    </div>
+  </div>
+</div>
+
+<app-mmodal
+  [idModal]="'postdetail'"
+  [tipo]="14"
+  [title]="'Detalle Publicación'"
+  [post]="this.PostD"
+  #postdetail
+>
+</app-mmodal>
+
+<app-footer></app-footer>

@@ -1,0 +1,110 @@
+<div class="mt-5" style="min-height: 38vw">
+  <div class="d-flex justify-content-center align-items-center">
+     <div class="col-md-8 justify-content-center align-items-center">
+      <div class="register container card">
+        <div class="col-12 user-img d-flex justify-content-center">
+          <img src="assets/img/user.png" class="rounded-circle" alt="MenOkay" />
+        </div>
+        <div class="text text-center">
+          <p>LogIn</p>
+        </div>
+        <form #frmLoginAdmin="ngForm" (ngSubmit)="onLoginAdmin(frmLoginAdmin)">
+          <div class="form-group col-md-12 col-sm-12 mb-4">
+            <label class="label">Rol de usuario</label>
+            <select class="form-select" aria-label="Default select" id="rol" name="rol" required ngModel #rol="ngModel"
+               [(ngModel)]="opSelect" (change)="onChangeSelect($event)">
+              <option value="AD" selected>Administrador</option>
+              <option value="SS">Soporte Sistemas</option>
+              <option value="SV">Soporte Ventas</option>
+              <option value="SA">Soporte Anuncios</option>
+            </select>
+          </div>
+          <div class="form-group col-md-12 col-sm-12 mb-4">
+            <label class="label">Usuario</label>
+            <input id="userAdmin" type="text" class="form-control mb-3" placeholder="Nombre usuario" required ngModel
+              name="userAdmin" #userAdmin="ngModel" />
+            <div *ngIf="
+                userAdmin.invalid && (userAdmin.dirty || userAdmin.touched)
+              " class="text-danger">
+              <small *ngIf="userAdmin.errors?.['required']">
+                Ingrese el usuario.
+              </small>
+            </div>
+          </div>
+          <div class="form-group col-md-12 col-sm-12 mb-4">
+            <label class="label">Contraseña</label>
+            <input id="passAdmin" type="password" class="form-control mb-3" placeholder="Contraseña usuario" required
+              ngModel name="passAdmin" #passAdmin="ngModel"  />
+            <div *ngIf="
+                passAdmin.invalid && (passAdmin.dirty || passAdmin.touched)
+              " class="text-danger">
+              <small *ngIf="passAdmin.errors?.['required']">
+                Ingrese la contraseña.
+              </small>
+            </div>
+          </div>
+          <div class="form-group text-center mt-5 mb-4">
+            <input type="submit" class="btn enviar" value="Iniciar Sesión" [disabled]="!frmLoginAdmin.valid"
+              [ngClass]="'input-btn'" />
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-otp [userN]="nameUser" [tipo]="1" [idModal]="'modalOtp'" #modalOtp></app-otp>
+
+<app-modal-alerts [idModal]="'modalCredencialSuccess'" [icono]="'./assets/img/success.png'" [titulo]="'Proceso Exitoso'"
+  [descripcion]="message" [tipo]="0" (successModal)="onValidOtp()" #modalCredencialSuccess></app-modal-alerts>
+
+<app-modal-alerts [idModal]="'modalCredencialFail'" [icono]="'./assets/img/fail.png'" [titulo]="'Error en el proceso'"
+  [descripcion]="message" [tipo]="0" (successModal)="onFailValidCredecial()" #modalCredencialFail></app-modal-alerts>
+
+
+
+<app-modal-alerts [idModal]="'modalUserSuccess'" [icono]="'./assets/img/success.png'" [titulo]="'Proceso Exitoso'"
+  [descripcion]="message" [tipo]="0" (successModal)="onFailValidCredecial()" #modalUserSuccess></app-modal-alerts>
+
+<app-modal-alerts [idModal]="'modalUserFail'" [icono]="'./assets/img/fail.png'" [titulo]="'Proceso No Exitoso'"
+  [descripcion]="message" [tipo]="0" (successModal)="onFailValidCredecial()" #modalUserFail></app-modal-alerts>
+
+
+<app-modal-alerts [idModal]="'modalPassSuccess'" [icono]="'./assets/img/success.png'" [titulo]="'Proceso Exitoso'"
+  [descripcion]="message" [tipo]="0" (successModal)="onRecover()" #modalPassSuccess></app-modal-alerts>
+
+<app-modal-alerts [idModal]="'modalPassFail'" [icono]="'./assets/img/fail.png'" [titulo]="'Proceso No Exitoso'"
+  [descripcion]="message" [tipo]="0" (successModal)="onFailValidCredecial()" #modalPassFail></app-modal-alerts>
+
+
+<app-modal-alerts [idModal]="'modalRecoverSuccess'" [icono]="'./assets/img/success.png'" [titulo]="'Proceso Exitoso'"
+  [descripcion]="message" [tipo]="0" (successModal)="onFailValidCredecial()" #modalRecoverSuccess></app-modal-alerts>
+
+<app-modal-alerts [idModal]="'modalRecoverFail'" [icono]="'./assets/img/fail.png'" [titulo]="'Proceso No Exitoso'"
+  [descripcion]="message" [tipo]="0" (successModal)="onFailValidCredecial()" #modalRecoverFail></app-modal-alerts>
+
+<app-modal-alerts [idModal]="'modalRecoverWarning'" [icono]="'./assets/img/warning.png'" [titulo]="''"
+  [descripcion]="'Las contraseñas deben ser iguales.'" [tipo]="0" (successModal)="onRecover()"
+  #modalRecoverWarning></app-modal-alerts>
+
+  <app-modal-alerts
+  [idModal]="'exito'"
+  [icono]="'./assets/img/success.png'"
+  [titulo]="'Ingreso correcto'"
+  [descripcion]="message"
+  (successModal)="onRedirigir()"
+  [tipo]="0"
+  #exitoModal
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'fail'"
+  [icono]="'./assets/img/fail.png'"
+  [titulo]="'Ingreso incorrecto'"
+  [descripcion]="message"
+  (successModal)="onFail()"
+  [tipo]="0"
+  #failModal
+></app-modal-alerts>

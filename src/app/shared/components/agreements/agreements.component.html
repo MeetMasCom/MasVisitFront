@@ -1,0 +1,230 @@
+<app-menu></app-menu>
+<div class="d-flex flex-column ">
+  <div class="container p-3 w-100 ">
+    <h2 class="text-center fw-bold">ACUERDO DE AFILIACIÓN</h2>
+    <div class="container p-2 ms-2 mt-3">
+
+      <div class="w-100 mb-4">
+        <p class="ms-2 mt-2 text-justify">
+          Cada participante en el programa de afiliados que ofrece Tips de business se compromete expresamente a este acuerdo de
+          afiliación, términos y condiciones.
+        </p>
+      </div>
+
+      <div class="w-100 mb-4">
+        <p class="ms-2 mt-2 text-justify">
+          <b>AVISO:</b> Por favor, lea atentamente este acuerdo. A menos que usted explícitamente está de acuerdo y dar
+          su
+          consentimiento a este acuerdo, es posible que no participen en el programa de afiliados ni como usuario en la
+          web. Al participar en el programa de afiliados y como usuario de la web, usted está de acuerdo en cumplir y
+          estar legalmente sometido a los términos y condiciones de este contrato. Si usted no está de acuerdo con todos
+          los términos de este acuerdo y contrato, por favor no se registre en el programa de afiliados no utilice la
+          web, en sus servicios y productos.
+        </p>
+      </div>
+
+      <h3 class="text-center fw-bold"> TÉRMINOS Y CONDICIONES DE AFILIADO DE TIPS DE BUSINESS. </h3>
+
+      <div class="w-100 mb-4">
+        <span class="fw-semibold">
+          AFILIADOS
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          Cada afiliado y usuario es un contratista independiente de TIPS DE BUSINESS y no un empleado. Nada de lo aquí se
+          pretende crear una relación de empleador / empleado.
+        </p>
+      </div>
+
+      <div class="w-100 mb-4">
+        <span class="fw-semibold">
+          KYC
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          El afiliado y el usuario deberá presentar la información de identificación a TIPS DE BUSINESS. Información de
+          identificación deberá incluir, como mínimo, una copia de un documento oficial, foto, tarjeta de identificación
+          (por ejemplo, una licencia de conducir). Estos documentos deberán ser enviados opcion de KYC presentado de una
+          manera aceptable en virtud del derecho TIPS DE BUSINESS. Hasta validar su KYC se limitara ciertas funciones de
+          nuestros servicios.
+        </p>
+      </div>
+
+
+      <div class="w-100 mb-4">
+        <span class="fw-semibold">
+          COMISIONES
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          Cuando un cliente registra con su IDE de afiliado podrá generar comisiones de sus invitados. Y se acredita
+          todas según sus transacciones de bono publicidad, bono recompensa por ser parte de nuestra empresa y pagos de
+          membresías de sus invitado directos e indirectos. Si divide en 7 niveles las comisiones generadas de cada
+          operación respectiva.
+        </p>
+      </div>
+
+      <div class="w-100 mb-4">
+        <span class="fw-semibold">
+          PAGO DE COMISIONES
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          Las comisiones se pagan en cada operación solo bono recompensa se pagará una vez al mes, cada primero del mes
+          por compra de membresías de sus invitados directo e indirectos del mes anterior y así mismo el bono de
+          publicidad.
+        </p>
+      </div>
+
+      <div class="w-100 mb-4">
+        <span class="fw-semibold">
+          PASIVOS POR IMPUESTOS
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          Cada afiliado actúa como un contratista independiente y como tal es responsable de sus ingresos y obligaciones
+          tributarias. En daca uno de sus países correspondiente.
+        </p>
+      </div>
+
+      <div class="w-100 mb-4">
+        <span class="fw-semibold">
+          COMISIONES FALLIDAS
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          Las comisiones no son pagadas por las operaciones canceladas cuyo pago no se ha recibido, o cualquier
+          transacción que ha sido rechazado por cualquier motivo. Si una comisión ya ha sido pagada, se deducirá de las
+          futuras comisiones del afiliado.
+        </p>
+      </div>
+
+      <div class="w-100 mb-4">
+        <span class="fw-semibold">
+          TIPOS DE PAGO DE COMISIONES
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          Todas las comisiones son pagadas en dólares estadounidenses se acreditará en el balance de cada afiliado. El
+          afiliado debe seleccionar el método de cobro disponible en nuestra web. TIPS DE BUSINESS no asume ninguna
+          responsabilidad por un afiliado que no elegí un procesador de pagos. Si un afiliado no puede elegir a un
+          procesador de pagos, por favor CONTACTE AL SOPORTE.
+        </p>
+      </div>
+
+      <div class="w-100 mb-4">
+        <span class="fw-semibold">
+          COSTO DE TRANSACCIÓN
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          Todas las comisiones se calculan sobre la base de la transacción neta. En otras palabras, todas las cuotas de
+          procesadores de pago primero se deducirán de las cantidades recaudadas por parte del afiliado. Toda tarifa por
+          transacción se aplique, el importe de la tasa se puede ver en página de <a
+            class="text-primary text-decoration-none" [href]="'fees'">
+            fees
+          </a>.
+        </p>
+      </div>
+
+      <div *ngIf="data.length>0" class="w-100 mb-4">
+        <span class="fw-semibold">
+          TIPOS DE USUARIOS
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          Usuario <b>Bronce</b> no tiene costo. Usuario <b>Plata</b> tiene un costo mensual de {{findPrice('PLATA') |
+          currency }} dólares incluido IVA.
+          Usuario <b>Oro</b> tiene un costo mensual de {{findPrice('ORO') | currency}} dólares incluido IVA. Usuario
+          <b>Diamante</b> tiene un
+          costo
+          mensual de
+          {{findPrice('DIAMANTE')| currency }} dólares incluido IVA.
+        </p>
+      </div>
+
+      <div class="w-100 mb-4">
+        <span class="fw-semibold">
+          COMISIONES POR TIPO DE USUARIO
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          Usuarios: <b>Bronce</b> hasta nivel 1 de profundidad de bono publicidad y bono recompensa. <b>Plata</b> hasta
+          nivel 3
+          de
+          profundidad de bono publicidad y bono recompensa. <b>Oro</b> hasta nivel 5 de profundidad de bono
+          publicidad y bono
+          recompensa. <b>Diamante</b> hasta nivel 7 de profundidad de bono publicidad y bono recompensa.
+        </p>
+      </div>
+
+      <div class="w-100 mb-4">
+        <span class="fw-semibold">
+          SUSPENSION DE PAGOS DE COMISIONES
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          Se suspenderá la cuenta del afiliado que no cumpla con los términos y condiciones o tenga más de una cuenta no
+          podrá recuperar y hacer sus retiros de saldo de sus balances.
+        </p>
+      </div>
+
+      <div class="w-100 mb-4">
+        <span class="fw-semibold">
+          TIPO DE BONO
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          <b>Bono recompensa:</b> En este bono se pagará a todos los usuarios activos que tengan membresía plata, oro o
+          diamante 50% es para la empresa y 50% es para red de afiliados a sus sponsors superiores. Según el tipo de
+          usuarios Bronce hasta nivel 1, plata hasta nivel 3, oro hasta nivel 5, diamante hasta nivel 7
+        </p>
+      </div>
+
+      <div class="w-100 mb-4">
+        <span class="fw-semibold">
+          TERMINACIÓN DE ESTE CONTRATO
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          TIPS DE BUSINESS. puede finalizar en cualquier momento si el afiliado que no cumplí con el acuerdo, políticas de
+          privacidad y términos condiciones.
+        </p>
+      </div>
+
+      <div class="w-100 mb-4">
+        <span class="fw-semibold">
+          TIPOS DE OPERACIONES
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          Ventas de membresía por servicios de web.
+        </p>
+      </div>
+
+      <div class="w-100 mb-4">
+        <span class="fw-semibold">
+          RETIROS
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          TIPS DE BUSINESS. cobra en cada transacción revise la página de <a class="text-primary text-decoration-none"
+            [href]="'fees'">
+            fees
+          </a>.
+        </p>
+      </div>
+
+      <div class="w-100 mb-4">
+        <span class="fw-semibold">
+          RESPONSABILIDAD DE TIPS DE BUSINESS.
+        </span>
+        <p class="ms-2 mt-2 text-justify">
+          No será responsable por daños indirectos o accidentales (pérdida de ingresos, las comisiones) por venta
+          servicios de los afiliados del sistema de seguimiento de fallos, los fallos del sistema de procesamiento de la
+          comisión, las pérdidas de los archivos de base de datos o copias de seguridad de los mismos, los ataques a los
+          recursos informáticos, virus informáticos, la viabilidad de sus productos, los resultados de 'intento de daño'
+          al programa, o actos de Dios o la Naturaleza. TIPS DE BUSINESS. no hace ninguna afirmación de que la operación de los
+          sitios web o que la red de TIPS DE BUSINESS.
+        </p>
+      </div>
+
+      <div class="w-100 d-flex justify-content-end mt-2">
+        <span class="fw-bold">
+          Fecha: Actualizado 24 de Agosto del 2023.
+        </span>
+      </div>
+
+
+      <br><br><br><br><br><br>
+    </div>
+  </div>
+</div>
+<div class="w-100 position-fixed bottom-0 ">
+  <app-footer></app-footer>
+</div>

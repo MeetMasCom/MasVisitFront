@@ -1,0 +1,251 @@
+<app-menu></app-menu>
+<div class="mt-5" style="min-height: 38vw">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="col-md-6 justify-content-center align-items-center">
+      <div class="register container card">
+        <div class="col-12 user-img d-flex justify-content-center">
+          <img src="assets/img/user.png" class="rounded-circle" alt="MenOkay" />
+        </div>
+        <div class="text">
+          <p>LogIn</p>
+        </div>
+        <form #frmLogin="ngForm" (ngSubmit)="onLogin(frmLogin)">
+
+          <div class="form-group">
+            <label class="label text">Nombre de usuario</label>
+            <input
+              id="userNameL"
+              type="text"
+              class="form-control mb-3"
+              placeholder="Nombre usuario"
+              required
+              ngModel
+              name="userNameL"
+              #userNameL="ngModel"
+              [ngClass]="'input'"
+            />
+            <div
+              *ngIf="
+                userNameL.invalid && (userNameL.dirty || userNameL.touched)
+              "
+              class="text-danger"
+            >
+              <small *ngIf="userNameL.errors?.['required']">
+                Ingrese el username.
+              </small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="label text">Contraseña</label>
+            <input
+              type="password"
+              class="form-control mb-3"
+              placeholder="Contraseña"
+              id="passwordL"
+              required
+              ngModel
+              name="passwordL"
+              #passwordL="ngModel"
+              [ngClass]="'input'"
+            />
+            <div
+              *ngIf="
+                passwordL.invalid && (passwordL.dirty || passwordL.touched)
+              "
+              class="text-danger form-group"
+            >
+              <small class="form-group" *ngIf="passwordL.errors?.['required']">
+                Ingrese la contraseña.
+              </small>
+            </div>
+
+            <div class="modal-footer justify-content-center d-flex border-0">
+              <div class="form-group text-center">
+                <input
+                  type="submit"
+                  class="btn nuevo"                 
+                  value="Iniciar Sesión"
+                  [disabled]="!frmLogin.valid"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+        <div
+          class="col-12"
+        >
+          <div class="row">
+            <div class="col-6 text-center">
+              <a
+                class="btn-link btn border-0 p-0 m-0 text ttext"
+                (click)="onUser()"
+              >
+                Olvidé mi usuario
+              </a>
+            </div>
+            <div class="col-6 text-center">
+              <a
+                class="btn-link btn border-0 p-0 m-0 text ttext"
+                (click)="onPass()"
+              >
+                Olvidé mi contraseña
+              </a>
+            </div>
+          </div>
+
+          <br />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <a>
+        <img src="assets/img/logo.png" class="rounded" alt="MenOkay" />
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+<!--Validar credenciales-->
+<app-otp [userN]="nameUser" [idModal]="'modalOtp'" #modalOtp></app-otp>
+
+<app-modal-alerts
+  [idModal]="'modalCredencialSuccess'"
+  [icono]="'./assets/img/success.png'"
+  [titulo]="'Proceso Exitoso'"
+  [descripcion]="message"
+  [tipo]="0"
+  (successModal)="onValidCredecial()"
+  #modalCredencialSuccess
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'modalCredencialFail'"
+  [icono]="'./assets/img/fail.png'"
+  [titulo]="'Error en el proceso'"
+  [descripcion]="message"
+  [tipo]="0"
+  (successModal)="onFailValidCredecial()"
+  #modalCredencialFail
+></app-modal-alerts>
+
+<!--Recuperar usuario-->
+<app-modal-alerts
+  [idModal]="'modalUserName'"
+  [tipo]="1"
+  [title]="'Recuperar Usuario'"
+  (sendModal)="onForm($event)"
+  #modalUserName
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'modalUserSuccess'"
+  [icono]="'./assets/img/success.png'"
+  [titulo]="'Proceso Exitoso'"
+  [descripcion]="message"
+  [tipo]="0"
+  (successModal)="onFailValidCredecial()"
+  #modalUserSuccess
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'modalUserFail'"
+  [icono]="'./assets/img/fail.png'"
+  [titulo]="'Proceso No Exitoso'"
+  [descripcion]="message"
+  [tipo]="0"
+  (successModal)="onFailValidCredecial()"
+  #modalUserFail
+></app-modal-alerts>
+
+<!--Recuperar contraseña-->
+<app-modal-alerts
+  [idModal]="'modalPassword'"
+  [tipo]="2"
+  [title]="'Recuperar Contraseña'"
+  (sendModal)="onFormPass($event)"
+  #modalPassword
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'modalPassSuccess'"
+  [icono]="'./assets/img/success.png'"
+  [titulo]="'Proceso Exitoso'"
+  [descripcion]="message"
+  [tipo]="0"
+  (successModal)="onRecover()"
+  #modalPassSuccess
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'modalPassFail'"
+  [icono]="'./assets/img/fail.png'"
+  [titulo]="'Proceso No Exitoso'"
+  [descripcion]="message"
+  [tipo]="0"
+  (successModal)="onFailValidCredecial()"
+  #modalPassFail
+></app-modal-alerts>
+
+<!--Recuperar contraseña parte 2-->
+<app-modal-alerts
+  [idModal]="'modalRecover'"
+  [tipo]="3"
+  [title]="'Actualizar Contraseña'"
+  (sendModal)="onFormActPass($event)"
+  #modalRecover
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'modalRecoverSuccess'"
+  [icono]="'./assets/img/success.png'"
+  [titulo]="'Proceso Exitoso'"
+  [descripcion]="message"
+  [tipo]="0"
+  (successModal)="onFailValidCredecial()"
+  #modalRecoverSuccess
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'modalRecoverFail'"
+  [icono]="'./assets/img/fail.png'"
+  [titulo]="'Proceso No Exitoso'"
+  [descripcion]="message"
+  [tipo]="0"
+  (successModal)="onFailValidCredecial()"
+  #modalRecoverFail
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'modalRecoverWarning'"
+  [icono]="'./assets/img/warning.png'"
+  [titulo]="''"
+  [descripcion]="'Las contraseñas deben ser iguales.'"
+  [tipo]="0"
+  (successModal)="onRecover()"
+  #modalRecoverWarning
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'exito'"
+  [icono]="'./assets/img/success.png'"
+  [titulo]="'Ingreso correcto'"
+  [descripcion]="message"
+  (successModal)="onRedirigir()"
+  [tipo]="0"
+  #exitoModal
+></app-modal-alerts>
+
+<app-modal-alerts
+  [idModal]="'fail'"
+  [icono]="'./assets/img/fail.png'"
+  [titulo]="'Ingreso incorrecto'"
+  [descripcion]="message"
+  (successModal)="onFail()"
+  [tipo]="0"
+  #failModal
+></app-modal-alerts>
+
+<app-footer></app-footer>

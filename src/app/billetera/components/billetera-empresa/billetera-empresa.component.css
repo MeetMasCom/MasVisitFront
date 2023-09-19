@@ -1,0 +1,66 @@
+.nuevo{
+    background-color: #f9a21e;
+}
+
+fa-icon:hover{
+    color: #f9a21e;
+    width: 20px;
+    height: 20px;
+}
+
+
+fa-3x{
+    font-size: 1em !important;
+    padding: 0;
+}
+
+.nav-link:focus, .nav-link:hover,.nav-link.active{
+    background-color: #f9a21e;
+    color: #000;
+}
+
+
+.nav-link{
+    color: #000;
+}
+
+.val{
+font-size: .4em !important;
+justify-content: left !important;
+}
+
+.nav-link:focus,
+.nav-link.active {
+  background: #fbb240;
+  color: #000;
+  border-radius: 10px 10px 0 0;
+}
+
+.nav-link {
+  color: #000;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #fbb240;
+}
+
+tbody {
+  background: #ffffff;
+}
+
+.table td,
+.table th {
+  padding: 0.75rem;
+  vertical-align: middle;
+  border-top: 1px solid #dee2e6;
+}
+
+/*PHONE*/
+@media only screen and (min-width: 300px) and (max-width: 600px) {
+  button {
+    margin-bottom: 2vw;
+  }
+}

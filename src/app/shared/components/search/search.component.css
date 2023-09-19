@@ -1,0 +1,44 @@
+.sticky-top {
+  width: 100vw;
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+  border: 1px solid transparent;
+  z-index: 0;
+}
+
+.selectContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.select {
+  border-radius: 5px;
+  margin: 1vw;
+}
+
+.clsFree {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.clsPay {
+  pointer-events: all;
+}
+
+/*PHONE*/
+@media only screen and (min-width: 300px) and (max-width: 600px) {
+  .selectContainer {
+    display: contents;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .select {
+    width: 80vw;
+  }
+
+  .btn {
+    margin-top: 2vw;
+  }
+}

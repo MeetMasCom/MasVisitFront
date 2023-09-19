@@ -1,0 +1,134 @@
+<div class="notification-window">
+  <ng-container *ngIf="notification?.length>0">
+    <ul class="list-group list-unstyled">
+      <div *ngFor="let noti of notification">
+          <ng-container *ngIf="noti.state === 0">
+            <li class="list-group-item noti">
+              <div class="container">
+                <div class="row noti p-2">
+                  <div class="col-md-2">
+                    <ng-container *ngIf="noti.user.length>0">
+                      <ng-container *ngIf="noti.user[0].image !== ''">
+                        <img
+                          [src]="'data:image/png;base64,' + noti.user[0].image"
+                          width="40vw"
+                          height="40vw"
+                          alt="..."
+                          class="img-fluid rounded-circle"
+                        />
+                      </ng-container>
+                      <ng-container *ngIf="noti.user[0].image === ''">
+                        <img
+                          [src]="'../../../../assets/user.png'"
+                          width="40vw"
+                          height="40vw"
+                          alt="..."
+                          class="img-fluid rounded-circle"
+                        />
+                      </ng-container>
+                    </ng-container>
+
+                    <ng-container *ngIf="noti.user.length === 0">
+                      <img
+                        [src]="'../../../../assets/img/1.png'"
+                        width="40vw"
+                        height="40vw"
+                        alt="..."
+                        class="img-fluid rounded-circle"
+                      />
+                    </ng-container>
+                  </div>
+                  <ng-container *ngIf="noti.user.length > 0">
+                    <div class="col-md-8">
+                      {{ noti.user[0].userName }} {{ noti.message }}
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="noti.user.length === 0">
+                    <div class="col-md-8">
+                      {{ noti.message }}
+                    </div>
+                  </ng-container>
+
+                  <ng-container *ngIf="noti.state === 0">
+                    <div class="col-md-2">
+                      <input
+                        class="form-check-input me-1"
+                        type="radio"
+                        alt="leído"
+                        aria-label="..."
+                        (change)="onRadioChange(noti._id)"
+                      />
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="noti.state === 1">
+            <li>
+              <div class="container">
+                <div class="row rounded-pill p-2">
+                  <div class="col-md-2">
+                    <ng-container *ngIf="noti.user.length>0">
+                      <ng-container *ngIf="noti.user[0].image !== ''">
+                        <img
+                          [src]="'data:image/png;base64,' + noti.user[0].image"
+                          width="40vw"
+                          height="40vw"
+                          alt="..."
+                          class="img-fluid rounded-circle"
+                        />
+                      </ng-container>
+                      <ng-container *ngIf="noti.user[0].image === ''">
+                        <img
+                          [src]="'../../../../assets/user.png'"
+                          width="40vw"
+                          height="40vw"
+                          alt="..."
+                          class="img-fluid rounded-circle"
+                        />
+                      </ng-container>
+                    </ng-container>
+
+                    <ng-container *ngIf="noti.user.length === 0">
+                      <img
+                        [src]="'../../../../assets/img/1.png'"
+                        width="40vw"
+                        height="40vw"
+                        alt="..."
+                        class="img-fluid rounded-circle"
+                      />
+                    </ng-container>
+                  </div>
+                  <ng-container *ngIf="noti.user.length > 0">
+                    <div class="col-md-8">
+                      {{ noti.user[0].userName }} {{ noti.message }}
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="noti.user.length === 0">
+                    <div class="col-md-8">
+                      {{ noti.message }}
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="noti.state === 0">
+                    <div class="col-md-2">
+                      <input
+                        class="form-check-input me-1"
+                        type="radio"
+                        alt="leído"
+                        aria-label="..."
+                        (change)="onRadioChange(noti._id)"
+                      />
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </li>
+          </ng-container>
+      </div>
+    </ul>
+  </ng-container>
+  <ng-container *ngIf="notification?.length === 0">
+    <h5>No tienes notificaciones</h5>
+  </ng-container>
+</div>

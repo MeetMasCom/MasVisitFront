@@ -1,0 +1,83 @@
+.chat-container {
+  width: 100% !important;
+  min-height: 80vh !important;
+  /* background-color: aqua; */
+}
+
+.-mt-2 {
+  width: 100% !important;
+  margin-top: -30px !important;
+}
+
+.h-100 {
+  height: 100px !important;
+}
+
+.chat-list {
+  overflow-y: auto !important;
+  max-height: 600px;
+}
+
+.chat {
+  height: 80px !important;
+  background-color: #fefefe;
+  border-radius: 15px;
+}
+
+.chat-selected {
+  background-color: #cfcfcf !important;
+}
+
+.fs-12 {
+  font-size: 12px !important;
+}
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.state {
+  bottom: -10px;
+  right: 0px;
+}
+
+.state-user {
+  bottom: 0px;
+  right: 0px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.info-user {
+  height: 80px !important;
+  border-bottom: 1px solid #cfcfcf;
+}
+
+.chat-user {
+  overflow-y: auto !important;
+  max-height: 600px;
+  min-height: 600px !important;
+  overflow-x: hidden !important;
+}
+
+.message-user {
+  overflow-y: auto !important;
+  max-height: 400px;
+}
+
+.message-user-detail {
+  border-radius: 15px;
+  background-color: #cfcfcf;
+  color: #fff;
+}
+
+.message-user-detail-me {
+  border-radius: 15px;
+  background-color: #0d6efd;
+  color: #fff;
+}

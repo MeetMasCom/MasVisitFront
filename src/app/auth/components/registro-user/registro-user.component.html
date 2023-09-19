@@ -1,0 +1,269 @@
+<app-menu></app-menu>
+<div class="mt-2">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="col-md-6 justify-content-center align-items-center">
+      <form #frmREgister="ngForm" (ngSubmit)="onRegister(frmREgister)">
+        <div class="container card register">
+          <div class="mt-4">
+            <p>Registrate</p>
+          </div>
+          <div>
+            <div class="form-group">
+              <label class="label">País</label>
+              <select
+                class="form-select d-flex"
+                id="country"
+                required
+                ngModel
+                name="country"
+                #country="ngModel"
+                [ngClass]="'select'"
+              >
+                <option value="" selected disabled>Seleccione un país</option>
+                <option *ngFor="let item of countries" [value]="item._id">
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div class="form-group">
+              <label class="label">Fecha de Nacimiento</label>
+              <input
+                type="date"
+                class="form-control"
+                placeholder=""
+                id="dateBirth"
+                required
+                ngModel
+                name="dateBirth"
+                #dateBirth="ngModel"
+                [ngClass]="'input'"
+              />
+              <div
+                *ngIf="
+                  dateBirth.invalid &&
+                  (dateBirth.dirty || dateBirth.touched || errordate)
+                "
+                class="text-danger"
+              >
+                <small *ngIf="dateBirth.errors?.['required']">
+                  {{ "Seleccione una fecha" }}
+                </small>
+              </div>
+              <small class="text-danger" *ngIf="errordate !== ''">
+                {{ errordate }}
+              </small>
+            </div>
+          </div>
+          <div>
+            <div class="form-group">
+              <label class="label"> Nombre de usuario</label>
+              <input
+                id="userName"
+                type="text"
+                class="form-control"
+                placeholder="Nombre de usuario"
+                required
+                ngModel
+                name="userName"
+                pattern="[A-Za-z0-9]+"
+                #userName="ngModel"
+                [ngClass]="'input'"
+                (change)="onValidateUserName(userName.value)"
+              />
+              <div
+                *ngIf="userName.invalid && (userName.dirty || userName.touched)"
+                class="text-danger"
+              >
+                <small *ngIf="userName.errors?.['required']">
+                  {{ "Ingrese el nombre de usuario" }}
+                </small>
+                <small *ngIf="userName.errors?.['pattern']">
+                  {{ "register.username" }}
+                  {{ "register.invaliMsg" }}
+                </small>
+              </div>
+              <div *ngIf="statusUserName" class="text-danger">
+                {{ "register.username" }}
+                {{ "register.unaviableMsg" }}
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="form-group">
+              <label class="label"> Correo</label>
+              <input
+                id="email"
+                type="email"
+                class="form-control"
+                placeholder=" Correo"
+                placeholder="Email"
+                required
+                email
+                ngModel
+                name="email"
+                #email="ngModel"
+                [ngClass]="'input'"
+                (change)="onValidateEmail(email.value)"
+              />
+              <div
+                *ngIf="email.invalid && (email.dirty || email.touched)"
+                class="text-danger"
+              >
+                <small *ngIf="email.errors?.['required']">
+                  {{ "Ingrese el correo electrónico" }}
+                </small>
+                <small *ngIf="email.errors?.['email']">
+                  {{ "register.mail" }}
+                  {{ "register.invaliMsg" }}
+                </small>
+              </div>
+              <div *ngIf="statusEmail" class="text-danger">
+                {{ "register.mail" }}
+                {{ "register.usedMsg" }}
+              </div>
+            </div>
+          </div>
+          <div></div>
+
+          <div>
+            <div class="form-group">
+              <label class="label"> Contraseña</label>
+              <input
+                type="password"
+                class="form-control"
+                placeholder=" Contraseña"
+                id="password"
+                required
+                ngModel
+                minlength="8"
+                name="password"
+                #password="ngModel"
+                [ngClass]="'input'"
+              />
+              <div
+                *ngIf="password.invalid && (password.dirty || password.touched)"
+                class="text-danger form-group"
+              >
+                <small class="form-group" *ngIf="password.errors?.['required']">
+                  {{ "Ingrese una contraseña" }}
+                </small>
+                <small
+                  class="form-group"
+                  *ngIf="password.errors?.['minlength']"
+                >
+                  {{ "register.minPassword" }}
+                </small>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="form-group">
+              <label class="label">Confirma tu Contraseña</label>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Confirma tu contraseña"
+                id="password"
+                required
+                ngModel
+                minlength="8"
+                name="repitPassword"
+                #repitPassword="ngModel"
+                [ngClass]="'input'"
+              />
+              <div
+                *ngIf="
+                  repitPassword.invalid &&
+                  (repitPassword.dirty || repitPassword.touched)
+                "
+                class="text-danger d-flex flex-column"
+              >
+                <small
+                  class="form-group"
+                  *ngIf="repitPassword.errors?.['required']"
+                >
+                  Ingrese una contraseña
+                </small>
+                <small
+                  class="form-group"
+                  *ngIf="repitPassword.errors?.['minlength']"
+                >
+                  Debe tener mínimo 8 caracteres
+                </small>
+              </div>
+              <div
+                *ngIf="repitPassword.value != password.value"
+                class="text-danger d-flex flex-column"
+              >
+                <small class="form-group"> Las contraseñas no coinciden </small>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="form-group">
+              <label class="label"> Género </label>
+              <select
+                class="form-select d-flex"
+                id="gender"
+                required
+                ngModel
+                name="gender"
+                #gender="ngModel"
+                [ngClass]="'select'"
+              >
+                <option value="" selected disabled>
+                  Seleccione una opción
+                </option>
+                <option *ngFor="let item of generos" [value]="item.id">
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <div class="form-group">
+              <input
+                type="checkbox"
+                id="terms"
+                required
+                ngModel
+                name="terms"
+                #terms="ngModel"
+              />
+
+              <a href="#">Términos y condiciones</a>
+            </div>
+          </div>
+          <!-- *" -->
+          <div *ngIf="user"
+          
+            class="mt-2 bg-warning bg-opacity-10 border rounded-3 border-warning p-3 d-flex justify-content-center align-items-center">
+            Invitado por: &nbsp; <b> {{ this.user }}</b>
+          </div>
+          <div class="col-sm-12 mt-2">
+            <div class="form-group text-center">
+              <input type="submit" class="btn nuevo" value="Registrarme" />
+            </div>
+            <br />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <a>
+        <img src="../../../../assets/img/logo.png" class="rounded" alt="MenOkay" />
+      </a>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+
+<app-modal-alerts [idModal]="'exitoR'" [icono]="'./assets/img/success.png'" [titulo]="'Registro Correcto'"
+  [descripcion]="message" (successModal)="onRedirigir()" [tipo]="0" #exitoRModal></app-modal-alerts>
+
+<app-modal-alerts [idModal]="'failR'" [icono]="'./assets/img/fail.png'" [titulo]="'Registro Incorrecto'"
+  [descripcion]="message" (successModal)="onFail()" [tipo]="0" #failRModal></app-modal-alerts>

@@ -1,0 +1,96 @@
+<app-menu></app-menu>
+<div class="d-flex flex-column container justify-content-start mt-3">
+  <ul class="nav nav-tabs mb-3 border-0" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="ads-profile-tab" data-bs-toggle="pill" data-bs-target="#ads-profile"
+        type="button" role="tab" aria-controls="ads-profile" aria-selected="false">
+        Activos
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="ads-rev-tab" data-bs-toggle="pill" data-bs-target="#ads-rev" type="button" role="tab"
+        aria-controls="ads-rev" aria-selected="false">
+        En revisión
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="ads-dev-tab" data-bs-toggle="pill" data-bs-target="#ads-dev" type="button" role="tab"
+        aria-controls="ads-dev" aria-selected="false">
+        Devueltos
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="ads-profile" role="tabpanel" aria-labelledby="ads-profile-tab">
+      <div class="d-flex justify-content-end mb-1">
+        <button data-bs-toggle="modal" data-bs-target="#addAdsModal" class="btn" [ngClass]="'input-btn'" type="button">
+          Nuevo
+        </button>
+      </div>
+      <app-notices-type [type]="0" (onOffItem)="onOffAds($event)" (sendId)="onDelete($event)"
+        (sendItem)="onUpdate($event)" [data]="adsActive"></app-notices-type>
+    </div>
+    <div class="tab-pane fade my-3" id="ads-rev" role="tabpanel" aria-labelledby="ads-rev-tab">
+      <app-notices-type [type]="1" [data]="adsReview"></app-notices-type>
+    </div>
+    <div class="tab-pane fade" id="ads-dev" role="tabpanel" aria-labelledby="ads-dev-tab">
+      <app-notices-type [type]="2" [data]="adsReturn" (sendId)="onDelete($event)"
+        (sendItem)="onUpdate($event)"></app-notices-type>
+    </div>
+  </div>
+</div>
+<br><br><br>
+<div class="w-100 position-fixed bottom-0">
+  <app-footer></app-footer>
+</div>
+
+
+
+<app-modal-alerts [idModal]="'successNotices'" [icono]="'./assets/img/success.png'" [titulo]="'Registro exitoso'"
+  [descripcion]="messague" [tipo]="0" (successModal)="onRedirigir()" #successNotices></app-modal-alerts>
+
+<app-modal-alerts [idModal]="'failNotices'" [icono]="'./assets/img/fail.png'" [titulo]="'Fallo al registrar'"
+  [descripcion]="messague" [tipo]="0" #failNotices></app-modal-alerts>
+
+<app-modal-alerts [idModal]="'exitoDeleteAdsRev'" [icono]="'./assets/img/success.png'" [titulo]="'Proceso Exitoso'"
+  [descripcion]="'Se eliminó exitosamente el anuncio.'" (successModal)="onRedirigir()" [tipo]="0"
+  #exitoDeleteAdsRev></app-modal-alerts>
+
+<app-modal-alerts [idModal]="'failDeleteAdsRev'" [icono]="'./assets/img/fail.png'" [titulo]="'Proceso No Exitoso'"
+  [descripcion]="'No se pudo eliminar el anuncio.'" [tipo]="0" #failDeleteAdsRev></app-modal-alerts>
+
+
+<!-- agregar anuncio Modal -->
+<div class="modal fade" id="addAdsModal" tabindex="-1" aria-labelledby="addAdsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addAdsModalLabel">Nuevo anuncio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-notices (saveAds)="openModal($event)"></app-notices>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Button trigger modal -->
+<button type="button" #btnEdit class="hidden d-none" data-bs-toggle="modal" data-bs-target="#editAdsModal">
+</button>
+
+<!-- editar anuncio Modal -->
+<div class="modal fade" id="editAdsModal" tabindex="-1" aria-labelledby="editAdsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editAdsModalLabel">Editar anuncio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-notices [data]="selectedAds" [action]="1" (saveAds)="openModal($event)"></app-notices>
+      </div>
+    </div>
+  </div>
+</div>

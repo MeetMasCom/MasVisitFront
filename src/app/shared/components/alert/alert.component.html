@@ -1,0 +1,44 @@
+<ng-container *ngIf="classAlert === 'alert-success'">
+  <div
+    class="alert alert-success alert-dismissible fade show fixed-top mt-5"
+    role="alert"
+  >
+    {{ message }}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="classAlert === 'alert-danger'">
+  <div
+    class="alert alert-danger alert-dismissible fade show fixed-top mt-5"
+    role="alert"
+  >
+    {{ message }}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="classAlert === 'alert-warning'">
+  <div
+    class="alert alert-warning alert-dismissible fade show fixed-top mt-5"
+    role="alert"
+  >
+    {{ message }}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+</ng-container>
