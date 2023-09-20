@@ -1,0 +1,39 @@
+.nuevo {
+    background-color: #f9a21e;
+  }
+  
+  fa-icon:hover {
+    color: #f9a21e;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .fa-3x {
+    font-size: 1em !important;
+    padding: 0;
+  }
+  
+  .nav-link:focus,
+  .nav-link:hover,
+  .nav-link.active {
+    background-color: #f9a21e;
+    color: #000;
+  }
+  
+  .nav-link {
+    color: #000;
+  }
+  
+  img {
+    height: 160px;
+    width: 250px;
+  }
+  
+  /*TABLET*/
+  @media only screen and (min-width: 601px) and (max-width: 1300px) {
+    img {
+      height: 120px;
+      width: 180px;
+    }
+  }
+  

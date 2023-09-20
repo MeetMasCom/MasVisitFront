@@ -1,0 +1,53 @@
+<div>
+    <form
+    #fmrRegisterComment="ngForm"
+    (ngSubmit)="onComment(fmrRegisterComment)"
+  >
+    <div class="form-body">
+      <div class="row">
+        <div class="form-group mb-4">
+          <label> Comentario: </label>
+
+          <textarea
+            type="text"
+            class="form-control"
+            placeholder="Comentario"
+            id="hcomentario"
+            name="hcomentario"
+            required
+            ngModel
+            rows="7"
+            #hcomentario="ngModel"
+            [ngClass]="'input'"
+          ></textarea>
+          <div
+            *ngIf="
+              hcomentario.invalid &&
+              (hcomentario.dirty || hcomentario.touched)
+            "
+            class="text-danger form-group position-absolute"
+          >
+            <small
+              class="form-group"
+              *ngIf="hcomentario.errors?.['required']"
+            >
+              Campo requerido.
+            </small>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="form-group text-center">
+            <input
+              type="submit"
+              class="btn"
+              value="RECHAZAR"
+              [disabled]="!fmrRegisterComment['valid']"
+              [ngClass]="'input-btn'"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

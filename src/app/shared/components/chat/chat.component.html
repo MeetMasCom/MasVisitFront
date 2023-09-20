@@ -1,0 +1,104 @@
+<app-menu></app-menu>
+<div class="row p-0 m-0 chat-container -mt-4">
+    <div class="col-4 chat-list p-2 overflow-y-auto">
+        <div class="w-100 px-2 pt-2 mb-3">
+            <span class="fw-bold">Chats</span>
+        </div>
+        <ng-container *ngFor="let item of users; let i = index">
+            <div (click)="selectUser(item)" class="d-flex flex-column px-3 mb-3 cursor-pointer">
+                <div [ngClass]="{'chat-selected':user._id == item._id}"
+                    class="row chat px-2 d-flex justify-content-between align-items-center">
+                    <div class="col-12 col-md-2 position-relative">
+                        <img class="img-fluid rounded-circle" [src]="'data:image/png;base64,'+item.image"
+                            alt="meet-mas">
+                        <span class="position-absolute state translate-middle p-2  border border-light rounded-circle"
+                            [ngClass]="{'bg-success':item.online, 'bg-danger':!item.online}">
+                        </span>
+                    </div>
+                    <div
+                        class="d-none col-0 col-md-10 chat-list p-2 d-md-flex flex-column align-items-start justify-content-start">
+                        <span class="fw-bold">{{item.firstname}} {{item.lastname}}</span>
+                        <span class="fs-12 truncate w-full">{{item.description}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="m-2" *ngIf="users.length == 0">
+            No tienes chats disponibles...
+        </div>
+
+    </div>
+    <div class="col-8 p-3">
+        <div *ngIf="user" class="chat-user position-relative ">
+            <div class="info-user row p-2 mb-2">
+                <div class="col-4 col-md-1 position-relative">
+                    <img width="60" class="img-fluid rounded-circle" [src]="'data:image/png;base64,'+user.image"
+                        alt="meet-mas">
+                    <span class="position-absolute state-user translate-middle p-2  border border-light rounded-circle"
+                        [ngClass]="{'bg-success':user.online, 'bg-danger':!user.online}">
+                    </span>
+                </div>
+                <div class="col-8 col-md-11 p-2 d-flex flex-column align-items-start justify-content-start">
+                    <span class="fw-bold">{{user.firstname}} {{user.lastname}}</span>
+                    <span class="fs-12">{{user.description}}</span>
+                </div>
+            </div>
+
+            <div class="message-user p-2 w-100">
+                <ng-container *ngFor="let data of messagues">
+                    <div class="fs-12 fw-lighter w-100 text-center mb-3">{{data.date}}</div>
+
+                    <ng-container *ngFor="let chat of data.message">
+
+                        <ng-container *ngIf="!chat.current">
+                            <div class="row m-0 mb-3">
+                                <div class="col-10 col-md-6 row">
+                                    <div class="d-none d-md-block col-2">
+                                        <img class="img-fluid rounded-circle"
+                                            [src]="'data:image/png;base64,'+user.image" alt="meet-mas">
+                                    </div>
+                                    <div class="col-10 message-user-detail py-2 px-3">
+                                        {{chat.data}}
+                                    </div>
+                                </div>
+                                <div class="col-2 col-md-6">
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="chat.current">
+                            <div class="row m-0 mb-3">
+                                <div class="col-2 col-md-6">
+                                </div>
+                                <div class="col-10 col-md-6 message-user-detail-me py-2 px-3">
+                                    {{chat.data}}
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+
+                    <div class="w-100 d-flex justify-content-center mt-4" *ngIf="this.isLoading">
+                        <div class="spinner-border text-warning" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+                <div class="m-2" *ngIf="messagues.length == 0 && !this.isLoading">
+                    No tienes mensajes...
+                </div>
+
+            </div>
+
+            <div class="position-absolute w-100 bottom-0 mb-4">
+                <div class="d-flex flex-row p-2 mb-2">
+                    <textarea class="form-control me-2 rounded-5" [formControl]="chat" rows="1"></textarea>
+                    <button type="button" (click)="saveMessague()" class="btn btn-primary">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <app-footer></app-footer> -->

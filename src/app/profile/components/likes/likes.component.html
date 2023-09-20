@@ -1,0 +1,165 @@
+<app-menu></app-menu>
+<div class="container mt-4" style="min-height: 37vw">
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="pills-home-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#pills-home"
+            type="button"
+            role="tab"
+            aria-controls="pills-home"
+            aria-selected="true"
+          >
+            Seguidos
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="pills-profile-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#pills-profile"
+            type="button"
+            role="tab"
+            aria-controls="pills-profile"
+            aria-selected="false"
+          >
+            Seguidores
+          </button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="pills-tabContent">
+        <div
+          class="tab-pane fade show active"
+          id="pills-home"
+          role="tabpanel"
+          aria-labelledby="pills-home-tab"
+        >
+          <div class="row">
+            <div class="col-md-12">
+              <ng-container *ngIf="this.misLikes?.length > 0">
+                <div class="row d-flex justify-content-center">
+                  <div class="col-md-6 p-3" *ngFor="let like of this.misLikes">
+                    <div class="contenido rounded p-3">
+                      <ng-container *ngFor="let user of like.user">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-md-3">
+                              <ng-container *ngIf="user?.image !== ''">
+                                <img
+                                  [src]="'data:image/png;base64,' + user.image"
+                                  width="40px"
+                                  height="40px"
+                                  alt="..."
+                                  class="rounded"
+                                />
+                              </ng-container>
+                              <ng-container *ngIf="user?.image === ''">
+                                <img
+                                  src="../../assets/user.png"
+                                  width="40px"
+                                  height="40px"
+                                  alt="..."
+                                  class="rounded"
+                                />
+                              </ng-container>
+                            </div>
+                            <div class="col-md-9 align-items-center">
+                              <div class="row mt-2">
+                                <div class="col-md-5">
+                                  <h6 class="font-weight-bold">
+                                    {{ user.userName }},
+                                  </h6>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-5 text-right">
+                                  {{ calcularEdad(user.dateBirth) }} años
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div></ng-container
+              >
+              <ng-container *ngIf="this.misLikes?.length === 0">
+                <h5>No tienes match</h5>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="tab-pane fade show"
+          id="pills-profile"
+          role="tabpanel"
+          aria-labelledby="pills-profile-tab"
+        >
+        <div class="row">
+            <div class="col-md-12">
+              <ng-container *ngIf="this.userLike?.length > 0">
+                <div class="row d-flex justify-content-center">
+                  <div class="col-md-6 p-3" *ngFor="let like of this.userLike">
+                    <div class="contenido rounded p-3">
+                      <ng-container *ngFor="let user of like.user">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-md-3">
+                              <ng-container *ngIf="user?.image !== ''">
+                                <img
+                                  [src]="'data:image/png;base64,' + user.image"
+                                  width="40px"
+                                  height="40px"
+                                  alt="..."
+                                  class="rounded"
+                                />
+                              </ng-container>
+                              <ng-container *ngIf="user?.image === ''">
+                                <img
+                                  src="../../assets/user.png"
+                                  width="40px"
+                                  height="40px"
+                                  alt="..."
+                                  class="rounded"
+                                />
+                              </ng-container>
+                            </div>
+                            <div class="col-md-9 align-items-center">
+                              <div class="row mt-2">
+                                <div class="col-md-5">
+                                  <h6 class="font-weight-bold">
+                                    {{ user.userName }},
+                                  </h6>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-5 text-right">
+                                  {{ calcularEdad(user.dateBirth) }} años
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div></ng-container
+              >
+              <ng-container *ngIf="this.userLike?.length === 0">
+                <h5>No tienes match</h5>
+              </ng-container>
+            </div>
+          </div>
+
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

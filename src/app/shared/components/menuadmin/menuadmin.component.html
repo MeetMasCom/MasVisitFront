@@ -1,0 +1,225 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="dashboard">
+      <img class="rounded img-fluid"  src="../../assets/img/logo1.png" alt="Ken You Me" />
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+          <img class="rounded img-fluid"  src="../../assets/img/logo1.png" alt="Ken You Me" />
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body mx-4">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="dashboard">
+              <fa-icon [icon]="['fas', 'house']"></fa-icon>
+              Inicio
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <fa-icon [icon]="['fas', 'user']"></fa-icon>
+              Usuario
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+              <li>
+                <a class="dropdown-item" href="administradores">
+                  <fa-icon [icon]="['fas', 'user-gear']"></fa-icon>
+                  Administradores
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="supSistemas">
+                  <fa-icon [icon]="['fas', 'computer']"></fa-icon>
+                  Soporte Sistemas
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="supVentas">
+                  <fa-icon [icon]="['fas', 'circle-dollar-to-slot']"></fa-icon>
+                  Soporte Ventas
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="supAnuncios">
+                  <fa-icon [icon]="['fas', 'rectangle-ad']"></fa-icon>
+                  Soporte Anuncios
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="supUsers">
+                  <fa-icon [icon]="['fas', 'circle-dollar-to-slot']"></fa-icon>
+                  Soporte Usuarios
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown d-none">
+            <a class="nav-link dropdown-toggle" href="dashboard" id="offcanvasNavbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <fa-icon [icon]="['fas', 'building-user']"></fa-icon>
+              Servicios
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+              <li>
+                <a class="dropdown-item" href="promptsAdmin">
+                  <fa-icon [icon]="['fas', 'hotel']"></fa-icon>
+                  Prompts
+                </a>
+                <a class="dropdown-item" href="cupones">
+                  <fa-icon [icon]="['fas', 'plus-circle']"></fa-icon>
+                  Cupones
+                </a>
+              </li>
+              <!-- <li>
+                <a class="dropdown-item" href="hotelToVerify">
+                  <fa-icon [icon]="['fas', 'hotel']"></fa-icon>
+                  Tips
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="dashboard">
+                  <fa-icon [icon]="['fas', 'utensils']"></fa-icon>
+                  Negocios
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="dashboard">
+                  <fa-icon [icon]="['fab', 'pagelines']"></fa-icon>
+                  Marketing
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="dashboard">
+                  <fa-icon [icon]="['fas', 'users-line']"></fa-icon>
+                  Emprendedor
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="profiles">
+                  <fa-icon [icon]="['fas', 'users']"></fa-icon>
+                  Programas
+                </a>
+              </li> -->
+              <li>
+                <a class="dropdown-item" href="feedback">
+                  <fa-icon [icon]="['fas', 'users']"></fa-icon>
+                  FeedBack
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown d-none">
+            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <fa-icon [icon]="['fas', 'hammer']"></fa-icon>
+              Listados
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+              <li>
+                <a class="dropdown-item" href="options/ESTUDIOS">
+                  <fa-icon [icon]="['fas', 'graduation-cap']"></fa-icon>
+                  Estudios
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="options/PROFESION">
+                  <fa-icon [icon]="['fas', 'user-tie']"></fa-icon>
+                  Profesiones
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item"  href="options/IDIOMAS">
+                  <fa-icon [icon]="['fas', 'language']"></fa-icon>
+                  Idiomas
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="options/DEPORTES">
+                  <fa-icon [icon]="['fas', 'medal']"></fa-icon>
+                  Deportes
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="options/POLITICA">
+                  <fa-icon [icon]="['fas', 'handshake']"></fa-icon>
+                  Política
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="options/RELIGION">
+                  <fa-icon [icon]="['fas', 'cross']"></fa-icon>
+                  Religion
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="options/ETNIAS">
+                  <fa-icon [icon]="['fas', 'person']"></fa-icon>
+                  Etnias
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="options/JORNADA_LABORAL">
+                  <fa-icon [icon]="['fas', 'house-laptop']"></fa-icon>
+                  Jornada Laboral
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="options/DEPENDENCIA_LABORAL">
+                  <fa-icon [icon]="['fas', 'pen-nib']"></fa-icon>
+                  Dependencia Laboral
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <fa-icon [icon]="['fas', 'hammer']"></fa-icon>
+              Administración
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+              <li>
+                <a class="dropdown-item" href="membresias">
+                  <fa-icon [icon]="['fas', 'file-pen']"></fa-icon>
+                  Membresías
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="billeteraE">
+                  <fa-icon [icon]="['fas', 'wallet']"></fa-icon>
+                  Billeteras
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="recargasE">
+                  <fa-icon [icon]="['fas', 'money-bill-trend-up']"></fa-icon>
+                  Recargas
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="retirosE">
+                  <fa-icon [icon]="['fas', 'money-bill-wave']"></fa-icon>
+                  Retiros
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="admin">
+              <fa-icon [icon]="['fas', 'right-from-bracket']"></fa-icon>
+              Salir
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

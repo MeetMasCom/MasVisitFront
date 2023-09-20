@@ -1,0 +1,382 @@
+<app-menuadmin></app-menuadmin>
+<div class="container d-flex flex-column mt-5 pt-5">
+  <div class="my-5">
+    <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="pills-home-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-home"
+          type="button"
+          role="tab"
+          aria-controls="pills-home"
+          aria-selected="true"
+        >
+          Billeteras
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="pills-profile-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-profile"
+          type="button"
+          role="tab"
+          aria-controls="pills-profile"
+          aria-selected="false"
+        >
+          Agregar
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+      <br />
+      <div
+        class="tab-pane fade show active"
+        id="pills-home"
+        role="tabpanel"
+        aria-labelledby="pills-home-tab"
+      >
+        <div class="form-inline">
+          <div class="form-group m-2" style="width: 90%">
+            <h3>Billeteras Empresa</h3>
+          </div>
+        </div>
+        <hr />
+        <br />
+        <div>
+          <ng-container *ngIf="billeteraEmpresa?.length > 0">
+            <div class="table-responsive">
+              <table id="billetera" class="row-border hover table text-center">
+                <thead>
+                  <tr>
+                    <th>Detalle</th>
+                    <th>Alias</th>
+                    <th>Tipo</th>
+                    <th>Dirección</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let b of billeteraEmpresa">
+                    <td>{{ b.detalle }}</td>
+                    <td>{{ b.alias }}</td>
+                    <td>{{ b.tipo }}</td>
+                    <td>{{ b.dir }}</td>
+
+                    <td>
+                      <form
+                        #frmActBiEmpresa="ngForm"
+                        (ngSubmit)="
+                          onUpdateBilleteraEmpresa(
+                            frmActBiEmpresa,
+                            b._id,
+                            b.estado
+                          )
+                        "
+                      >
+                        <input
+                          type="button"
+                          class="mx-2 btn btn-outline-warning"
+                          value="Actualizar"
+                          (click)="ir(b._id)"
+                        />
+                        <input
+                          type="submit"
+                          *ngIf="b.estado === 1"
+                          class="mx-2 btn btn-outline-danger"
+                          value="Desactivar"
+                          onclick="return confirm('¿Esta seguro?')"
+                        />
+                        <input
+                          type="submit"
+                          *ngIf="b.estado === 0"
+                          class="mx-2 btn btn-outline-success"
+                          value="Activar"
+                          onclick="return confirm('¿Esta seguro?')"
+                        />
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="billeteraEmpresa?.length === 0">
+            <h4>No existen billeteras disponibles</h4>
+          </ng-container>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="pills-profile"
+        role="tabpanel"
+        aria-labelledby="pills-profile-tab"
+      >
+        <div class="form-inline">
+          <div class="form-group m-2" style="width: 90%">
+            <h3>Registrar Nueva Billetera Empresa</h3>
+          </div>
+        </div>
+        <hr />
+        <form
+          #fmrBilleteraEmpresa="ngForm"
+          (ngSubmit)="onRegisterBilleteraEmpresa(fmrBilleteraEmpresa)"
+        >
+          <div class="row mx-3">
+            <div class="col mt-3">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text text-dark">Billetera</span>
+                </div>
+                <select
+                  class="form-select "
+                  name="tipo"
+                  id="tipo"
+                  [(ngModel)]="tipo"
+                  (change)="getSelectedTipo()"
+                  required
+                >
+                  <option value="" disabled>Seleccione tipo</option>
+                  <option value="Crypto">Crypto</option>
+                  <option Value="Banco">Banco</option>
+                  <option Value="Otro">Otro</option>
+                </select>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text text-dark">Detalle</span>
+                </div>
+                <input
+                  id="detalle"
+                  name="detalle"
+                  type="text"
+                  class="form-control"
+                  placeholder="Detalle"
+                  required
+                  ngModel
+                  #detalle="ngModel"
+                />
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text text-dark">Tipo</span>
+                </div>
+                <input
+                  [disabled]="status == 'Otro'"
+                  *ngIf="status != 'Banco'"
+                  id="alias"
+                  name="alias"
+                  type="text"
+                  class="form-control"
+                  placeholder="Tipo"
+                  required
+                  ngModel
+                  #alias="ngModel"
+                />
+                <input
+                  [disabled]="status != 'Crypto'"
+                  *ngIf="status != 'Banco'"
+                  id="sigla"
+                  name="sigla"
+                  type="text"
+                  class="form-control"
+                  placeholder="Sigla"
+                  required
+                  ngModel
+                  #sigla="ngModel"
+                />
+
+                <select
+                  *ngIf="status == 'Banco'"
+                  class="form-select"
+                  name="alias"
+                  id="alias"
+                  required
+                  ngModel
+                  #alias="ngModel"
+                >
+                  <option value="" disabled>Seleccione tipo</option>
+                  <option value="Corriente">Corriente</option>
+                  <option Value="Ahorro">Ahorro</option>
+                </select>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text text-dark">Dirección</span>
+                </div>
+                <input
+                  id="dir"
+                  name="dir"
+                  type="text"
+                  class="form-control"
+                  placeholder="Dirección"
+                  required
+                  ngModel
+                  #dir="ngModel"
+                />
+                <input
+                  [disabled]="status != 'Crypto'"
+                  id="tag"
+                  name="tag"
+                  type="string"
+                  class="form-control"
+                  placeholder="Tag"
+                  ngModel
+                  #tag="ngModel"
+                />
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text text-dark">Saldo Mínimo</span>
+                </div>
+                <input
+                  id="minsaldo"
+                  name="minsaldo"
+                  type="number"
+                  class="form-control"
+                  placeholder="Mínimo Saldo"
+                  required
+                  ngModel
+                  #minsaldo="ngModel"
+                />
+              </div>
+            </div>
+            <div class="col mt-3">
+              <div class="input-group mb-3">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text text-dark"
+                      >Costo Transacción</span
+                    >
+                  </div>
+                  <input
+                    id="costo"
+                    name="costo"
+                    type="number"
+                    class="form-control"
+                    placeholder="Costo Transacción"
+                    required
+                    ngModel
+                    #saldo="ngModel"
+                  />
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text text-dark"
+                      >Mínimo Recarga / Retiro</span
+                    >
+                  </div>
+                  <input
+                    id="minimo"
+                    name="minimo"
+                    type="number"
+                    class="form-control"
+                    placeholder="Mínimo"
+                    required
+                    ngModel
+                    #minimo="ngModel"
+                  />
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text text-dark"
+                      >Máximo Retiro Bronce</span
+                    >
+                  </div>
+                  <input
+                    id="maxretiroB"
+                    name="maxretiroB"
+                    type="number"
+                    class="form-control"
+                    placeholder="Máximo Retiro Usuario Bronce"
+                    required
+                    ngModel
+                    #maxretiroB="ngModel"
+                  />
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text text-dark"
+                      >Máximo Retiro Plata</span
+                    >
+                  </div>
+                  <input
+                    id="maxretiroP"
+                    name="maxretiroP"
+                    type="number"
+                    class="form-control"
+                    placeholder="Máximo Retiro Usuario Plata"
+                    required
+                    ngModel
+                    #maxretiroP="ngModel"
+                  />
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text text-dark"
+                      >Máximo Retiro Oro</span
+                    >
+                  </div>
+                  <input
+                    id="maxretiroO"
+                    name="maxretiroO"
+                    type="number"
+                    class="form-control"
+                    placeholder="Máximo Retiro Usuario Oro"
+                    required
+                    ngModel
+                    #maxretiroO="ngModel"
+                  />
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text text-dark"
+                      >Máximo Retiro Diamante</span
+                    >
+                  </div>
+                  <input
+                    id="maxretiroD"
+                    name="maxretiroD"
+                    type="number"
+                    class="form-control"
+                    placeholder="Máximo Retiro Usuario Diamante"
+                    required
+                    ngModel
+                    #maxretiroD="ngModel"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="form-group mx-3 px-3 mb-5">
+            <input
+              id="advertencia"
+              name="advertencia"
+              type="checkbox"
+              required
+              ngModel
+              #advertencia="ngModel"
+            />
+            <label for="advertencia"
+              >&nbsp;&nbsp;¿Seguro que desea guardar la billetera?</label
+            >
+            <input
+              type="submit"
+              class="px-3 mx-3 float-right btn nuevo"
+              value="Guardar"
+              [disabled]="!fmrBilleteraEmpresa.valid"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

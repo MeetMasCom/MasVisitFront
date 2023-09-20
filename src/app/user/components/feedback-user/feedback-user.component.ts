@@ -26,7 +26,6 @@ export class FeedbackUserComponent {
     public constante: ConstantsSystem,
     private clipboardService: ClipboardService,
     private toastr: ToastrService,
-    private authServiceService: AuthServiceService,
   ) {}
 
 

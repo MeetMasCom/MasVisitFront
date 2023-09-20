@@ -1,0 +1,360 @@
+<app-menuadmin></app-menuadmin>
+<div class="container">
+  <br />
+  <div class="row mt-3">
+    <br />
+    <div class="col-sm-11">
+      <h3>
+        <i *ngIf="estado == 1" class="fas fa-check-circle text-success"></i>
+        <i
+          *ngIf="estado == 0"
+          class="fas fa-exclamation-circle text-danger"
+        ></i>
+        Actualizar Billetera
+        <ng-container *ngIf="tipoB == 'Otro'">
+          {{ aliasB }}
+        </ng-container>
+        <ng-container *ngIf="tipoB == 'Banco'">
+          {{ detalleB }}
+        </ng-container>
+        <ng-container *ngIf="tipoB == 'Crypto'">
+          {{ aliasB }}
+        </ng-container>
+      </h3>
+    </div>
+  </div>
+  <br />
+  <hr />
+  <br />
+  <form #frmUpdate="ngForm" (ngSubmit)="onUpdate(frmUpdate)">
+    <div class="row mx-3">
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-dark">Detalle</span>
+          </div>
+          <input
+            id="detalle"
+            name="detalle"
+            [(ngModel)]="detalleB"
+            type="text"
+            class="form-control"
+            ngModel
+            #detalle="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-dark">Dirección</span>
+          </div>
+          <input
+            id="direccion"
+            [(ngModel)]="direccionB"
+            name="direccion"
+            type="text"
+            class="form-control"
+            ngModel
+            #direccion="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-dark">Tag</span>
+          </div>
+          <input
+            [disabled]="tipoB != 'Crypto'"
+            id="tag"
+            name="tag"
+            type="text"
+            [(ngModel)]="tagB"
+            class="form-control"
+            placeholder="Tag"
+            ngModel
+            #tag="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-dark">Costo Transacción</span>
+          </div>
+          <input
+            id="costo"
+            name="costo"
+            type="number"
+            [(ngModel)]="costoB"
+            step="0.01"
+            class="form-control"
+            placeholder="Costo"
+            ngModel
+            #costo="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-dark">Saldo Mínimo</span>
+          </div>
+          <input
+            id="minsaldo"
+            name="minsaldo"
+            type="number"
+            [(ngModel)]="saldoMinimoB"
+            step="0.01"
+            class="form-control"
+            placeholder="Saldo Mínimo"
+            ngModel
+            #minsaldo="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-dark">Mínimo </span>
+          </div>
+          <input
+            id="minimo"
+            name="minimo"
+            type="number"
+            [(ngModel)]="minimoB"
+            step="0.01"
+            class="form-control"
+            ngModel
+            #minimo="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-dark">Maximo Retiro Bronce</span>
+          </div>
+          <input
+            id="maxretiroB"
+            name="maxretiroB"
+            type="number"
+            [(ngModel)]="maximoRetiroBB"
+            step="0.01"
+            class="form-control"
+            placeholder="Maximo Retiro Bronce"
+            ngModel
+            #maxretiroB="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-dark">Maximo Retiro Plata</span>
+          </div>
+          <input
+            id="maxetiroP"
+            name="maxretiroP"
+            type="number"
+            [(ngModel)]="maximoRetiroPB"
+            step="0.01"
+            class="form-control"
+            placeholder="Maximo Retiro Plata"
+            ngModel
+            #maxretiroP="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-dark">Maximo Retiro Oro</span>
+          </div>
+          <input
+            id="maxretiroO"
+            name="maxretiroO"
+            type="number"
+            [(ngModel)]="maximoRetiroOB"
+            step="0.01"
+            class="form-control"
+            placeholder="Maximo Retiro Oro"
+            ngModel
+            #maxretiroO="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-dark"
+              >Maximo Retiro Diamante</span
+            >
+          </div>
+          <input
+            id="maxretiroD"
+            name="maxretiroD"
+            type="number"
+            [(ngModel)]="maximoRetiroDB"
+            step="0.01"
+            class="form-control"
+            placeholder="Maximo Retiro Diamante"
+            ngModel
+            #maxretiroD="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-dark">Mínimo Profit</span>
+          </div>
+          <input
+            id="minimoProfit"
+            name="minimoProfit"
+            type="number"
+            [(ngModel)]="minimoProfitB"
+            step="0.01"
+            class="form-control"
+            placeholder="Mínimo Profit"
+            ngModel
+            #minimoProfit="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-dark">Maximo Profit Bronce</span>
+          </div>
+          <input
+            id="maximoProfitB"
+            name="maximoProfitB"
+            type="number"
+            [(ngModel)]="maximoProfitBB"
+            step="0.01"
+            class="form-control"
+            placeholder="Maximo Profit Bronce"
+            ngModel
+            #maximoProfitB="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-dark">Maximo Profit Plata</span>
+          </div>
+          <input
+            id="maximoProfitP"
+            name="maximoProfitP"
+            type="number"
+            [(ngModel)]="maximoProfitPB"
+            step="0.01"
+            class="form-control"
+            placeholder="Maximo Profit Plata"
+            ngModel
+            #maximoProfitP="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-dark">Maximo Profit Oro</span>
+          </div>
+          <input
+            id="maximoProfitO"
+            name="maximoProfitO"
+            type="number"
+            [(ngModel)]="maximoProfitOB"
+            step="0.01"
+            class="form-control"
+            placeholder="Maximo Profit Oro"
+            ngModel
+            #maximoProfitO="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-dark"
+              >Maximo Profit Diamante</span
+            >
+          </div>
+          <input
+            id="maximoProfitD"
+            name="maximoProfitD"
+            type="number"
+            [(ngModel)]="maximoProfitDB"
+            step="0.01"
+            class="form-control"
+            placeholder="Maximo Profit Diamante"
+            ngModel
+            #maximoProfitD="ngModel"
+          />
+        </div>
+      </div>
+
+      <div class="col-sm-12 mt-2">
+        <div class="input-group mb-3">
+          <input
+            id="advertencia"
+            name="advertencia"
+            type="checkbox"
+            required
+            ngModel
+            #advertencia="ngModel"
+          />
+          <label for="advertencia"
+            >&nbsp;&nbsp;¿Seguro que desea guardar los cambios?</label
+          >
+        </div>
+      </div>
+      <br />
+      <div class="col-sm-12 mt-2">
+        <div
+          *ngIf="estado == 0"
+          class="alert alert-danger alert-dismissible fade show text-center"
+          role="alert"
+        >
+          <strong>Aviso!</strong> {{ msj }}...
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div
+          *ngIf="estado == 1"
+          class="alert alert-success alert-dismissible fade show text-center"
+          role="alert"
+        >
+          <strong>Aviso!</strong> {{ msj }}...
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+      <div class="col-sm-12 mt-2">
+        <input
+          type="submit"
+          class="float-right btn nuevo"
+          value="Guardar"
+          [disabled]="!frmUpdate.valid"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+<app-footer></app-footer>

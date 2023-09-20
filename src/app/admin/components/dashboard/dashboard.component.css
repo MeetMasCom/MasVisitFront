@@ -1,0 +1,17 @@
+.container {
+  font-family: Inter;
+  height: 34vw;
+  align-items: center;
+  text-align: center;
+}
+
+/*PHONE*/
+@media only screen and (min-width: 300px) and (max-width: 600px) {
+}
+
+/*TABLET*/
+@media only screen and (min-width: 601px) and (max-width: 1000px) {
+  .container {
+    height: 45vw;
+  }
+}

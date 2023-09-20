@@ -1,0 +1,26 @@
+<ng-container *ngIf="val === 0">
+    <div class="rating">
+      <ng-container *ngFor="let i of stars">
+        <fa-icon
+          class="fa-3x"
+          [icon]="faStar"
+          (click)="updateRating(i)"
+          [ngClass]="{ active: i <= rating }"
+        ></fa-icon>
+      </ng-container>
+    </div>
+  </ng-container>
+  
+  <ng-container *ngIf="val != 0">
+    <div class="rating">
+      <ng-container *ngFor="let i of stars">
+        <fa-icon
+          class="fa-3x"
+          [icon]="faStar"
+          (click)="updateRating(i)"
+          [ngClass]="{ active: i <= val }"
+        ></fa-icon>
+      </ng-container>
+    </div>
+  </ng-container>
+  

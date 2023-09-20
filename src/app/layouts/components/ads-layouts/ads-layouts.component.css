@@ -1,0 +1,43 @@
+.contAll {
+    flex-direction: row;
+    font-family: Inter;
+  }
+  
+  .central {
+    background: #ffffff;
+    border-radius: 20px;
+  }
+  
+  
+  
+  /*PHONE*/
+  @media only screen and (min-width: 300px) and (max-width: 600px) {
+    .contAll {
+      flex-direction: column-reverse;
+    }
+  
+    .col {
+      width: 100%;
+    }
+  
+    .containerInput {
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      display: contents;
+    }
+  
+    .input-btn {
+      width: 50vw;
+    }
+  
+    .nav-link:focus,
+    .nav-link.active {
+      font-size: 12px;
+    }
+  
+    .nav-link {
+      font-size: 12px;
+    }
+  }
+  

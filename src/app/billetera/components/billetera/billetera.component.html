@@ -1,0 +1,160 @@
+<app-menu></app-menu>
+<div class="d-flex flex-column mt-4">
+  <div class="d-flex flex-column container justify-content-start">
+    <ul class="nav nav-tabs mb-3 border-0" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="member-home-tab" data-bs-toggle="pill" data-bs-target="#member-home"
+          type="button" role="tab" aria-controls="member-home" aria-selected="true">
+          Billeteras
+          <fa-icon [icon]="['fas', 'wallet']"></fa-icon>
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="member-profile-tab" data-bs-toggle="pill" data-bs-target="#member-profile"
+          type="button" role="tab" aria-controls="member-profile" aria-selected="false" (click)="model = {}">
+          Agregar
+          <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active bg-white p-3" id="member-home" role="tabpanel"
+        aria-labelledby="member-home-tab">
+        <div class="mt-3 mb-3">
+          <h2>Billeteras</h2>
+        </div>
+        <div class="table-responsive">
+          <table aria-describedby="" class="table text-center">
+            <thead>
+              <tr>
+                <th scope="col">Alias</th>
+                <th scope="col">Detalle</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngIf="billetera.length > 0">
+                <tr *ngFor="let item of billetera">
+                  <td>{{ item.alias }}</td>
+                  <td>{{ item.detalle }}</td>
+                  <td>{{ item.tipoWalletC }}</td>
+                  <td class="text-center">
+                    <button title="Actualizar" type="button" class="btn btn-outline-primary" (click)="onUpdate(item)"
+                      [disabled]="!item.estado">
+                      <fa-icon [icon]="['far', 'pen-to-square']"></fa-icon>
+                      <!-- Actualizar -->
+                    </button>
+                  </td>
+                </tr>
+              </ng-container>
+              <ng-container *ngIf="billetera.length === 0">
+                <tr class="text-center">
+                  <td class="text-center" colspan="4">No existen billeteras</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab-pane fade bg-white" id="member-profile" role="tabpanel" aria-labelledby="member-profile-tab">
+        <div class="mb-4">
+          <h2>Agregar Billetera</h2>
+        </div>
+        <ng-container *ngIf="walletsC.length>0;else noWallet">
+          <form [formGroup]="form" (ngSubmit)="onSaveWalletUser(model)">
+            <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+            <div class="form-group text-center">
+              <input type="submit" class="btn" value="Guardar" [disabled]="form.invalid" [ngClass]="'input-btn'" />
+            </div>
+          </form>
+        </ng-container>
+        <ng-template #noWallet>
+          <div class="w-100 alert alert-warning" role="alert">
+            No tienes billeteras por agregar
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="w-100 position-fixed bottom-0 ">
+  <app-footer></app-footer>
+</div>
+
+
+
+<app-modal-alerts [idModal]="'successCreateM'" [icono]="'./assets/img/success.png'" [titulo]="'Registro Correcto'"
+  [descripcion]="message" (successModal)="onRedirigir()" [tipo]="0" #successCreateM></app-modal-alerts>
+
+<app-modal-alerts [idModal]="'failCreateM'" [icono]="'./assets/img/fail.png'" [titulo]="'Registro Incorrecto'"
+  [descripcion]="message" [tipo]="0" #failCreateM></app-modal-alerts>
+
+<app-modal-alerts [idModal]="'successValidOtp'" [icono]="'./assets/img/success.png'" [titulo]="'Verificación Correcta'"
+  [descripcion]="message" (successModal)="openOtpModal()" [tipo]="0" #successValidOtp></app-modal-alerts>
+
+<app-modal-alerts [idModal]="'failValidOtp'" [icono]="'./assets/img/fail.png'" [titulo]="'Verificación Incorrecta'"
+  [descripcion]="message" [tipo]="0" #failValidOtp></app-modal-alerts>
+
+<app-modal-alerts [idModal]="'successUpdateM'" [icono]="'./assets/img/success.png'" [titulo]="'Actualización Correcta'"
+  [descripcion]="message" (successModal)="onRedirigir()" [tipo]="0" #successUpdateM></app-modal-alerts>
+
+<app-modal-alerts [idModal]="'failUpdateM'" [icono]="'./assets/img/fail.png'" [titulo]="'Actualización Incorrecta'"
+  [descripcion]="message" [tipo]="0" #failUpdateM></app-modal-alerts>
+
+
+<button #modalUpdateButton type="button" class="hidden d-none" data-bs-toggle="modal" data-bs-target="#updateWalletModal">
+  Modal
+</button>
+
+<div class="modal fade" id="updateWalletModal" tabindex="-1" aria-labelledby="updateWalletModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-4 fw-bold" id="updateWalletModalLabel">Actualizar Billetera</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formUpdate" (ngSubmit)="onUpdateWalletUser(walletUser)">
+          <formly-form [form]="formUpdate" [fields]="fieldsUpdate" [model]="walletUser"></formly-form>
+          <div class="form-group text-center">
+            <input type="submit" class="btn" value="Guardar" [disabled]="formUpdate.invalid" [ngClass]="'input-btn'" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button #modalButton type="button" class="hidden d-none" data-bs-toggle="modal" data-bs-target="#otpModal">
+  Modal
+</button>
+
+<div class="modal fade" id="otpModal" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-4 fw-bold" id="otpModalLabel">Verificación en dos pasos</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #frmOtp="ngForm" (ngSubmit)="validateOtp()">
+          <div class="form-group d-flex flex-column align-items-center justify-content-center">
+            <label class="label"> Tu cuenta se encuentra protegida con la verificación de dos pasos; por favor, ingresa
+              el código que hemos
+              enviado a tu correo electrónico, no olvides revisar la bandeja de spam o correo no deseado.
+            </label>
+            <ng-otp-input class="mt-3" #otp (onInputChange)="onOtpChange($event)"
+              [config]="{ length: 6, allowNumbersOnly: true }"></ng-otp-input>
+          </div>
+          <div class="modal-footer justify-content-center d-flex border-0">
+            <div class="form-group text-center">
+              <input type="submit" class="btn" value="Continuar" [disabled]="!frmOtp.valid" [ngClass]="'input-btn'" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

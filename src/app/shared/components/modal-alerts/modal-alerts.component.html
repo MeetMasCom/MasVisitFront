@@ -1,0 +1,500 @@
+<button
+  type="button"
+  class="hidden"
+  data-bs-toggle="modal"
+  [attr.data-bs-target]="'#' + idModal"
+  id="modalButton"
+  #modalButton
+>
+  Modal
+</button>
+
+<div
+  class="modal fade"
+  [id]="idModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="overflow-y-auto modal-content">
+      <div *ngIf="title !== ''" class="modal-header border-0">
+        <h5 class="modal-title">{{ title }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!--Alertas-->
+        <ng-container *ngIf="tipo === 0">
+          <div class="icon-confirm">
+            <img [src]="icono" alt="" />
+          </div>
+          <div class="descripcion">
+            <h3 *ngIf="titulo">{{ titulo }}</h3>
+            <p *ngIf="descripcion">{{ descripcion }}</p>
+          </div>
+
+          <div class="buttons">
+            <button
+              type="button"
+              class="btn btnS nuevo"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              (click)="onSuccess()"
+            >
+              Aceptar
+            </button>
+          </div>
+        </ng-container>
+
+        <!--Formulario para recuperar usuario-->
+        <ng-container *ngIf="tipo === 1">
+          <form #fmrUserName="ngForm" (ngSubmit)="onRecover(fmrUserName)">
+            <div class="col-12 containerInput mt-2 mb-3">
+              <strong>Ingrese el correo registrado</strong>
+              <div class="form-group col-md-12 col-sm-12 mt-3">
+                <label class="form-label">Correo electrónico</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Correo electrónico"
+                  id="emailU"
+                  name="emailU"
+                  required
+                  ngModel
+                  #emailU="ngModel"
+                  [ngClass]="'input'"
+                />
+                <div
+                  *ngIf="emailU.invalid && (emailU.dirty || emailU.touched)"
+                  class="text-danger form-group position-absolute"
+                >
+                  <small class="form-group" *ngIf="emailU.errors?.['required']">
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 mt-5">
+              <div class="form-group text-center">
+                <input
+                  type="submit"
+                  class="btn nuevo"
+                  value="ENVIAR"
+                  [disabled]="!fmrUserName['valid']"
+                  [ngClass]="'input-btn'"
+                />
+              </div>
+            </div>
+          </form>
+        </ng-container>
+
+        <!--Formulario para recuperar contraseña-->
+        <ng-container *ngIf="tipo === 2">
+          <form #fmrPassword="ngForm" (ngSubmit)="onRecover(fmrPassword)">
+            <div class="col-12 containerInput mt-2 mb-3">
+              <strong>Ingrese el nombre de usuario registrado</strong>
+              <div class="form-group col-md-12 col-sm-12 mt-3">
+                <label class="form-label">Usuario</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Usuario"
+                  id="userU"
+                  name="userU"
+                  required
+                  ngModel
+                  #userU="ngModel"
+                  [ngClass]="'input'"
+                />
+                <div
+                  *ngIf="userU.invalid && (userU.dirty || userU.touched)"
+                  class="text-danger form-group position-absolute"
+                >
+                  <small class="form-group" *ngIf="userU.errors?.['required']">
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 mt-5">
+              <div class="form-group text-center">
+                <input
+                  type="submit"
+                  class="btn nuevo"
+                  value="ENVIAR"
+                  [disabled]="!fmrPassword['valid']"
+                  [ngClass]="'input-btn'"
+                />
+              </div>
+            </div>
+          </form>
+        </ng-container>
+
+        <!--Formulario para recuperar contraseña 2-->
+        <ng-container *ngIf="tipo === 3">
+          <form
+            #fmrPasswordCode="ngForm"
+            (ngSubmit)="onRecover(fmrPasswordCode)"
+          >
+            <div class="col-12 containerInput mt-2 mb-3">
+              <div class="form-group col-md-12 col-sm-12 mt-3">
+                <label class="form-label">Código</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Código"
+                  id="code"
+                  name="code"
+                  required
+                  ngModel
+                  #code="ngModel"
+                  [ngClass]="'input'"
+                />
+                <div
+                  *ngIf="code.invalid && (code.dirty || code.touched)"
+                  class="text-danger form-group position-absolute mb-3"
+                >
+                  <small class="form-group" *ngIf="code.errors?.['required']">
+                    Campo requerido.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 containerInput mt-3 mb-3">
+              <div class="form-group col-md-12 col-sm-12 mt-3">
+                <label class="form-label">Contraseña Nueva</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Contraseña Nueva"
+                  id="passNew"
+                  name="passNew"
+                  required
+                  ngModel
+                  minlength="8"
+                  #passNew="ngModel"
+                  [ngClass]="'input'"
+                />
+                <div
+                  *ngIf="passNew.invalid && (passNew.dirty || passNew.touched)"
+                  class="text-danger form-group position-absolute mb-3"
+                >
+                  <small
+                    class="form-group"
+                    *ngIf="passNew.errors?.['required']"
+                  >
+                    Campo requerido.
+                  </small>
+                  <small
+                    class="form-group"
+                    *ngIf="passNew.errors?.['minlength']"
+                  >
+                    Debe tener mínino 8 caracteres.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 containerInput mt-3 mb-3">
+              <div class="form-group col-md-12 col-sm-12 mt-3">
+                <label class="form-label">Repita la Contraseña</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Repita la Contraseña"
+                  id="passR"
+                  name="passR"
+                  required
+                  minlength="8"
+                  ngModel
+                  #passR="ngModel"
+                  [ngClass]="'input'"
+                />
+                <div
+                  *ngIf="passR.invalid && (passR.dirty || passR.touched)"
+                  class="text-danger form-group position-absolute"
+                >
+                  <small class="form-group" *ngIf="passR.errors?.['required']">
+                    Campo requerido.
+                  </small>
+                  <small class="form-group" *ngIf="passR.errors?.['minlength']">
+                    Debe tener mínino 8 caracteres.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 mt-5">
+              <div class="form-group text-center">
+                <input
+                  type="submit"
+                  class="btn nuevo"
+                  value="ENVIAR"
+                  [disabled]="!fmrPasswordCode['valid']"
+                  [ngClass]="'input-btn'"
+                />
+              </div>
+            </div>
+          </form>
+        </ng-container>
+
+        <!--Editar membresía-->
+        <ng-container *ngIf="tipo === 4">
+          <form
+            #fmrUpdateM="ngForm"
+            (ngSubmit)="onUpdateMembership(fmrUpdateM, data)"
+          >
+            <div class="col-12 containerInput mb-3">
+              <div class="form-group col-md-12 col-sm-12 m-2 mt-4">
+                <label>Código membresía</label>
+                <input
+                  id="codeMember"
+                  type="text"
+                  class="form-control"
+                  placeholder="Código membresía"
+                  readonly
+                  disabled
+                  ngModel
+                  name="codeMember"
+                  #codeMember="ngModel"
+                  [ngClass]="'input'"
+                  pattern="[0-9]*"
+                  [(ngModel)]="data.code"
+                />
+              </div>
+              <div class="form-group col-md-12 col-sm-12 m-2 mt-4">
+                <label>Nombre membresía</label>
+                <input
+                  id="nameMember"
+                  type="text"
+                  class="form-control"
+                  placeholder="Nombre membresía"
+                  required
+                  ngModel
+                  name="nameMember"
+                  #nameMember="ngModel"
+                  [ngClass]="'input'"
+                  [(ngModel)]="data.name"
+                />
+              </div>
+            </div>
+            <div class="col-12 containerInput mt-2 mb-3">
+              <div class="form-group col-md-12 col-sm-12 m-2 mt-4">
+                <label>Descripción</label>
+                <ckeditor
+                  #descMember="ngModel"
+                  [(ngModel)]="data.description"
+                  [ngModelOptions]="{ standalone: true }"
+                  [editor]="Editor"
+                >
+                </ckeditor>
+              </div>
+
+              <div class="form-group col-md-12 col-sm-12 m-2 mt-4">
+                <label>Precio membresía</label>
+                <input
+                  id="priceMember"
+                  type="text"
+                  class="form-control"
+                  placeholder="Precio membresía"
+                  ngModel
+                  name="priceMember"
+                  #priceMember="ngModel"
+                  [ngClass]="'input'"
+                  pattern="[0-9.]*"
+                  [(ngModel)]="data.price"
+                />
+              </div>
+            </div>
+            <div class="form-group text-center">
+              <input
+                type="submit"
+                class="btn nuevo"
+                value="Actualizar"
+                [disabled]="!fmrUpdateM.valid"
+                [ngClass]="'input-btn'"
+              />
+            </div>
+          </form>
+        </ng-container>
+
+        <ng-container *ngIf="tipo === 5">
+          <div class="col-12 containerInput mt-2 mb-3">
+            <div class="form-group col-md-12 col-sm-12 m-2 mt-4">
+              <label>Descripción</label>
+              <ckeditor
+                #descMember="ngModel"
+                [(ngModel)]="references"
+                [ngModelOptions]="{ standalone: true }"
+                [editor]="Editor"
+              >
+              </ckeditor>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="tipo === 6">
+          <div class="col-12 containerInput mt-2 mb-3">
+            <div class="form-group col-md-12 col-sm-12 m-2 mt-4">
+              <form
+                #frmUpdateCupo="ngForm"
+                (ngSubmit)="onUpdateCupo(frmUpdateCupo)"
+              >
+                <div class="row">
+                  <div class="col-md-12 mt-3">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text text-dark">Cantidad</span>
+                      </div>
+                      <input
+                        required
+                        type="number"
+                        step="1"
+                        id="cantidad"
+                        class="form-control"
+                        name="cantidad"
+                        ngModel="{{ this.cuponS?.cantidad }}"
+                        #cantidad="ngModel"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 mt-3">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text text-dark"
+                          >Porcentaje</span
+                        >
+                      </div>
+                      <input
+                        required
+                        type="number"
+                        step="1"
+                        id="porcentaje"
+                        class="form-control"
+                        name="porcentaje"
+                        ngModel="{{ this.cuponS?.porcentaje }}"
+                        #porcentaje="ngModel"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 mt-3">
+                    <div class="input-group mb-3">
+                      <input
+                        type="submit"
+                        class="btn nuevo"
+                        value="Guardar"
+                        [disabled]="!frmUpdateCupo.valid"
+                        onclick="return confirm('¿Esta seguro?')"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="tipo === 7">
+          <div class="col-12 containerInput mt-2 mb-3">
+            <div class="form-group col-md-12 col-sm-12 m-2 mt-4">
+              <!-- <div class="row">
+                <div class="col-md-12 mt-3">
+                  <label for="">Usuario:</label>
+                </div>
+              </div> -->
+              <form #frmDarCupo="ngForm" (ngSubmit)="onDarCupo(frmDarCupo)">
+                <div class="row">
+                  <div class="col-md-12 mt-3">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text text-dark">Cupon</span>
+                      </div>
+                      <select
+                        required
+                        step="1"
+                        id="tipoCupon"
+                        class="form-control"
+                        name="tipoCupon"
+                        ngModel
+                        (change)="selectCupo($event)"
+                        #tipoCupon="ngModel"
+                      >
+                        <option value="" disabled>Escoja una opción</option>
+                        <option
+                          *ngFor="let opcion of cupon"
+                          [value]="opcion._id"
+                        >
+                          Cupon del {{ opcion.porcentaje }} %
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="row">
+                  <div class="col-md-12 mt-3">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text text-dark">Cantidad</span>
+                      </div>
+                      <input
+                        id="cantidad"
+                        type="number"
+                        class="form-control"
+                        placeholder=" Cantidad"
+                        required
+                        cantidad
+                        [defaultValue]="1"
+                        ngModel
+                        name="cantidad"
+                        #cantidad="ngModel"
+                        [ngClass]="'input'"
+                        (change)="onValidateCantidad(cantidad.value)"
+                      />
+                      <br />
+                      <div
+                        *ngIf="
+                          cantidad.invalid &&
+                          (cantidad.dirty || cantidad.touched)
+                        "
+                        class="text-danger"
+                      >
+                        <small *ngIf="cantidad.errors?.['required']">
+                          {{ "Ingrese la cantidad de cupos" }}
+                        </small>
+                      </div>
+                      <div *ngIf="statusCantidad" class="text-danger">
+                        {{ "cantidad no permitida" }}
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                <div class="row">
+                  <div class="col-sm-12 mt-3 ">
+                    <div class="input-group mb-3 d-flex justify-content-center">
+                      <input
+                        type="submit"
+                        class="btn nuevo"
+                        value="Guardar"
+                        [disabled]="!frmDarCupo.valid"
+                        onclick="return confirm('¿Esta seguro?')"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

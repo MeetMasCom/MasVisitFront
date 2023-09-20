@@ -1,0 +1,93 @@
+<app-menu></app-menu>
+
+<!-- <div class="container mt-4" style="min-height: 37vw">
+  <div class="row">
+    <div class="col-md-12">
+    
+      <div class="row">
+        <div class="col-md-12">
+          <ng-container *ngIf="courses?.length > 0">
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-4 p-2" *ngFor="let curse of courses">
+                <div class="contenido rounded p-3">
+                  <div class="container">
+                    <div class="row manito">
+                      <div
+                        class="h-100 d-inline-block card d-flex col-12 p-2"
+                      >
+                        <div class="card-body">
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-12">
+                                <h4>{{ curse?.title }}</h4>
+                              </div>
+                              <div class="col-12">
+                                <img [src]="'data:image/png;base64,' + curse.image" class="card-img-top" alt="...">
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="mt-2">
+                                {{ preview(curse.description)}}... <hr>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div>
+                                <ng-container *ngIf="curse?.price !== 0">
+                                  <h6>PRECIO: $ {{curse?.price}}</h6>
+                                </ng-container>
+                                <ng-container *ngIf="curse?.price === 0">
+                                  <h6>GRATIS</h6>
+                                </ng-container>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <h6>
+                                Membresia disponible para usuarios
+                              </h6>
+                              <div *ngFor="let user of curse.userCourse">
+                                
+                                <ng-container *ngIf="user?.item_id === '0'">
+                                  <h6>BRONCE</h6>
+                                </ng-container>
+                                <ng-container *ngIf="curse?.item_id === '1'">
+                                  <h6>PLATA</h6>
+                                </ng-container>
+                                <ng-container *ngIf="curse?.item_id === '2'">
+                                  <h6>ORO</h6>
+                                </ng-container>
+                                <ng-container *ngIf="curse?.item_id === '3'">
+                                  <h6>DIAMANTE</h6>
+                                </ng-container>
+                              </div>
+                            </div>
+                            <div class="row mt-2">
+                              <div class="d-flex justify-content-center">
+                                <button class="btn nuevo" (click)="Acceder(curse._id,curse.price)">Acceder</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="courses?.length === 0">
+            <div
+            class="col-12 col-md-8  bg-warning bg-opacity-10 border rounded-3 border-warning p-3 d-flex justify-content-center align-items-center ">            
+            <span>
+              No existen cursos disponibles
+            </span>
+          </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<app-footer></app-footer>
+
+
+
