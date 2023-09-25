@@ -374,4 +374,40 @@ export class AdminServiceService {
     );
   }
 
+
+  //APIS
+
+  createApi(form: any): Observable<any> {
+    console.log(" formulario servicio", form.value);
+    const body = {
+      name:form.value.nameApi,
+      clientId:form.value.clientId,
+      clientSecret:form.value.clientSecret,
+    };
+    return this.http.post(`${this.constante.API_SERVER}/apisR/addApis`, body);
+  }
+
+  getApis(): Observable<any> {
+    return this.http.get(`${this.constante.API_SERVER}/apisR/getApis`);
+  }
+
+  updateStateApi(id: string, state: number): Observable<any> {
+    const body = {
+      state: state,
+    };
+    return this.http.post(`${this.constante.API_SERVER}/apisR/updateState/${id}`, body);
+  }
+
+  getApiById(id: string): Observable<any> {
+    return this.http.get(`${this.constante.API_SERVER}/apisR/getByIdApi/${id}`);
+  }
+
+  updateApi(id: string, form: any): Observable<any> {
+    const body = {
+      name:form.value.nameApi,
+     clientId:form.value.clientId,
+     clientSecret:form.value.clientSecret,
+    };
+    return this.http.post(`${this.constante.API_SERVER}/apisR/updateApi/${id}`, body);
+  }
 }
