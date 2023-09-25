@@ -94,6 +94,7 @@ export class MmodalComponent {
   @Output() TFChange: EventEmitter<any> = new EventEmitter<{ valor1: any, valor2: any }>();
   @Output() changeRadioTest: EventEmitter<any> = new EventEmitter<{ valor1: any, valor2: any }>();
   @Output() onSaveCuestionario: EventEmitter<any> = new EventEmitter();
+  @Output() onUpdateApi: EventEmitter<any> = new EventEmitter();
   
   
   @ViewChild('modalPublicar') modalPublicar!: ElementRef;
@@ -265,4 +266,9 @@ export class MmodalComponent {
   saveCuestionario(){
     this.onSaveCuestionario.emit();
   }
+
+  updateApis(event:any){
+    this.onUpdateApi.emit(event);
+  }
+  
 }

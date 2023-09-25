@@ -103,6 +103,9 @@ import { SharedInterceptorInterceptor } from './shared/services/interceptors/sha
 //MODULES
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { InstagramComponent } from './redes_sociales/components/instagram/instagram.component';
+import { ApisComponent } from './admin/components/apis/apis.component';
+import { CallbackInstagramComponent } from './redes_sociales/components/callback-instagram/callback-instagram.component';
 
 
 
@@ -182,6 +185,9 @@ export function urlValidator(
     BilleteraComponent,
     BilleteraEmpresaComponent,
     UpdateBilleteraEComponent,
+    InstagramComponent,
+    ApisComponent,
+    CallbackInstagramComponent,
   ],
   imports: [
     CKEditorModule,
