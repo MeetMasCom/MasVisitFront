@@ -1,6 +1,5 @@
 <div class="sticky-top">
-   
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light bg-menu">
       <ng-container *ngIf="token !== ''">
         <a class="navbar-brand align-items-center icon" href="/tips">
           <img
@@ -8,12 +7,6 @@
             src="../../assets/img/logo1.png"
             alt="Men Okay"
           />
-          <!-- &nbsp;
-          <img
-            class="rounded img-header img-fluid"
-            src="../../assets/img/demo.png"
-            alt="Ken You Me"
-          /> -->
         </a>
       </ng-container>
       <ng-container *ngIf="token === ''">
@@ -23,12 +16,6 @@
             src="../../assets/img/logo1.png"
             alt="Woman Okay"
           />
-          <!-- &nbsp;
-          <img
-            class="rounded img-header img-fluid"
-            src="../../assets/img/demo.png"
-            alt="Ken You Me"
-          /> -->
         </a>
       </ng-container>
           <button
@@ -47,25 +34,15 @@
         id="navbarNavAltMarkup"
       >
         <div class="navbar-nav menu mx-4">
-          
           <ng-container *ngIf="token === ''">
-            <a class="nav-item nav-link " href="tipsbusiness">Tips</a>
-            <a class="nav-item nav-link " >Negocios</a>
-            <a class="nav-item nav-link " >Marketing</a>
-            <a class="nav-item nav-link " >Emprendedor</a>
-            <a class="nav-item nav-link " >Programas</a>
-            <a class="nav-item nav-link " >En vivo</a>
-            <a class="nav-item nav-link" type="button" (click)="onRegister()">
-              Registrarse
-            </a>
-            <a
-              class="nav-item nav-link "
-             
-              href="login"
-            >
-              <!-- <fa-icon [icon]="['fas', 'key']"></fa-icon> -->
-              Login
-            </a>
+            <a class="nav-item nav-link text-white" href="tipsbusiness">Tips</a>
+            <a class="nav-item nav-link text-white">Negocios</a>
+            <a class="nav-item nav-link text-white">Marketing</a>
+            <a class="nav-item nav-link text-white">Emprendedor</a>
+            <a class="nav-item nav-link text-white">Programas</a>
+            <a class="nav-item nav-link text-white">En vivo</a>
+            <a class="nav-item nav-link text-white" type="button" (click)="onRegister()">Registrarse</a>
+            <a class="nav-item nav-link text-white" href="login">Login</a>
           </ng-container>
           <ng-container *ngIf="token !== ''">
             <a class="nav-item nav-link " href="feedbackUser">FeedBack</a>
@@ -80,7 +57,7 @@
             <a class="nav-item nav-link " href="conectar">Conectar</a>
             <a class="nav-item nav-link " href="miscursos">Mis Cursos</a>
 
-          <a class="nav-item nav-link d-none" href="search">Conocer Gente</a>  
+          <a class="nav-item nav-link d-none" href="search">Conocer Gente</a>
             <a class="nav-item nav-link d-none" href="moda">Moda</a>
             <div class="dropdown d-none">
               <a
@@ -96,35 +73,19 @@
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li *ngFor="let p of profile">
                   <ng-container *ngIf="p.name !== 'Personal'">
-                    <a
-                      class="dropdown-item"
-                      travellers
-                      [routerLink]="'/travel/' + p._id"
-                      >{{ p.name }}</a
-                    >
+                    <a class="dropdown-item" travellers [routerLink]="'/travel/' + p._id" >{{ p.name }}</a>
                   </ng-container>
                 </li>
               </ul>
             </div>
-  
-          
             <a class="nav-item nav-link d-none" href="hotel">
               Hoteles
             </a>
-               <!--<a class="nav-item nav-link d-none">{{
-              "menu.restaurants" | translate
-            }}</a>
-            <a class="nav-item nav-link d-none">{{
-              "menu.flowers" | translate
-            }}</a> -->
             <button (click)="VentanaNotificaciones()" class="border-0 nav-item nav-link">
-              <fa-icon [icon]="faBell">             
+              <fa-icon [icon]="faBell">
               </fa-icon>
               <ng-container *ngIf="nuevas !== 0">
-                <span
-                  class="position-absolute
-                   translate-middle badge rounded-pill noti"
-                >
+                <span class="position-absolute translate-middle badge rounded-pill noti">
                   {{ nuevas }}
                   <span class="visually-hidden"></span>
                 </span>
@@ -133,68 +94,42 @@
             <div *ngIf="mostrarVentanaNotificaciones===true">
               <div class="position-absolute mt-4">
                 <app-notification></app-notification>
-              </div>            
+              </div>
             </div>
-  
+
             <a class="border-0 nav-item nav-link" href="#"> </a>
             <a class="border-0 nav-item nav-link" href="messages">
               <fa-icon [icon]="['fas', 'message']"></fa-icon>
             </a>
-  
+
             <div class="dropdown">
-              <a
-                class="btn dropdown-toggle border-0 nav-item nav-link"
-                href="#"
-                role="button"
-                id="dropdownMenuLink"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+              <a class="btn dropdown-toggle border-0 nav-item nav-link" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                 <fa-icon [icon]="['fas', 'user']"></fa-icon>
-               {{ user }}
+                {{ user }}
               </a>
-  
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><a class="dropdown-item" href="myProfile">Mi Perfil</a></li>
                 <li><a class="dropdown-item"  [routerLink]="'/dataUser/' + estado" >Mis Datos</a></li>
                 <ng-container *ngIf="this.typeUser===2">
                   <li><a class="dropdown-item"  href="cursos" >Mis Cursos</a></li>
                   <li><a class="dropdown-item"  href="tipsC" >Mis Tips</a></li>
-                  <!-- <li><a class="dropdown-item"  href="prompts" >Mis Prompts</a></li> -->
                   <li><a class="dropdown-item"  href="misenvivo" >Mis En vivo</a></li>
                 </ng-container>
-                
                 <li><a class="dropdown-item" href="privacy">Privacidad</a></li>
                 <li><a class="dropdown-item d-none" href="anuncios">Anuncios</a></li>
-                <li>
-                  <a class="dropdown-item" href="sponsor">Link Patrocinador</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="referidos">Mis Referidos</a>
-                </li>
+                <li><a class="dropdown-item" href="sponsor">Link Patrocinador</a></li>
+                <li><a class="dropdown-item" href="referidos">Mis Referidos</a></li>
                 <li><a class="dropdown-item" href="finanzas">Mis Finanzas</a></li>
                 <li><a class="dropdown-item" href="match">Mis Amigos</a></li>
-                <li>
-                  <a class="dropdown-item" href="myBilletera">Mi Billetera</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="usuarioMembresia">Membresías</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="teacher">Profesor</a>
-                </li>
-                <li>
-                  <a class="dropdown-item btn" (click)="onLogout()">Salir</a>
-                </li>
+                <li><a class="dropdown-item" href="myBilletera">Mi Billetera</a></li>
+                <li><a class="dropdown-item" href="usuarioMembresia">Membresías</a></li>
+                <li><a class="dropdown-item" href="teacher">Profesor</a></li>
+                <li><a class="dropdown-item btn" (click)="onLogout()">Salir</a></li>
               </ul>
             </div>
-          </ng-container>               
-         
-  
-          
+          </ng-container>
         </div>
       </div>
-
     </nav>
 </div>
 
