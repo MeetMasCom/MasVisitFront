@@ -37,7 +37,7 @@
     "ng-recaptcha": "^11.0.0",
     "ngx-bootstrap": "^10.2.0",
     "ngx-clipboard": "^16.0.0",
-    "ngx-toastr": "^17.0.2",
+    "ngx-toastr": "^16.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
