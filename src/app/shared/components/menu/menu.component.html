@@ -35,20 +35,19 @@
       >
         <div class="navbar-nav menu mx-4">
           <ng-container *ngIf="token === ''">
-            <a class="nav-item nav-link text-white" href="tipsbusiness">Tips</a>
-            <a class="nav-item nav-link text-white">Negocios</a>
-            <a class="nav-item nav-link text-white">Marketing</a>
-            <a class="nav-item nav-link text-white">Emprendedor</a>
-            <a class="nav-item nav-link text-white">Programas</a>
-            <a class="nav-item nav-link text-white">En vivo</a>
-            <a class="nav-item nav-link text-white" type="button" (click)="onRegister()">Registrarse</a>
-            <a class="nav-item nav-link text-white" href="login">Login</a>
+            <a class="nav-item nav-link " href="tipsbusiness">Tips</a>
+            <a class="nav-item nav-link ">Negocios</a>
+            <a class="nav-item nav-link ">Marketing</a>
+            <a class="nav-item nav-link ">Emprendedor</a>
+            <a class="nav-item nav-link ">Programas</a>
+            <a class="nav-item nav-link ">En vivo</a>
+            <a class="nav-item nav-link " type="button" (click)="onRegister()">Registrarse</a>
+            <a class="nav-item nav-link " href="login">Login</a>
           </ng-container>
           <ng-container *ngIf="token !== ''">
             <a class="nav-item nav-link " href="feedbackUser">FeedBack</a>
-            <a class="nav-item nav-link " href="facebook">Facebook</a>
             <a class="nav-item nav-link " href="instagram">Instagram</a>
-            <a class="nav-item nav-link d-none" href="negocios">Negocios</a>
+            <a class="nav-item nav-link " href="planning">Planificación</a>
             <a class="nav-item nav-link d-none" href="marketing">Marketing</a>
             <a class="nav-item nav-link d-none" href="emprendedor">Emprendedor</a>
             <a class="nav-item nav-link d-none" href="programas">Programas</a>
@@ -80,7 +79,7 @@
             <a class="nav-item nav-link d-none" href="hotel">
               Hoteles
             </a>
-            <button (click)="VentanaNotificaciones()" class="border-0 nav-item nav-link">
+            <a (click)="VentanaNotificaciones()" class="border-0 nav-item nav-link" type="button">
               <fa-icon [icon]="faBell">
               </fa-icon>
               <ng-container *ngIf="nuevas !== 0">
@@ -89,14 +88,13 @@
                   <span class="visually-hidden"></span>
                 </span>
               </ng-container>
-            </button>
+            </a>
             <div *ngIf="mostrarVentanaNotificaciones===true">
               <div class="position-absolute mt-4">
                 <app-notification></app-notification>
               </div>
             </div>
 
-            <a class="border-0 nav-item nav-link" href="#"> </a>
             <a class="border-0 nav-item nav-link" href="messages">
               <fa-icon [icon]="['fas', 'message']"></fa-icon>
             </a>

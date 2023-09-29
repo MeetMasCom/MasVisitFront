@@ -13,7 +13,7 @@ export class AuthServiceService {
     public constante: ConstantsSystem
   ) { }
 
-  register(user: User): Observable<any> {
+  register(user: User,sponsor:string): Observable<any> {
     return this.httpCLient.post(`${this.constante.API_SERVER}/user`, {
       userName: user.userName,
       email: user.email,
@@ -23,7 +23,7 @@ export class AuthServiceService {
       country: user.country,
       gender: user.gender,
       //preferences: user.prefer,
-      //sponsor: sponsor ? sponsor : undefined,
+      sponsor: sponsor ? sponsor : undefined,
     });
   }
 

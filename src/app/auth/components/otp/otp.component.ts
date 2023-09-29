@@ -83,7 +83,7 @@ export class OtpComponent implements OnInit {
 
   onRedirigir() {
     if(this.tipo===0){
-      this.router.navigate(['/tips']);
+      this.router.navigate(['/home']);
     }
     if (this.tipo===1){
       this.router.navigate(['/dashboard']);

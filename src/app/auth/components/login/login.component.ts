@@ -62,6 +62,7 @@ classA: string;
               this.data = sessionStorage.getItem('data')!;
               this.dataUsers = JSON.parse(sessionStorage.getItem('data')!);
               this.tipo=this.dataUsers.tipo;
+              console.log(this.tipo);
             }
             //this.message = response.message;
             this.message="Ingreso Correcto"
@@ -154,6 +155,7 @@ classA: string;
   onRecover() {
     this.modalRecover.abrir();
   }
+
   onRedirigir() {
     if(this.tipo===0){
       this.router.navigate(['/home']);

@@ -28,8 +28,11 @@ import { UpdateBilleteraEComponent } from './billetera/components/update-billete
 
 import {InstagramComponent} from './redes_sociales/components/instagram/instagram.component';
 import {ApisComponent} from './admin/components/apis/apis.component';
+import {PlanningComponent} from './redes_sociales/components/planning/planning.component';
 
 import {CallbackInstagramComponent} from './redes_sociales/components/callback-instagram/callback-instagram.component';
+import {AddPublicationComponent} from './redes_sociales/components/add-publication/add-publication.component';
+
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -72,7 +75,10 @@ const routes: Routes = [
 
   //redes sociales
   { path: 'instagram', component: InstagramComponent },
-  {path:'callbackInstagram', component:CallbackInstagramComponent}
+  {path:'callbackInstagram', component:CallbackInstagramComponent},
+  {path:'planning', component:PlanningComponent},
+  {path:'addPublication', component:AddPublicationComponent}
+
  
 ];
 

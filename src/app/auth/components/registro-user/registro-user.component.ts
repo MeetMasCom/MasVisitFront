@@ -36,7 +36,7 @@ export class RegistroUserComponent {
   generos: any = [];
   preferencias: any = [];
   valPerfil: any=[];
-  user = 'tipsdebusiness';
+  user = 'masvisit';
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -157,7 +157,7 @@ export class RegistroUserComponent {
     });
       try {
         const resp = await lastValueFrom(
-          this.userService.register(form.value)
+          this.userService.register(form.value,this.user)
         );
         if (resp.data !== null) {
           sessionStorage.setItem('user', JSON.stringify(resp.data));

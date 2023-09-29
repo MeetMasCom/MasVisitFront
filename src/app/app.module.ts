@@ -106,6 +106,8 @@ import { AppComponent } from './app.component';
 import { InstagramComponent } from './redes_sociales/components/instagram/instagram.component';
 import { ApisComponent } from './admin/components/apis/apis.component';
 import { CallbackInstagramComponent } from './redes_sociales/components/callback-instagram/callback-instagram.component';
+import { PlanningComponent } from './redes_sociales/components/planning/planning.component';
+import { AddPublicationComponent } from './redes_sociales/components/add-publication/add-publication.component';
 
 
 
@@ -188,6 +190,8 @@ export function urlValidator(
     InstagramComponent,
     ApisComponent,
     CallbackInstagramComponent,
+    PlanningComponent,
+    AddPublicationComponent,
   ],
   imports: [
     CKEditorModule,

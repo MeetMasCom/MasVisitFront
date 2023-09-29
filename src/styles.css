@@ -31,7 +31,7 @@
   .nav-link:focus,
   .nav-link.active {
     background: #0B2F60;
-    color: #FFFFFF;
+    color: #ffffff;
     border-radius: 10px 10px 0 0;
     font-family: Inter;
     font-size: 15px;
@@ -61,12 +61,12 @@
 }
 
 .nuevo{
-  background-color: #0B2F60 !important;
+  background-color: #12B9FF !important;
   color: #ffffff !important;
 }
 
 .enviar {
-  background-color: #0B2F60 !important;
+  background-color: #12B9FF !important;
   color: #ffffff !important;
 }
 
@@ -366,13 +366,13 @@
 
    .nav-link:focus,
 .nav-link.active {
-  background: #0B2F60;
-  color: #ffffff;
+  background: #ffffff;
+  color: #010028;
   border-radius: 10px 10px 0 0;
 }
 
 .nav-link {
-  color: #0B2F60;
+  color:#010028 ;
 }
 
 thead {

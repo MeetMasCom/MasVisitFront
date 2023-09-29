@@ -1,0 +1,40 @@
+.imgs{
+    width:30px;
+    height: 30px;
+}
+
+
+
+.redes {
+    display: flex;
+    min-height: 2vw;
+    align-items: center;
+    justify-content: space-around;
+    color: #ffffff;
+  }
+
+  .fa-3x {
+    font-size: 1.5em !important;
+}
+
+.cambiar-color {
+    color: #ABB2B9 !important; 
+    transition: color 0.1s; /* Agrega una transición suave */
+}
+.cambiar-color:hover {
+    color: #0B2F60 !important; /* Cambia el color al hacer clic o pasar el ratón por encima */
+}
+
+
+a {
+    color: #0B2F60;
+  }
+
+
+  
+.opc {
+    display: flex;
+    min-height: 2vw;
+    align-items: center;
+    justify-content: space-around;
+  }
