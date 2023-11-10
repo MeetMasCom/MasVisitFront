@@ -8,11 +8,11 @@ export class ConstantsSystem {
   API_IMAGES_LOCAL: string = '';
 
   constructor() {
-  //this.API_SERVER = 'http://localhost:8000/api';
+  this.API_SERVER = 'http://localhost:8000/api';
+    
+  this.API_IMAGES = 'http://localhost:8000/';
 
-  //this.API_IMAGES = 'http://localhost:8000/';
-
-  this.API_SERVER = 'https://masvisit.com/api';
-  this.API_IMAGES = 'https://masvisit.com/';
+  //this.API_SERVER = 'https://masvisit.com/api';
+  //this.API_IMAGES = 'https://masvisit.com/';
   }
 }

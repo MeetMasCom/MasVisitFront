@@ -10,9 +10,9 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-9 p-2">
+            <div class="col-md-12 p-2">
               <div class="row">
-                <div class="col-8 redes fa-3x">
+                <div class="col-6 redes fa-3x">
                   <div>
                     <a class="cambiar-color" type="button" target="_blank">
                       <fa-icon [icon]="['fab', 'facebook']"></fa-icon>
@@ -49,6 +49,34 @@
                     </a>
                   </div>
                 </div>
+                <div class="col-6 redes fa-3x">                 
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="input-group mb-2">
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="fecha"
+                          name="fecha"
+                          [(ngModel)]="selectedDate"
+                          placeholder="Username"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="input-group mb-2">
+                        <input
+                          type="time"
+                          class="form-control"
+                          id="hora"
+                          name="hora"
+                          [(ngModel)]="selectedTime"
+                          placeholder="Username"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="row"></div>
             </div>
@@ -60,12 +88,19 @@
             <div class="col">
               <div class="p-2">
                 <div class="card">
-                  <div class="row" style="min-height: 20vw"></div>
+                  <div class="row" style="min-height: 20vw">
+                  <div class="col contenedor">
+                    <textarea type="text" [(ngModel)]="contenidoTextarea" class="mi-input-personalizado" placeholder="Agrega alguna descripcion"></textarea>
+
+                    <img *ngIf="imagenUrl" [src]="imagenUrl" alt="Imagen de la publicación">
+                    <input type="file" (change)="onFileSelected($event)" style="display: none" #fileInput>
+                  </div>
+                  </div>
                   <div class="border-bottom"></div>
                   <div class="row">
                     <div class="col-12 opc p-3">
                       <div>
-                        <a type="button" target="_blank">
+                        <a type="button" target="_blank"(click)="fileInput.click()">
                           <fa-icon [icon]="['fab', 'facebook']"></fa-icon>
                         </a>
                       </div>
@@ -108,8 +143,8 @@
           <div class="row">
             <div class="col">
               <div class="p-2">
-                <button class="btn nuevo">Cancelar</button>
-                <button class="btn nuevo ml-2" style="margin-left: 10px;">Guardar</button>
+                <button class="btn nuevo" (click)="Cancelar()">Cancelar</button>
+                <button class="btn nuevo ml-2" style="margin-left: 10px;" (click)="GuardarPublicacion()">Guardar</button>
               </div>
             </div>
           </div>

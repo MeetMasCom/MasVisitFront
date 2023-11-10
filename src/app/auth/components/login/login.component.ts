@@ -53,28 +53,41 @@ classA: string;
       const response = await lastValueFrom(this.userService.login(form.value));
       if (response.data !== null) {
           
-          if (response.data !== null) {
+            console.log(response.data);
             sessionStorage.setItem('data', JSON.stringify(response.data.user));
             sessionStorage.setItem('user', response.data.user.userName);
             sessionStorage.setItem('id', response.data.user._id);
             sessionStorage.setItem('token', JSON.stringify(response.data.token));
+            console.log("session",sessionStorage);
             if (sessionStorage.getItem('data')!) {
               this.data = sessionStorage.getItem('data')!;
               this.dataUsers = JSON.parse(sessionStorage.getItem('data')!);
               this.tipo=this.dataUsers.tipo;
-              console.log(this.tipo);
+          
             }
             //this.message = response.message;
-            this.message="Ingreso Correcto"
+      
+            console.log(this.tipo);
+              this.message="Ingreso Correcto"
             this.exitoModal.abrir();
-          }
-        
       }
     } catch (error: any) {
       //this.message = error.error.message;
       this.message="Ingreso incorrecto"
       this.modalCredencialFail.abrir();
     }
+
+    // try {
+    //   this.nameUser = form.value.userNameL;
+    //   const response = await lastValueFrom(this.userService.login(form.value));
+    //   if (response.data !== null) {
+    //     this.message = response.data;
+    //     this.modalCredencialSuccess.abrir();
+    //   }
+    // } catch (error: any) {
+    //   this.message = error.error.message;
+    //   this.modalCredencialFail.abrir();
+    // }
   }
 
   onUser() {

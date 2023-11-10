@@ -26,13 +26,14 @@ import { BilleteraComponent } from './billetera/components/billetera/billetera.c
 import { BilleteraEmpresaComponent } from './billetera/components/billetera-empresa/billetera-empresa.component';
 import { UpdateBilleteraEComponent } from './billetera/components/update-billetera-e/update-billetera-e.component';
 
-import {InstagramComponent} from './redes_sociales/components/instagram/instagram.component';
-import {ApisComponent} from './admin/components/apis/apis.component';
-import {PlanningComponent} from './redes_sociales/components/planning/planning.component';
+import { InstagramComponent } from './redes_sociales/components/instagram/instagram.component';
+import { ApisComponent } from './admin/components/apis/apis.component';
+import { PlanningComponent } from './redes_sociales/components/planning/planning.component';
 
-import {CallbackInstagramComponent} from './redes_sociales/components/callback-instagram/callback-instagram.component';
-import {AddPublicationComponent} from './redes_sociales/components/add-publication/add-publication.component';
+import { CallbackInstagramComponent } from './redes_sociales/components/callback-instagram/callback-instagram.component';
+import { AddPublicationComponent } from './redes_sociales/components/add-publication/add-publication.component';
 
+import { MyPostComponent } from './post/components/my-post/my-post.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -56,8 +57,8 @@ const routes: Routes = [
   { path: 'options/:code', component: ProfessionsComponent },
   { path: 'retirosE', component: AdminRetreatComponent },
   { path: 'supUsers', component: AdminUsersComponent },
-  { path: 'cupones', component: CuposComponent},
-  { path: 'apis', component: ApisComponent},
+  { path: 'cupones', component: CuposComponent },
+  { path: 'apis', component: ApisComponent },
 
   //billetera
   { path: 'myBilletera', component: BilleteraComponent },
@@ -72,14 +73,12 @@ const routes: Routes = [
 
   { path: 'finanzas', component: BalanceComponent },
 
-
   //redes sociales
   { path: 'instagram', component: InstagramComponent },
-  {path:'callbackInstagram', component:CallbackInstagramComponent},
-  {path:'planning', component:PlanningComponent},
-  {path:'addPublication', component:AddPublicationComponent}
-
- 
+  { path: 'callbackInstagram', component: CallbackInstagramComponent },
+  { path: 'planning', component: PlanningComponent },
+  { path: 'addPublication', component: AddPublicationComponent },
+  { path: 'post', component: MyPostComponent },
 ];
 
 @NgModule({

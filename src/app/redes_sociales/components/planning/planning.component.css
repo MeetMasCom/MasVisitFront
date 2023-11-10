@@ -1,0 +1,33 @@
+.fecha-actual {
+    background-color: #12B9FF; /* Puedes cambiar este color a tu preferencia */
+  }
+
+.celda{
+    background-color: aliceblue;
+    min-height: 5vw;
+}
+
+
+
+.hora-actual {
+  /* Estilos para la hora actual */
+  font-weight: bold; /* Puedes cambiar a otros estilos según tus preferencias */
+  color: #12B9FF; /* Cambia a tu color deseado */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center; /* Centra el texto horizontalmente */
+}
+
+td {
+  vertical-align: middle; /* Centra el contenido verticalmente */
+}
+
+

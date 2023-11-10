@@ -31,6 +31,23 @@ export class ProfileServiceService {
     );
   }
 
+  
+  registrarPost(
+    id: string,
+    post: Post,
+    file: string
+  ): Observable<any> {
+    return this.httpCLient.post(
+      `${this.constante.API_SERVER}/post/createPost`,
+      {
+        user_id: id,
+        title:post.ptitle,
+        description: post.pdescription,
+        photo: file,
+      }
+    );
+  }
+
   getUserById(id: string): Observable<User> {
     return this.httpCLient.get<any>(
       `${this.constante.API_SERVER}/user/userById/${id}`

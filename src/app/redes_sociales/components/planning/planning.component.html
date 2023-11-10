@@ -1,25 +1,324 @@
-
 <app-menu></app-menu>
 <div class="container" style="min-height: 37vw">
-  <div class="row">    
-    <div class="col-md-3">
-      <div class="card mt-3">
-       
-      </div>
-    </div>
-    <div class="col-md-9">
-      <div class="row mt-3">
-        <div class="col d-flex">
-            <button class="btn nuevo" (click)="AddPublication()">Crear nueva publicación</button>
+  <div class="d-flex flex-column">
+    <div class="d-flex flex-column container justify-content-start mt-4">
+      <ul class="nav nav-tabs mb-3 border-0" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="admin-home-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#admin-home"
+            type="button"
+            role="tab"
+            aria-controls="admin-home"
+            aria-selected="true"
+          >
+            Planificador
+            <fa-icon [icon]="['fas', 'user-tie']"></fa-icon>
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="admin-profile-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#admin-profile"
+            type="button"
+            role="tab"
+            aria-controls="admin-profile"
+            aria-selected="false"
+          >
+            Acortador de Link
+            <fa-icon [icon]="['fas', 'user-plus']"></fa-icon>
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div
+          class="tab-pane fade show active bg-white p-3"
+          id="admin-home"
+          role="tabpanel"
+          aria-labelledby="admin-home-tab"
+        >
+          <div class="row">
+            <!-- <div class="col-md-3">
+      <div class="card mt-3"></div>
+    </div> -->
+            <div class="col-md-12">
+              <div class="row mt-3">
+                <div class="col d-flex">
+                  <button class="btn nuevo" (click)="AddPublication()">
+                    Crear nueva publicación
+                  </button>
+                </div>
+                <div class="col d-flex">
+                  <button class="btn nuevo" (click)="retrocederSemana()">
+                    Semana Anterior
+                  </button>
+                  <span *ngIf="fechaInicioSemana">{{
+                    fechaInicioSemana.toLocaleDateString()
+                  }}</span>
+                  <button class="btn nuevo" (click)="avanzarSemana()">
+                    Semana Siguiente
+                  </button>
+                </div>
+              </div>
+              <div class="row p-3">
+                <div class="card">
+                  <!-- En tu archivo de template, por ejemplo, calendar.component.html -->
+
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Hora</th>
+                        <th
+                          *ngFor="let fecha of fechasSemana"
+                          [ngClass]="{ 'fecha-actual': esFechaActual(fecha) }"
+                        >
+                          {{ fecha }}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let hora of horas">
+                        <td [ngClass]="{ 'hora-actual': hora === horaActual }">
+                          {{ hora }}
+                        </td>
+                        <td *ngFor="let fecha of fechasSemana">
+                          <div
+                            (dblclick)="publicar(hora, fecha)"
+                            class="celda border"
+                          >
+                            <div *ngFor="let evento of eventos">
+                              <ng-container
+                                *ngIf="
+                                  esMismaFechaYHora(
+                                    evento.fecha,
+                                    evento.hora,
+                                    fecha,
+                                    hora
+                                  )
+                                "
+                              >
+                                <p>{{ evento.description }}</p>
+                              </ng-container>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="row p-3">
-        <div class="card">
-           
+
+        <div
+          class="tab-pane fade active bg-white p-3"
+          id="admin-profile"
+          role="tabpanel"
+          aria-labelledby="admin-profile-tab"
+        >
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row mt-3">
+                <div class="col d-flex">Acortador de Link</div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-8">
+                  <div class="card mt-3">
+                    <div class="row">
+                      <div class="col-md-6 p-3">
+                        <label class="sr-only" for="inlineFormInputGroup"
+                          >Nombre</label
+                        >
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">Nombre</div>
+                          </div>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inlineFormInputGroup"
+                            placeholder="Username"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-6 p-3">
+                        <label class="sr-only" for="inlineFormInputGroup"
+                          >Url</label
+                        >
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">URL</div>
+                          </div>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inlineFormInputGroup"
+                            placeholder="Url"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                      <div class="col-md-12 mt-2">
+                        <h5>BOTONES</h5>
+                      </div>
+                      <div class="col p-3">
+                        <button class="btn nuevo" (click)="agregarInput()">
+                          Añadir nuevo botón
+                        </button>
+                      </div>
+                    </div>
+                    <form action="">
+                      <div class="row">
+                        <div class="col-md-6 p-3">
+                          <div
+                            *ngFor="let input of inputs; let i = index"
+                            class="input-group mb-3"
+                          >
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Texto:</span>
+                            </div>
+                            <input
+                              type="text"
+                              class="form-control"
+                              [(ngModel)]="inputs[i]"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-6 p-3">
+                          <div
+                            *ngFor="let input of urls; let i = index"
+                            class="input-group mb-3"
+                          >
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">URL:</span>
+                            </div>
+                            <input
+                              type="text"
+                              class="form-control"
+                              [(ngModel)]="urls[i]"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="row">
+                      <div class="col p-3  col d-flex justify-content-end">
+                        <button class="btn nuevo float-right" (click)="guardarBotones()">
+                          Visualizar
+                        </button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 mt-2">
+                        <h5>ÍCONOS</h5>
+                      </div>
+                      <div class="col p-3">
+                        <button class="btn nuevo" (click)="agregarIcono()">
+                          Añadir nuevo ícono
+                        </button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 p-3">
+                        <div
+                          *ngFor="let input of iconos; let i = index"
+                          class="input-group mb-3"
+                        >
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">...</span>
+                          </div>
+                          <select class="form-control">
+                            <option
+                              *ngFor="let item of objetosArray"
+                              [value]="item"
+                            >
+                              <fa-icon
+                                [icon]="['fab', item.icono]"
+                                class="mr-2"
+                              ></fa-icon>
+                              {{ item.nombre }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 p-3">
+                        <div
+                          *ngFor="let input of urlsIcono; let i = index"
+                          class="input-group mb-3"
+                        >
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">URL:</span>
+                          </div>
+                          <input
+                            type="text"
+                            class="form-control"
+                            [(ngModel)]="inputs[i]"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col p-3  col d-flex justify-content-end">
+                        <button class="btn nuevo float-right" (click)="guardarIconos()">
+                          Visualizar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card p-3">
+                    <div class="row mt-3">
+                      <div
+                        class="col d-flex justify-content-center align-items-center"
+                      >
+                        <img
+                          class="rounded img-header img-fluid"
+                          src="../../assets/img/logo1.png"
+                          style="width: 90px; height: 80px"
+                        />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div
+                        class="col-md-12 d-flex justify-content-center align-items-center"
+                      >
+                        <h6>Tips de Business</h6>
+                        <br />
+                      </div>
+                      <div
+                        class="col-md-12 d-flex justify-content-center align-items-center"
+                      >
+                        <p>
+                          Consejos prácticos para emprendedor, recursos valiosos
+                          para impulsar tu negocio.
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div *ngFor="let item of inputs">
+                        <div
+                          class="col-md-12 justify-content-center align-items-center"
+                        >
+                          <a class="btn nuevo" type="button">{{item}}</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <app-footer></app-footer>
