@@ -1,10 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { lastValueFrom } from 'rxjs';
 import { ConstantsSystem } from 'src/app/utils/constants-system';
 import { RedesSocialesService } from '../../services/redes-sociales.service';
-import { parseISO, isWithinInterval, addHours, isSameDay, isBefore } from 'date-fns';
+import { FormsModule } from '@angular/forms';
+import {
+  parseISO,
+  isWithinInterval,
+  addHours,
+  isSameDay,
+  isBefore,
+} from 'date-fns';
 
 @Component({
   selector: 'app-planning',
@@ -44,6 +51,9 @@ export class PlanningComponent {
   urls: string[] = ['']; // Puedes inicializar con un input vacío
   iconos: string[] = ['']; // Puedes inicializar con un input vacío
   urlsIcono: string[] = ['']; // Puedes inicializar con un input vacío
+  @Output() valoresEmitted = new EventEmitter<
+    { texto: string; url: string }[]
+  >();
 
   fechaActual1: Date = new Date();
   fechaInicioSemana: Date | undefined;
@@ -59,8 +69,8 @@ export class PlanningComponent {
     { icono: 'twitter', nombre: 'Twitter' },
     // Puedes agregar más objetos con valores ya definidos
   ];
-
-   eventos: any[] = [];
+  detail: any[] = [];
+  eventos: any[] = [];
   //   { tema: 'Reunión de equipo', fecha: '2023-11-07', hora: '10:00' },
   //   { tema: 'Entrenamiento', fecha: '2023-11-07', hora: '14:30' },
   //   { tema: 'Presentación de proyectos', fecha: '2023-11-08', hora: '16:00' },
@@ -81,9 +91,9 @@ export class PlanningComponent {
   //   { tema: 'Celebración de logros', fecha: '2023-11-11', hora: '05:00' },
   //   { tema: 'Celebración de logros', fecha: '2023-11-12', hora: '09:00' },
   //   { tema: 'Celebración de logros', fecha: '2023-11-13', hora: '02:00' },
-    // ... Otras 10 entradas ...
+  // ... Otras 10 entradas ...
   //];
-  id: string='';
+  id: string = '';
   token: any;
 
   constructor(
@@ -95,11 +105,10 @@ export class PlanningComponent {
 
   ngOnInit(): void {
     if (sessionStorage.getItem('id')!) {
-      this.id = sessionStorage.getItem('id')!;   
-    
+      this.id = sessionStorage.getItem('id')!;
+
       if (sessionStorage.getItem('token')!) {
         this.token = JSON.parse(sessionStorage.getItem('token')!);
-        
       }
     } else {
       this.router.navigate(['/inicio']);
@@ -107,7 +116,7 @@ export class PlanningComponent {
     this.getPublicaciones();
     this.calcularInicioSemana();
     this.generarFechasSemana();
-    this.fechaActual = moment().format('D MMM YYYY');
+    this.fechaActual = moment().format('YYYY-MM-DD');
     this.actualizarHoraActual();
   }
 
@@ -136,7 +145,9 @@ export class PlanningComponent {
   generarFechasSemana(): void {
     this.fechasSemana = [];
     for (let i = 0; i < 7; i++) {
-      const fecha = moment(this.fechaInicioSemana).add(i, 'days').format('YYYY-MM-DD');
+      const fecha = moment(this.fechaInicioSemana)
+        .add(i, 'days')
+        .format('YYYY-MM-DD');
       this.fechasSemana.push(fecha);
     }
   }
@@ -156,32 +167,31 @@ export class PlanningComponent {
     this.router.navigate(['/addPublication']);
   }
 
-
   esMismaFechaYHora(
     eventDate: string,
-  eventHour: string,
-  cellDate: string,
-  cellHour: string
-): boolean {
-  const eventDateTime = new Date(eventDate + ' ' + eventHour);
-  const cellDateTime = new Date(cellDate + ' ' + cellHour);
-  // Calcula la próxima hora
-  const proximaHora = new Date(eventDate + ' ' + eventHour);
-  proximaHora.setHours(proximaHora.getHours() + 1);
-  proximaHora.setMinutes(0);
-  proximaHora.setSeconds(0);
- 
-  return (
-    eventDateTime.getFullYear() === cellDateTime.getFullYear() &&
-    eventDateTime.getMonth() === cellDateTime.getMonth() &&
-    eventDateTime.getDate() === cellDateTime.getDate() &&
-    eventDateTime.getHours() === cellDateTime.getHours()
-  );
-  
+    eventHour: string,
+    cellDate: string,
+    cellHour: string
+  ): boolean {
+    const eventDateTime = new Date(eventDate + ' ' + eventHour);
+    const cellDateTime = new Date(cellDate + ' ' + cellHour);
+    // Calcula la próxima hora
+    const proximaHora = new Date(eventDate + ' ' + eventHour);
+    proximaHora.setHours(proximaHora.getHours() + 1);
+    proximaHora.setMinutes(0);
+    proximaHora.setSeconds(0);
+
+    return (
+      eventDateTime.getFullYear() === cellDateTime.getFullYear() &&
+      eventDateTime.getMonth() === cellDateTime.getMonth() &&
+      eventDateTime.getDate() === cellDateTime.getDate() &&
+      eventDateTime.getHours() === cellDateTime.getHours()
+    );
   }
 
   agregarInput() {
-    this.inputs.push('');
+    this.inputs.push
+    
     this.urls.push('');
   }
 
@@ -190,23 +200,43 @@ export class PlanningComponent {
     this.urlsIcono.push('');
   }
 
-  guardarBotones(){
-   console.log(this.inputs);
+  trackByIndex(index: number, obj: any): any {
+    return index;
+ }
+ 
+
+  guardarBotones() {
+    // // Crea un array con los valores de texto y url
+    // const valores: { texto: string; url: string }[] = [];
+
+    // for (let i = 0; i < this.inputs.length; i++) {
+    //   valores.push({ texto: this.inputs[i], url: this.urls[i] });
+    // }
+
+    // // Llama a la función que manejará los valores (puedes ajustar esto según tus necesidades)
+    // console.log("botones",valores);
   }
 
-  guardarIconos(){
-
+  onInputChange(event: Event, index: number): void {
+    if (event.target) {
+      this.inputs[index] = (event.target as HTMLInputElement).value;
+    }
   }
+  
 
+  guardarIconos() {}
 
-  async getPublicaciones(){
-      
+  async getPublicaciones() {
     const resp = await lastValueFrom(
       this.redesService.getPublicaciones(this.id)
     );
     if (resp.data.length > 0) {
       this.eventos = resp.data;
-      console.log("eventos",this.eventos);
-    } 
+    }
+  }
+
+  async detailPublication(id:string){
+      this.router.navigate(['/addPublication'],{ queryParams: { detail: id } });
+    
   }
 }

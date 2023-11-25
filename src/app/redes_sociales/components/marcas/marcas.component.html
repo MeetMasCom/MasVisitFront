@@ -1,0 +1,208 @@
+<app-menu></app-menu>
+<div class="container" style="min-height: 37vw">
+  <div class="d-flex flex-column">
+    <div class="d-flex flex-column container justify-content-start mt-4">
+      <ul class="nav nav-tabs mb-3 border-0" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="admin-home-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#admin-home"
+            type="button"
+            role="tab"
+            aria-controls="admin-home"
+            aria-selected="true"
+          >
+            Mis Marcas
+            <fa-icon [icon]="['fas', 'user-tie']"></fa-icon>
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="admin-profile-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#admin-profile"
+            type="button"
+            role="tab"
+            aria-controls="admin-profile"
+            aria-selected="false"
+          >
+            Agregar Marca
+            <fa-icon [icon]="['fas', 'user-plus']"></fa-icon>
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+
+        <!--listado de marcas--->
+        <div
+          class="tab-pane fade show active bg-white p-3"
+          id="admin-home"
+          role="tabpanel"
+          aria-labelledby="admin-home-tab"
+        >
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row mt-3">
+                <div class="col d-flex">Mis Marcas</div>
+              </div>
+              <div class="row mt-3">
+                <div class="col">
+                  <div class="table-responsive">
+                    <table aria-describedby="" class="table text-center">
+                      <thead>
+                        <tr>
+                          <th scope="col">Name</th>
+                          <th scope="col">Url</th>
+                          <th scope="col">Slogan</th>
+                          <th scope="col">Acción</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <ng-container *ngFor="let marca of marcas">
+          
+                        
+                        <tr>
+                          <td>{{marca.name}}</td>
+                          <td>{{marca.url}}</td>
+                          <td>{{marca.slogan}}</td>
+                          <td class="text-center">
+                            <button type="button" class="btn btn-outline-primary" (click)="detailMarca(marca._id)">
+                              <fa-icon [icon]="['far', 'pen-to-square']"></fa-icon>
+                              Editar
+                            </button>
+                          </td>
+                        </tr>
+                      </ng-container>
+                       
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- nueva marca--->
+        <div
+          class="tab-pane fade  bg-white p-3"
+          id="admin-profile"
+          role="tabpanel"
+          aria-labelledby="admin-profile-tab"
+        >
+          <div class="row">
+            <div class="col-md-12">
+              <!--formulario para agregar la marca-->
+              <div class="mb-4">
+                <h2>Registrar Marca</h2>
+              </div>
+              <form #frmAddMarca="ngForm" (ngSubmit)="onRegisterMarca(frmAddMarca)">
+                <div class="col-12 containerInput mt-2 mb-3">
+                  <div class="form-group col-md-6 col-sm-12 m-2 mt-4">
+                    <label>Nombre Pagina Web</label>
+                    <input
+                      id="name"
+                      type="text"
+                      class="form-control"
+                      placeholder="Nombre de la marca"
+                      required
+                      ngModel
+                      name="name"
+                      #name="ngModel"
+                      [ngClass]="'input'"
+                    />
+                    <div
+                      *ngIf="
+                        name.invalid && (name.dirty || name.touched)
+                      "
+                      class="text-danger form-group position-absolute"
+                    >
+                      <small *ngIf="name.errors?.['required']">
+                        Ingrese el nombre de la marca.
+                      </small>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6 col-sm-12 m-2 mt-4">
+                    <label>URL:</label>
+                    <input
+                      id="url"
+                      type="text"
+                      class="form-control"
+                      placeholder="URL"
+                      required
+                      ngModel
+                      name="url"
+                      #url="ngModel"
+                      [ngClass]="'input'"
+                    />
+                    <div
+                      *ngIf="
+                        url.invalid && (url.dirty || url.touched)
+                      "
+                      class="text-danger form-group position-absolute"
+                    >
+                      <small *ngIf="url.errors?.['required']">
+                        Ingrese la URL.
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 containerInput mt-2 mb-3">
+                  <div class="form-group col-md-6 col-sm-12 m-2 mt-4">
+                    <label>Slogan</label>
+                    <input
+                      id="slogan"
+                      type="text"
+                      class="form-control"
+                      placeholder="slogan"
+                      required
+                      ngModel
+                      name="slogan"
+                      #slogan="ngModel"
+                      [ngClass]="'input'"
+                    />
+                    <div
+                      *ngIf="
+                        slogan.invalid && (slogan.dirty || slogan.touched)
+                      "
+                      class="text-danger form-group position-absolute"
+                    >
+                      <small *ngIf="slogan.errors?.['required']">
+                        Ingrese el slogan.
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group text-center">
+                  <input
+                    type="submit"
+                    class="btn nuevo"
+                    value="Guardar"
+                    [disabled]="!frmAddMarca.valid"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-mmodal
+  [idModal]="'updateMar'"
+  [tipo]="26"
+  [title]="'Actualizar Marca'"
+  [detalle]="this.detailM"
+  (onUpdateMarca)="updateMarca($event)"
+  #updateMar>  
+</app-mmodal>
+
+<app-footer></app-footer>

@@ -1387,6 +1387,130 @@
           </ng-container>
         </ng-container>
    
+          <!--modificar los datos de las Marcas-->
+          <ng-container *ngIf="tipo === 26">
+            <ng-container *ngIf="detalle?.length !== null">
+              <form
+                #frmUpdateMarca="ngForm"
+                class="form form-horizontal"
+                (ngSubmit)="updateMarca(frmUpdateMarca)"
+              >
+                <div class="form-body">
+                  <div class="row">
+                    <div class="col-md-4 mt-4">
+                      <label> Marca: </label>
+                    </div>
+                    <div class="col-md-8 form-group mt-4">
+                      <div class="position-relative has-icon-left">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Nombre de la marca"
+                          id="name"
+                          name="name"
+                          required
+                          ngModel="{{ detalle.name }}"
+                          #name="ngModel"
+                          [ngClass]="'input'"
+                        />
+                        <div
+                          *ngIf="
+                          name.invalid &&
+                            (name.dirty || name.touched)
+                          "
+                          class="text-danger form-group position-absolute"
+                        >
+                          <small
+                            class="form-group"
+                            *ngIf="name.errors?.['required']"
+                          >
+                            Campo requerido.
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="col-md-4 mt-4">
+                      <label> URL: </label>
+                    </div>
+                    <div class="col-md-8 form-group mt-4">
+                      <div class="position-relative has-icon-left">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="URL"
+                          id="url"
+                          name="url"
+                          required
+                          ngModel="{{ detalle.url }}"
+                          #url="ngModel"
+                          [ngClass]="'input'"
+                        />
+                        <div
+                          *ngIf="
+                          url.invalid &&
+                            (url.dirty || url.touched)
+                          "
+                          class="text-danger form-group position-absolute"
+                        >
+                          <small
+                            class="form-group"
+                            *ngIf="url.errors?.['required']"
+                          >
+                            Campo requerido.
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="col-md-4 mt-4">
+                      <label> Slogan: </label>
+                    </div>
+                    <div class="col-md-8 form-group mt-4">
+                      <div class="position-relative has-icon-left">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Slogan"
+                          id="slogan"
+                          name="slogan"
+                          required
+                          ngModel="{{ detalle.slogan }}"
+                          #slogan="ngModel"
+                          [ngClass]="'input'"
+                        />
+                        <div
+                          *ngIf="
+                          slogan.invalid &&
+                            (slogan.dirty || slogan.touched)
+                          "
+                          class="text-danger form-group position-absolute"
+                        >
+                          <small
+                            class="form-group"
+                            *ngIf="slogan.errors?.['required']"
+                          >
+                            Campo requerido.
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <br /><br />
+                    <div class="col-12 d-flex justify-content-end p-4">
+                      <input
+                        class="btn float-right nuevo"
+                        type="submit"
+                        value="Actualizar"
+                        [ngClass]="'input-btn'"
+                        [disabled]="!frmUpdateMarca['valid']"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </ng-container>
+          </ng-container>
 
       </div>
     </div>

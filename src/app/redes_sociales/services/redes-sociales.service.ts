@@ -46,7 +46,11 @@ export class RedesSocialesService {
     return this.httpCLient.get<any>(`${this.constante.API_SERVER}/publicaciones/getPublicacionesByIdUser/${id}`);
   }
 
-  createPublicacion(idUser:string,description:string,image:string,fecha:string,hora:string): Observable<any> {
+  getPublicationById(id: string): Observable<any> {
+    return this.httpCLient.get<any>(`${this.constante.API_SERVER}/publicaciones/publicationById/${id}`);
+  }
+
+  createPublicacion(idUser:string,description:string,image:string,fecha:string,hora:string,redesS:any): Observable<any> {
    
     const body = {
       user_id:idUser,
@@ -55,9 +59,40 @@ export class RedesSocialesService {
       //video:video,
       fecha:fecha,
       hora:hora,
-      //redesS:redesS
+      redesS:redesS
     };
     return this.httpCLient.post(`${this.constante.API_SERVER}/publicaciones/createPublicacion`, body);
+  }
+
+
+  //marcas
+  createMarca(idUser:string,form:any): Observable<any> {
+   
+    const body = {
+      user_id:idUser,
+      name:form.value.name,
+      url:form.value.url,
+      slogan:form.value.slogan
+    };
+    return this.httpCLient.post(`${this.constante.API_SERVER}/marcas/createMarca`, body);
+  }
+
+  getMarcaByUser(id: string): Observable<any> {
+    return this.httpCLient.get<any>(`${this.constante.API_SERVER}/marcas/getMarcaByIdUser/${id}`);
+  }
+
+  getMarcaById(id: string): Observable<any> {
+    return this.httpCLient.get<any>(`${this.constante.API_SERVER}/marcas/marcaById/${id}`);
+  }
+
+
+  updateMarca(id: string,form:any): Observable<any> {
+    const body = {
+      name:form.value.name,
+      url:form.value.url,
+      slogan:form.value.slogan
+    };
+    return this.httpCLient.post<any>(`${this.constante.API_SERVER}/marcas/updateMarca/${id}`,body);
   }
 
 }

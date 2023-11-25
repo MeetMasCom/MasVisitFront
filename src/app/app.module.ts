@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   ValidationErrors,
 } from '@angular/forms';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule, DatePipe, NgOptimizedImage } from '@angular/common';
 import {
   HttpClient,
   HttpClientModule,
@@ -109,6 +109,7 @@ import { CallbackInstagramComponent } from './redes_sociales/components/callback
 import { PlanningComponent } from './redes_sociales/components/planning/planning.component';
 import { AddPublicationComponent } from './redes_sociales/components/add-publication/add-publication.component';
 import { MyPostComponent } from './post/components/my-post/my-post.component';
+import { MarcasComponent } from './redes_sociales/components/marcas/marcas.component';
 
 
 
@@ -194,6 +195,7 @@ export function urlValidator(
     PlanningComponent,
     AddPublicationComponent,
     MyPostComponent,
+    MarcasComponent,
   ],
   imports: [
     CKEditorModule,
@@ -234,6 +236,7 @@ export function urlValidator(
     AuthServiceService,
     SharedserviceService,
     ConstantsSystem,
+      DatePipe,
 
     {
       provide: HTTP_INTERCEPTORS,

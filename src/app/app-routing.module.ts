@@ -34,6 +34,8 @@ import { CallbackInstagramComponent } from './redes_sociales/components/callback
 import { AddPublicationComponent } from './redes_sociales/components/add-publication/add-publication.component';
 
 import { MyPostComponent } from './post/components/my-post/my-post.component';
+import {MarcasComponent} from './redes_sociales/components/marcas/marcas.component';
+
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -79,6 +81,7 @@ const routes: Routes = [
   { path: 'planning', component: PlanningComponent },
   { path: 'addPublication', component: AddPublicationComponent },
   { path: 'post', component: MyPostComponent },
+  { path: 'marcas', component: MarcasComponent },
 ];
 
 @NgModule({

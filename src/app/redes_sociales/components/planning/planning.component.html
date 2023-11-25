@@ -33,8 +33,25 @@
             <fa-icon [icon]="['fas', 'user-plus']"></fa-icon>
           </button>
         </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="admin-historial-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#admin-historial"
+            type="button"
+            role="tab"
+            aria-controls="admin-historial"
+            aria-selected="false"
+          >
+            Historial
+            <fa-icon [icon]="['fas', 'user-plus']"></fa-icon>
+          </button>
+        </li>
       </ul>
       <div class="tab-content" id="pills-tabContent">
+
+        <!--calendario--->
         <div
           class="tab-pane fade show active bg-white p-3"
           id="admin-home"
@@ -42,9 +59,6 @@
           aria-labelledby="admin-home-tab"
         >
           <div class="row">
-            <!-- <div class="col-md-3">
-      <div class="card mt-3"></div>
-    </div> -->
             <div class="col-md-12">
               <div class="row mt-3">
                 <div class="col d-flex">
@@ -56,16 +70,19 @@
                   <button class="btn nuevo" (click)="retrocederSemana()">
                     Semana Anterior
                   </button>
-                  <span *ngIf="fechaInicioSemana">{{
-                    fechaInicioSemana.toLocaleDateString()
-                  }}</span>
+                  <span
+                    *ngIf="fechaInicioSemana"
+                    class="d-flex justify-content-center align-items-center p-2"
+                  >
+                    {{ fechaInicioSemana.toLocaleDateString() }}
+                  </span>
                   <button class="btn nuevo" (click)="avanzarSemana()">
                     Semana Siguiente
                   </button>
                 </div>
               </div>
               <div class="row p-3">
-                <div class="card">
+                <div class="">
                   <!-- En tu archivo de template, por ejemplo, calendar.component.html -->
 
                   <table>
@@ -86,10 +103,7 @@
                           {{ hora }}
                         </td>
                         <td *ngFor="let fecha of fechasSemana">
-                          <div
-                            (dblclick)="publicar(hora, fecha)"
-                            class="celda border"
-                          >
+                          <div (dblclick)="publicar(hora, fecha)" class="celda">
                             <div *ngFor="let evento of eventos">
                               <ng-container
                                 *ngIf="
@@ -115,8 +129,9 @@
           </div>
         </div>
 
+        <!--acortador de link--->
         <div
-          class="tab-pane fade active bg-white p-3"
+          class="tab-pane fade  bg-white p-3"
           id="admin-profile"
           role="tabpanel"
           aria-labelledby="admin-profile-tab"
@@ -157,7 +172,7 @@
                           <input
                             type="text"
                             class="form-control"
-                            id="inlineFormInputGroup"
+                            id="url"
                             placeholder="Url"
                           />
                         </div>
@@ -185,9 +200,12 @@
                               <span class="input-group-text">Texto:</span>
                             </div>
                             <input
+                            id="input{{ i }}"
+                            name="input{{ i }}"
                               type="text"
                               class="form-control"
                               [(ngModel)]="inputs[i]"
+                              (ngModelChange)="inputs[i] = $event"
                             />
                           </div>
                         </div>
@@ -200,18 +218,24 @@
                               <span class="input-group-text">URL:</span>
                             </div>
                             <input
+                            id="url{{ i }}"
                               type="text"
+                              name="url{{ i }}"
                               class="form-control"
-                              [(ngModel)]="urls[i]"
+                              [ngModel]="urls[i]"
+                              (ngModelChange)="urls[i] = $event"
                             />
                           </div>
                         </div>
                       </div>
                     </form>
                     <div class="row">
-                      <div class="col p-3  col d-flex justify-content-end">
-                        <button class="btn nuevo float-right" (click)="guardarBotones()">
-                          Visualizar
+                      <div class="col p-3 col d-flex justify-content-end">
+                        <button
+                          class="btn nuevo float-right"
+                          (click)="guardarBotones()"
+                        >
+                          Guardar
                         </button>
                       </div>
                     </div>
@@ -237,7 +261,7 @@
                           <select class="form-control">
                             <option
                               *ngFor="let item of objetosArray"
-                              [value]="item"
+                              [value]="item.nombre"
                             >
                               <fa-icon
                                 [icon]="['fab', item.icono]"
@@ -257,17 +281,22 @@
                             <span class="input-group-text">URL:</span>
                           </div>
                           <input
+                          id="urlsIcono{{ i }}"
+                          name="urlsIcono{{ i }}"
                             type="text"
                             class="form-control"
-                            [(ngModel)]="inputs[i]"
+                            [(ngModel)]="urlsIcono[i]"
                           />
                         </div>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col p-3  col d-flex justify-content-end">
-                        <button class="btn nuevo float-right" (click)="guardarIconos()">
-                          Visualizar
+                      <div class="col p-3 col d-flex justify-content-end">
+                        <button
+                          class="btn nuevo float-right"
+                          (click)="guardarIconos()"
+                        >
+                          Guardar
                         </button>
                       </div>
                     </div>
@@ -302,13 +331,23 @@
                         </p>
                       </div>
                     </div>
-                    <div class="row">
-                      <div *ngFor="let item of inputs">
-                        <div
-                          class="col-md-12 justify-content-center align-items-center"
-                        >
-                          <a class="btn nuevo" type="button">{{item}}</a>
-                        </div>
+                    <div class="row">                      
+                      <div class="col-md-4 mb-3 justify-content-center align-items-center" *ngFor="let item of inputs; let i = index; trackBy: trackByIndex">
+                        <ng-container *ngIf="item !==''">                          
+                          <a class="btn nuevo" type="button" href="{{urls[i]}}">{{ item }}</a>
+                        </ng-container>                       
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">                      
+                      <div class="col-md-4 mb-3 justify-content-center align-items-center" *ngFor="let item of iconos; let i = index">
+                        <ng-container *ngIf="item !==''">                          
+                          <a class="btn nuevo" type="button" href="{{urlsIcono[i]}}">
+                          <ng-container>
+                            {{item}}
+                          </ng-container>
+                          </a>
+                        </ng-container>                       
                       </div>
                     </div>
                   </div>
@@ -317,6 +356,58 @@
             </div>
           </div>
         </div>
+
+        <!--historial--->
+        <div
+        class="tab-pane fade  bg-white p-3"
+        id="admin-historial"
+        role="tabpanel"
+        aria-labelledby="admin-historial-tab"
+      >
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row mt-3">
+              <div class="col d-flex">Historial</div>
+            </div>
+            <div class="row mt-3">
+              <div class="col">
+                <div class="table-responsive">
+                  <table aria-describedby="" class="table text-center">
+                    <thead>
+                      <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Redes Sociales</th>
+                        <th scope="col">Acción</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let evento of eventos">
+        
+                      
+                      <tr>
+                        <td>{{evento.fecha}} {{evento.hora}}</td>
+                        <td>{{evento.description}}</td>
+                        <td>
+                      </td>
+                        <td class="text-center">
+                          <button type="button" class="btn btn-outline-primary" (click)="detailPublication(evento._id)">
+                            <fa-icon [icon]="['far', 'pen-to-square']"></fa-icon>
+                            Editar
+                          </button>
+                        </td>
+                      </tr>
+                    </ng-container>
+                     
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       </div>
     </div>
   </div>

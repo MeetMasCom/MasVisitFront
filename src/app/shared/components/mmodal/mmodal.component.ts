@@ -95,7 +95,7 @@ export class MmodalComponent {
   @Output() changeRadioTest: EventEmitter<any> = new EventEmitter<{ valor1: any, valor2: any }>();
   @Output() onSaveCuestionario: EventEmitter<any> = new EventEmitter();
   @Output() onUpdateApi: EventEmitter<any> = new EventEmitter();
-  
+  @Output() onUpdateMarca: EventEmitter<any> = new EventEmitter();
   
   @ViewChild('modalPublicar') modalPublicar!: ElementRef;
   @ViewChild('modalService') modalService!: ModalAlertsComponent;
@@ -111,6 +111,7 @@ export class MmodalComponent {
   }
 
   abrir() {
+    console.log("detail", this.detalle);
     this.modalPublicar.nativeElement.click();
   }
 
@@ -271,4 +272,8 @@ export class MmodalComponent {
     this.onUpdateApi.emit(event);
   }
   
+
+  updateMarca(event:any){
+    this.onUpdateMarca.emit(event);
+  }
 }
