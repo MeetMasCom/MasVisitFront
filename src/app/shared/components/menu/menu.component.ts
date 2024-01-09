@@ -72,7 +72,7 @@ export class MenuComponent implements OnInit {
 
     if (sessionStorage.getItem('id')!) {
       this.id = sessionStorage.getItem('id')!;
-      this.getProfile();
+      //this.getProfile();
       this.getNotificacion();
       this.getUser();
       

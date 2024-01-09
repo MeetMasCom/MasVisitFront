@@ -1462,7 +1462,102 @@
                         </div>
                       </div>
                     </div>
-  
+                    <div class="col-md-4 mt-4">
+                      <label> Correo: </label>
+                    </div>
+                    <div class="col-md-8 form-group mt-4">
+                      <div class="position-relative has-icon-left">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Correo"
+                          id="correo"
+                          name="correo"
+                          required
+                          ngModel="{{ detalle.correo }}"
+                          #correo="ngModel"
+                          [ngClass]="'input'"
+                        />
+                        <div
+                          *ngIf="
+                          correo.invalid &&
+                            (correo.dirty || correo.touched)
+                          "
+                          class="text-danger form-group position-absolute"
+                        >
+                          <small
+                            class="form-group"
+                            *ngIf="correo.errors?.['required']"
+                          >
+                            Campo requerido.
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 mt-4">
+                      <label> Compañia: </label>
+                    </div>
+                    <div class="col-md-8 form-group mt-4">
+                      <div class="position-relative has-icon-left">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Compañia"
+                          id="compania"
+                          name="compania"
+                          required
+                          ngModel="{{ detalle.compania }}"
+                          #compania="ngModel"
+                          [ngClass]="'input'"
+                        />
+                        <div
+                          *ngIf="
+                          compania.invalid &&
+                            (compania.dirty || compania.touched)
+                          "
+                          class="text-danger form-group position-absolute"
+                        >
+                          <small
+                            class="form-group"
+                            *ngIf="compania.errors?.['required']"
+                          >
+                            Campo requerido.
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 mt-4">
+                      <label> Representante: </label>
+                    </div>
+                    <div class="col-md-8 form-group mt-4">
+                      <div class="position-relative has-icon-left">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Representante"
+                          id="representante"
+                          name="representante"
+                          required
+                          ngModel="{{ detalle.representante }}"
+                          #representante="ngModel"
+                          [ngClass]="'input'"
+                        />
+                        <div
+                          *ngIf="
+                          representante.invalid &&
+                            (representante.dirty || representante.touched)
+                          "
+                          class="text-danger form-group position-absolute"
+                        >
+                          <small
+                            class="form-group"
+                            *ngIf="representante.errors?.['required']"
+                          >
+                            Campo requerido.
+                          </small>
+                        </div>
+                      </div>
+                    </div>
                     <div class="col-md-4 mt-4">
                       <label> Slogan: </label>
                     </div>
@@ -1495,14 +1590,76 @@
                         </div>
                       </div>
                     </div>
-  
+                    <div class="col-md-4 mt-4">
+                      <label> Teléfono: </label>
+                    </div>
+                    <div class="col-md-8 form-group mt-4">
+                      <div class="position-relative has-icon-left">
+                        <input
+                          type="number"
+                          class="form-control"
+                          placeholder="Teléfono"
+                          id="telefono"
+                          name="telefono"
+                          required
+                          ngModel="{{ detalle.telefono }}"
+                          #telefono="ngModel"
+                          [ngClass]="'input'"
+                        />
+                        <div
+                          *ngIf="
+                          telefono.invalid &&
+                            (telefono.dirty || telefono.touched)
+                          "
+                          class="text-danger form-group position-absolute"
+                        >
+                          <small
+                            class="form-group"
+                            *ngIf="telefono.errors?.['required']"
+                          >
+                            Campo requerido.
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 mt-4">
+                      <label> Dirección: </label>
+                    </div>
+                    <div class="col-md-8 form-group mt-4">
+                      <div class="position-relative has-icon-left">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Dirección"
+                          id="direccion"
+                          name="direccion"
+                          required
+                          ngModel="{{ detalle.direccion}}"
+                          #direccion="ngModel"
+                          [ngClass]="'input'"
+                        />
+                        <div
+                          *ngIf="
+                          direccion.invalid &&
+                            (direccion.dirty || direccion.touched)
+                          "
+                          class="text-danger form-group position-absolute"
+                        >
+                          <small
+                            class="form-group"
+                            *ngIf="direccion.errors?.['required']"
+                          >
+                            Campo requerido.
+                          </small>
+                        </div>
+                      </div>
+                    </div>
                     <br /><br />
                     <div class="col-12 d-flex justify-content-end p-4">
                       <input
                         class="btn float-right nuevo"
                         type="submit"
                         value="Actualizar"
-                        [ngClass]="'input-btn'"
                         [disabled]="!frmUpdateMarca['valid']"
                       />
                     </div>

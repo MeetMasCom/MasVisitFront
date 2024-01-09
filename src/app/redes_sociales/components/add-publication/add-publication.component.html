@@ -1,55 +1,145 @@
-<app-menu></app-menu>
+<!-- <app-menu></app-menu> -->
 <div class="container" style="min-height: 37vw">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9 col-12">
       <div class="col">
         <div class="card mt-3">
           <div class="row">
             <div class="d-flex justify-content-center align-content-center p-3">
-              <span class="">{{this.titulo}}</span>
+              <span class="">{{ this.titulo }}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label>
+                Publicar en las redes sociales:
+                <input
+                  type="radio"
+                  name="opcion"
+                  [(ngModel)]="publicarRedes"
+                  value="true"
+                />
+              </label>
+            </div>
+
+            <div>
+              <label>
+                No publicar en las redes sociales:
+                <input
+                  type="radio"
+                  name="opcion"
+                  [(ngModel)]="publicarRedes"
+                  value="false"
+                />
+              </label>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 p-2">
               <div class="row">
-                <div class="col-6 redes fa-3x">
+                <div class="col-md-8 col-12 redes fa-3x">
                   <div>
-                    <a class="cambiar-color" type="button" target="_blank" (click)="handleClick('facebook')">
+                    <a
+                      class="cambiar-color"
+                      type="button"
+                      target="_blank"
+                      (click)="handleClick('facebook')"
+                    >
                       <fa-icon [icon]="['fab', 'facebook']"></fa-icon>
                     </a>
                   </div>
+                  <div *ngIf="validarRed('facebook')">
+                    <select
+                      class="lista-botones form-select"
+                      [(ngModel)]="opcionFace"
+                    >
+                      <option value="post" selected>Post</option>
+                      <option value="reel">Reel</option>
+                      <option value="historia">Historia</option>
+                    </select>
+                  </div>
+
                   <div>
-                    <a class="cambiar-color" type="button" target="_blank" (click)="handleClick('twitter')">
+                    <a
+                      class="cambiar-color"
+                      type="button"
+                      target="_blank"
+                      (click)="handleClick('twitter')"
+                    >
                       <fa-icon [icon]="['fab', 'twitter']"></fa-icon>
                     </a>
                   </div>
                   <div>
-                    <a class="cambiar-color" type="button" target="_blank" (click)="handleClick('youtube')">
+                    <a
+                      class="cambiar-color"
+                      type="button"
+                      target="_blank"
+                      (click)="handleClick('youtube')"
+                    >
                       <fa-icon [icon]="['fab', 'youtube']"></fa-icon>
                     </a>
                   </div>
+                  <div *ngIf="validarRed('youtube')">
+                    <select
+                      class="lista-botones form-select"
+                      [(ngModel)]="opcionYoutube"
+                    >
+                      <option value="video">Video</option>
+                      <option value="short">Short</option>
+                    </select>
+                  </div>
                   <div>
-                    <a class="cambiar-color" type="button" target="_blank" (click)="handleClick('pinterest')">
+                    <a
+                      class="cambiar-color"
+                      type="button"
+                      target="_blank"
+                      (click)="handleClick('pinterest')"
+                    >
                       <fa-icon [icon]="['fab', 'pinterest']"></fa-icon>
                     </a>
                   </div>
                   <div>
-                    <a class="cambiar-color" type="button" target="_blank" (click)="handleClick('instagram')">
+                    <a
+                      class="cambiar-color"
+                      type="button"
+                      target="_blank"
+                      (click)="handleClick('instagram')"
+                    >
                       <fa-icon [icon]="['fab', 'instagram']"></fa-icon>
                     </a>
                   </div>
+                  <div *ngIf="validarRed('instagram')">
+                    <select
+                      class="lista-botones form-select"
+                      [(ngModel)]="opcionInsta"
+                    >
+                      <option value="post">Post</option>
+                      <option value="reel">Reel</option>
+                      <option value="historia">Historia</option>
+                    </select>
+                  </div>
                   <div>
-                    <a class="cambiar-color" type="button" target="_blank" (click)="handleClick('tiktok')">
+                    <a
+                      class="cambiar-color"
+                      type="button"
+                      target="_blank"
+                      (click)="handleClick('tiktok')"
+                    >
                       <fa-icon [icon]="['fab', 'tiktok']"></fa-icon>
                     </a>
                   </div>
                   <div>
-                    <a class="cambiar-color" type="button" target="_blank" (click)="handleClick('linkedin')">
+                    <a
+                      class="cambiar-color"
+                      type="button"
+                      target="_blank"
+                      (click)="handleClick('linkedin')"
+                    >
                       <fa-icon [icon]="['fab', 'linkedin']"></fa-icon>
                     </a>
                   </div>
                 </div>
-                <div class="col-6 redes fa-3x">                 
+                <div class="col-md-4 col-12 redes fa-3x">
                   <div class="row">
                     <div class="col-6">
                       <div class="input-group mb-2">
@@ -59,7 +149,7 @@
                           id="fecha"
                           name="fecha"
                           [(ngModel)]="selectedDate"
-                          placeholder="Username"
+                          (ngModelChange)="onDateSelected()"
                         />
                       </div>
                     </div>
@@ -71,7 +161,7 @@
                           id="hora"
                           name="hora"
                           [(ngModel)]="selectedTime"
-                          placeholder="Username"
+                          (ngModelChange)="onTimeSelected()"
                         />
                       </div>
                     </div>
@@ -83,113 +173,1260 @@
             <div class="col-md-3"></div>
           </div>
 
-          <!-- botones -->
           <div class="row">
             <div class="col">
               <div class="p-2">
                 <div class="card">
+                  <!-- contenido  -->
                   <div class="row" style="min-height: 20vw">
-                  <div class="col contenedor">
-                    <textarea type="text" [(ngModel)]="contenidoTextarea" class="mi-input-personalizado" placeholder="Agrega alguna descripcion"></textarea>
+                    <div class="col contenedor">
+                      <textarea
+                        type="text"
+                        [(ngModel)]="contenidoTextarea"
+                        class="mi-input-personalizado"
+                        placeholder="Agrega alguna descripcion"
+                      ></textarea>
+                      <div
+                        class="d-flex align-items-center justify-content-center"
+                        style="height: 300px"
+                      >
+                        <div class="row">
+                          <div class="col-md-4 p-4">
+                            <div class="row">
+                              <div class="col-md-12 float-end">
+                                <!--opciones para videos-->
+                                <ng-container
+                                  *ngIf="videoUrl && video === true"
+                                >
+                                  <div class="dropdown">
+                                    <a
+                                      class="btn dropdown-toggle border-0 nav-item nav-link"
+                                      role="button"
+                                      id="dropdownMenuLink"
+                                      data-bs-toggle="dropdown"
+                                      aria-expanded="false"
+                                      href="friends"
+                                    >
+                                      <fa-icon
+                                        class="fa-3x"
+                                        [icon]="faElipsis"
+                                      ></fa-icon>
+                                    </a>
+                                    <ul
+                                      class="dropdown-menu"
+                                      aria-labelledby="dropdownMenuLink"
+                                    >
+                                      <li>
+                                        <a
+                                          class="dropdown-item lista-botones"
+                                          travellers
+                                          >Editar</a
+                                        >
+                                      </li>
+                                      <li>
+                                        <a
+                                          class="dropdown-item lista-botones"
+                                          travellers
+                                          >Subir miniatura para youtube</a
+                                        >
+                                      </li>
+                                      <li>
+                                        <a
+                                          class="dropdown-item lista-botones"
+                                          travellers
+                                          >Sleccionar portada</a
+                                        >
+                                      </li>
+                                      <li>
+                                        <a
+                                          class="dropdown-item lista-botones"
+                                          travellers
+                                          (click)="Eliminar()"
+                                          >Eliminar</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </ng-container>
+                                <!--opciones para imagenes-->
+                                <ng-container
+                                  *ngIf="imagenUrl && image === true"
+                                >
+                                  <div class="dropdown">
+                                    <a
+                                      class="btn dropdown-toggle border-0 nav-item nav-link"
+                                      role="button"
+                                      id="dropdownMenuLink"
+                                      data-bs-toggle="dropdown"
+                                      aria-expanded="false"
+                                      href="friends"
+                                    >
+                                      <fa-icon
+                                        class="fa-3x"
+                                        [icon]="faElipsis"
+                                      ></fa-icon>
+                                    </a>
+                                    <ul
+                                      class="dropdown-menu"
+                                      aria-labelledby="dropdownMenuLink"
+                                    >
+                                      <li>
+                                        <a
+                                          class="dropdown-item lista-botones"
+                                          travellers
+                                          >Editar Imagen</a
+                                        >
+                                      </li>
+                                      <li>
+                                        <a
+                                          class="dropdown-item lista-botones"
+                                          travellers
+                                          >Añadir texto alternativo</a
+                                        >
+                                      </li>
+                                      <li>
+                                        <a
+                                          class="dropdown-item lista-botones"
+                                          travellers
+                                          (click)="Eliminar()"
+                                          >Eliminar</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </ng-container>
+                              </div>
+                            </div>
 
-                    <img *ngIf="imagenUrl" [src]="imagenUrl" alt="Imagen de la publicación">
-                    <input type="file" (change)="onFileSelected($event)" style="display: none" #fileInput>
-                  </div>
+                            <div
+                              class="row justify-content-center align-items-center"
+                            >
+                              <ng-container *ngIf="image === true">
+                                <img
+                                  *ngIf="imagenUrl"
+                                  [src]="imagenUrl"
+                                  class="img-miniatura"
+                                  alt="Imagen de la publicación"
+                                />
+                              </ng-container>
+                              <ng-container *ngIf="video === true">
+                                <img
+                                  [src]="videoThumbnail"
+                                  alt="Video Thumbnail"
+                                  *ngIf="videoThumbnail"
+                                  class="img-miniatura"
+                                  style="border: 2px solid #ddd"
+                                />
+                              </ng-container>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <input
+                        type="file"
+                        (change)="onFileSelected($event)"
+                        style="display: none"
+                        #fileInput
+                      />
+                    </div>
                   </div>
                   <div class="border-bottom"></div>
+
+                  <!--iconos para agregar fotos, videos ,emojies-->
                   <div class="row">
                     <div class="col-12 opc p-3">
                       <div>
-                        <a type="button" target="_blank"(click)="fileInput.click()">
-                          <fa-icon [icon]="faPhotoVideo">
-                          </fa-icon>
-                        </a>
-                      </div>
-                      <!-- <div>
-                        <a type="button" target="_blank" (click)="fileInput.click()">
-                          <fa-icon [icon]="faVideo">
-                          </fa-icon>
-                        </a>
-                      </div> -->
-                      <div>
-                        <a type="button" target="_blank" (click)="toggleEmojiPicker()">
-                          <fa-icon [icon]="faFile">
-                          </fa-icon>
-                        </a>
-                      </div>
-                      <!-- <div *ngIf="emojiPickerVisible">
-                        <emoji-mart title="Pick your emoji…" emoji="point_up"></emoji-mart>
-                        <emoji-mart set="google"></emoji-mart>
-                        <emoji-mart (emojiClick)="addEmoji($event)"></emoji-mart>
-                        <emoji-mart [style]="{ position: 'absolute', bottom: '20px', right: '20px' }"></emoji-mart>
-                        <emoji-mart
-                          [i18n]="{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }"
-                        ></emoji-mart>
-                      </div> -->
-                      <div>
-                        <a type="button" target="_blank">
-                          <fa-icon [icon]="faFaceSmile">
-                          </fa-icon>
+                        <a
+                          type="button"
+                          target="_blank"
+                          (click)="fileInput.click()"
+                          title="Video o imagen"
+                        >
+                          <fa-icon [icon]="faPhotoVideo"> </fa-icon>
                         </a>
                       </div>
                       <div>
-                        <a type="button" target="_blank">
-                          <fa-icon [icon]="faHashtag">
-                          </fa-icon>
+                        <a
+                          type="button"
+                          target="_blank"
+                          (click)="toggleEmojiPicker()"
+                          title="Documento"
+                        >
+                          <fa-icon [icon]="faFile"> </fa-icon>
+                        </a>
+                      </div>
+                      <div *ngIf="emojiPickerVisible">
+                        <div></div>
+                      </div>
+                      <div>
+                        <a type="button" target="_blank" title="Emojies">
+                          <fa-icon [icon]="faFaceSmile"> </fa-icon>
                         </a>
                       </div>
                       <div>
-                        <a type="button" target="_blank">
-                          <fa-icon [icon]="faComment">
-                          </fa-icon>
+                        <a type="button" target="_blank" title="Hashtag">
+                          <fa-icon [icon]="faHashtag"> </fa-icon>
                         </a>
                       </div>
                       <div>
-                        <a type="button" target="_blank">
-                          <fa-icon [icon]="faLocation">
-                          </fa-icon>
+                        <a type="button" target="_blank" title="Comentatios">
+                          <fa-icon [icon]="faComment"> </fa-icon>
                         </a>
                       </div>
                       <div>
-                        <a type="button" target="_blank">
-                          <fa-icon [icon]="faLink">
-                          </fa-icon>
+                        <div class="row">
+                          <a
+                            type="button"
+                            target="_blank"
+                            title="Ubicación"
+                            (click)="Ubicacion()"
+                          >
+                            <fa-icon [icon]="faLocation"> </fa-icon>
+                          </a>
+                        </div>
+                        <div class="row" *ngIf="ubicacion === true">
+                          <input
+                            [(ngModel)]="location"
+                            class="form-control"
+                            placeholder="Ingrese una ubicación"
+                          />
+                          <button class="btn nuevo">Buscar</button>
+
+                          <!-- <div *ngFor="let result of autocompleteResults">
+                            {{ result.description }}
+                          </div> -->
+                        </div>
+                      </div>
+                      <div>
+                        <a type="button" target="_blank" title="Link">
+                          <fa-icon [icon]="faLink"> </fa-icon>
                         </a>
                       </div>
                     </div>
+                  </div>
+
+                  <!--configuracion por cada red social-->
+                  <div class="border-bottom"></div>
+                  <div class="row">
+                    <div class="col-12" *ngFor="let icono of selectedIcons">
+                      {{ setIcon(icono) }}
+                      <div class="row">
+                        <!--facebook-->
+                        <div
+                          class="border-top col-12 btn d-inline-flex gap-1 lista-botones"
+                          *ngIf="
+                            icono === 'facebook' && this.opcionFace === 'reel'
+                          "
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#facebook"
+                          aria-expanded="false"
+                          aria-controls="facebook"
+                        >
+                          <p>
+                            <fa-icon [icon]="icon"></fa-icon> Configuración para
+                            facebook
+                          </p>
+                        </div>
+                        <div
+                          class="collapse"
+                          id="facebook"
+                          *ngIf="icono === 'facebook'"
+                        >
+                          <div class="card-body">
+                            <ng-container *ngIf="this.opcionFace === 'reel'">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Título"
+                                [(ngModel)]="tituloFace"
+                              />
+                            </ng-container>
+                          </div>
+                        </div>
+                        <!--twitter-->
+                        <div
+                          class="border-top col-12 btn d-inline-flex gap-1 lista-botones"
+                          *ngIf="icono === 'twitter'"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#twitter"
+                          aria-expanded="false"
+                          aria-controls="twitter"
+                        >
+                          <p>
+                            <fa-icon [icon]="icon"></fa-icon> Configuración para
+                            twitter
+                          </p>
+                        </div>
+                        <!--youtube-->
+                        <div
+                          class="border-top col-12 btn d-inline-flex gap-1 lista-botones"
+                          *ngIf="icono === 'youtube'"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#youtube"
+                          aria-expanded="false"
+                          aria-controls="youtube"
+                        >
+                          <p>
+                            <fa-icon [icon]="icon"></fa-icon> Configuración para
+                            youtube
+                          </p>
+                        </div>
+                        <div
+                          class="collapse"
+                          id="youtube"
+                          *ngIf="icono === 'youtube'"
+                        >
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-md-3">
+                                <label>Título:</label>
+                              </div>
+                              <div class="col-md-9">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Título"
+                                  [(ngModel)]="tituloYoutube"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="row mt-3">
+                              <div class="col-md-3">
+                                <label>Audiencia:</label>
+                              </div>
+                              <div class="col-md-9">
+                                <select
+                                  name="audiencia"
+                                  id="audiencia"
+                                  [(ngModel)]="opcionAudiencia"
+                                  class="form-select"
+                                >
+                                  <option value="1">
+                                    Sí, es un video creado para niños
+                                  </option>
+                                  <option value="2">
+                                    No, no es un video creado para niños
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="row mt-3">
+                              <div class="col-md-6">
+                                <div class="row">
+                                  <div class="col-md-3">
+                                    <label>Privacidad:</label>
+                                  </div>
+                                  <div class="col-md-9">
+                                    <select
+                                      name="privacidad"
+                                      id="privacidad"
+                                      [(ngModel)]="opcionPrivacidad"
+                                      class="form-select"
+                                    >
+                                      <option value="1">Público</option>
+                                      <option value="2">Oculto</option>
+                                      <option value="3">Privado</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="row">
+                                  <div class="col-md-3">
+                                    <label>Categoría:</label>
+                                  </div>
+                                  <div class="col-md-9">
+                                    <select
+                                      name="categoria"
+                                      id="categoria"
+                                      [(ngModel)]="opcionCategoria"
+                                      class="form-select"
+                                    >
+                                      <option value="1">
+                                        Cine y Animación
+                                      </option>
+                                      <option value="2">Motor</option>
+                                      <option value="3">Música</option>
+                                      <option value="4">
+                                        Mascotas y Animales
+                                      </option>
+                                      <option value="5">Deportes</option>
+                                      <option value="6">
+                                        Viajes y eventos
+                                      </option>
+                                      <option value="7">Videojuegos</option>
+                                      <option value="8">Gente y blogs</option>
+                                      <option value="9">Comedia</option>
+                                      <option value="10">
+                                        Entretenimiento
+                                      </option>
+                                      <option value="11">
+                                        Noticias y política
+                                      </option>
+                                      <option value="12">
+                                        Consejos y estilo
+                                      </option>
+                                      <option value="13">Formación</option>
+                                      <option value="14">
+                                        Ciencia y tecnología
+                                      </option>
+                                      <option value="15">
+                                        ONGs y activismo
+                                      </option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row mt-3">
+                              <div class="col-md-3">
+                                <label>Etiquetas:</label>
+                              </div>
+                              <div class="col-md-9">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  name="etiquetas"
+                                  [(ngModel)]="etiquetasYoutube"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!--pinterest-->
+                        <div
+                          class="border-top col-12 btn d-inline-flex gap-1 lista-botones"
+                          *ngIf="icono === 'pinterest'"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#pinterest"
+                          aria-expanded="false"
+                          aria-controls="pinterest"
+                        >
+                          <p>
+                            <fa-icon [icon]="icon"></fa-icon> Configuración para
+                            pinterest
+                          </p>
+                        </div>
+                        <div
+                          class="collapse"
+                          id="pinterest"
+                          *ngIf="icono === 'pinterest'"
+                        >
+                          <div class="card-body">
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Título"
+                            />
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Tablero"
+                            />
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Audiencia"
+                            />
+                          </div>
+                        </div>
+                        <!--instagram-->
+                        <div
+                          class="border-top col-12 btn d-inline-flex gap-1 lista-botones"
+                          *ngIf="
+                            icono === 'instagram' &&
+                            this.opcionInsta != 'historia'
+                          "
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#instagram"
+                          aria-expanded="false"
+                          aria-controls="instagram"
+                        >
+                          <p>
+                            <fa-icon [icon]="icon"></fa-icon> Configuración para
+                            instagram
+                          </p>
+                        </div>
+                        <div
+                          class="collapse"
+                          id="instagram"
+                          *ngIf="icono === 'instagram'"
+                        >
+                          <div class="card-body">
+                            <ng-container
+                              *ngIf="this.opcionInsta != 'historia'"
+                            >
+                              <div class="row">
+                                <div class="col-md-3">
+                                  <label>Colaboradores:</label>
+                                </div>
+                                <div class="col-md-9">
+                                  <button class="btn nuevo">
+                                    Añadir Colaboradores
+                                  </button>
+                                </div>
+                              </div>
+                            </ng-container>
+                          </div>
+                        </div>
+                        <!--tiktok-->
+                        <div
+                          class="border-top col-12 btn d-inline-flex gap-1 lista-botones"
+                          *ngIf="icono === 'tiktok'"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#tiktok"
+                          aria-expanded="false"
+                          aria-controls="tiktok"
+                        >
+                          <p>
+                            <fa-icon [icon]="icon"></fa-icon> Configuración para
+                            Tiktok
+                          </p>
+                        </div>
+                        <div
+                          class="collapse"
+                          id="tiktok"
+                          *ngIf="icono === 'tiktok'"
+                        >
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-md-4">
+                                <button
+                                  type="button"
+                                  class="btn"
+                                  [class.btn-nuevo]="isComentarios"
+                                  [class.btn-secondary]="!isComentarios"
+                                  (click)="toggleButton()"
+                                >
+                                  {{
+                                    isComentarios
+                                      ? "Deshabilitar comentarios"
+                                      : "Habilitar comentarios"
+                                  }}
+                                </button>
+                              </div>
+                              <div class="col-md-4">
+                                <button
+                                  type="button"
+                                  class="btn"
+                                  [class.btn-nuevo]="isDuos"
+                                  [class.btn-secondary]="!isDuos"
+                                  (click)="toggleButton1()"
+                                >
+                                  {{
+                                    isDuos
+                                      ? "Deshabilitar duos"
+                                      : "Habilitar duos"
+                                  }}
+                                </button>
+                              </div>
+                              <div class="col-md-4">
+                                <button
+                                  type="button"
+                                  class="btn"
+                                  [class.btn-nuevo]="isPegar"
+                                  [class.btn-secondary]="!isPegar"
+                                  (click)="toggleButton2()"
+                                >
+                                  {{
+                                    isPegar
+                                      ? "Deshabilitar pegar"
+                                      : "Habilitar pegar"
+                                  }}
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!--linkedin-->
+                        <div
+                          class="border-top col-12 btn d-inline-flex gap-1 lista-botones"
+                          *ngIf="icono === 'linkedin'"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#linkedin"
+                          aria-expanded="false"
+                          aria-controls="linkedin"
+                        >
+                          <p>
+                            <fa-icon [icon]="icon"></fa-icon> Configuración para
+                            LinkedIn
+                          </p>
+                        </div>
+                        <div
+                          class="collapse"
+                          id="linkedin"
+                          *ngIf="icono === 'tiktok'"
+                        >
+                          <div class="card-body">
+                            <div class="row"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <br />
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="row">
             <div class="col">
               <div class="p-2">
                 <button class="btn nuevo" (click)="Cancelar()">Cancelar</button>
-                <button class="btn nuevo ml-2" style="margin-left: 10px;" (click)="GuardarPublicacion()">Guardar</button>
+                <button
+                  class="btn nuevo ml-2"
+                  style="margin-left: 10px"
+                  [disabled]="selectedIcons.length === 0"
+                  (click)="GuardarPublicacion()"
+                >
+                  Guardar
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card mt-3">
+
+    <!--Vista previa por cada red social-->
+    <div class="col-md-3 col-12">
+      <div class="mt-3" style="min-height: 500px">
         <div class="col-md-12">
-          <div class="row">
+          <div class="row card">
             <div class="col-12 redes fa-3x">
               <div *ngFor="let icono of selectedIcons">
                 {{ setIcon(icono) }}
-                <a class="cambiar-color" type="button" target="_blank" >
+                <a
+                  class="cambiar-color"
+                  type="button"
+                  target="_blank"
+                  (click)="handleClick1(icono)"
+                >
                   <fa-icon [icon]="icon"></fa-icon>
                 </a>
               </div>
             </div>
           </div>
+          <div class="row p-2">
+            <div class="col-12 redes fa-3x">
+              <!--FACEBOOK-->
+              <ng-container *ngIf="this.selectedIcons1 === 'facebook'">
+                <ng-container *ngIf="opcionFace === 'post'">
+                  <div class="col-md-12 card">
+                    <div class="row mt-2">
+                      <div class="col-md-2"></div>
+                      <div class="col-md-10">
+                        <div class="row">
+                          <div
+                            class="col-md-12 lista-botones"
+                            style="font-weight: bold"
+                          >
+                            {{ marca[0].name }}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12 lista-botones">
+                            {{ fechaActual | date : "dd/MMMM" }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-1 lista-botones"></div>
+                      <div class="col-md-11 lista-botones mt-3">
+                        {{ contenidoTextarea }}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div
+                        class="col-md-12 justify-content-center align-content-center"
+                      >
+                        <ng-container *ngIf="image === true">
+                          <img
+                            *ngIf="imagenUrl"
+                            [src]="imagenUrl"
+                            class="img-fluid"
+                            alt="Imagen de la publicación"
+                          />
+                        </ng-container>
+                        <ng-container *ngIf="video === true">
+                          <div class="video-container">
+                            <video
+                              #videoElement
+                              controls
+                              preload="metadata"
+                              loop
+                              muted
+                              (loadedmetadata)="onVideoMetadata($event)"
+                              style="border-radius: 0px !important"
+                            >
+                              <source [src]="videoUrl" type="video/mp4" />
+                              Tu navegador no soporta el elemento de video.
+                            </video>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                    <div class="row p-2">
+                      <div
+                        class="col-md-4 lista-botones d-flex justify-content-center align-content-center"
+                      >
+                        <fa-icon [icon]="['far', 'thumbs-up']"></fa-icon> Me
+                        gusta
+                      </div>
+                      <div
+                        class="col-md-4 lista-botones d-flex justify-content-center align-content-center"
+                      >
+                        <fa-icon [icon]="['far', 'comment']"></fa-icon> Comentar
+                      </div>
+                      <div
+                        class="col-md-4 lista-botones d-flex justify-content-center align-content-center"
+                      >
+                        <fa-icon [icon]="['fas', 'share']"></fa-icon> Compartir
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="opcionFace === 'reel'">
+                  <div class="col-md-12 card" style="background-color: #000000">
+                    <ng-container *ngIf="video === true">
+                      <div class="col-md-12">
+                        <div class="row p-3">
+                          <div class="col-md-1 lista-botones"></div>
+                          <div class="col-md-1">
+                            <fa-icon [icon]="['fas', 'arrow-left']"></fa-icon>
+                          </div>
+                          <div class="col-md-6 lista-botones"></div>
+                          <div class="col-md-1">
+                            <fa-icon [icon]="['fas', 'search']"></fa-icon>
+                          </div>
+                          <div class="col-md-1">
+                            <fa-icon [icon]="['fas', 'camera']"></fa-icon>
+                          </div>
+                          <div class="col-md-1">
+                            <fa-icon [icon]="['fas', 'user-circle']"></fa-icon>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div
+                            class="col-md-12 p-2 justify-content-center align-content-center"
+                            style="width: 500px"
+                          >
+                            <div class="video-container">
+                              <video
+                                #videoElement
+                                controls
+                                preload="metadata"
+                                loop
+                                muted
+                                (loadedmetadata)="onVideoMetadata($event)"
+                              >
+                                <source [src]="videoUrl" type="video/mp4" />
+                                Tu navegador no soporta el elemento de video.
+                              </video>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-1"></div>
+                          <div class="col-md-8"></div>
+                        </div>
+                        <br />
+                      </div>
+                    </ng-container>
+                    <ng-container *ngIf="video === false">
+                      <div
+                        class="d-flex p-5 justify-content-center align-content-center"
+                      >
+                        <p class="lista-botones">
+                          Vista no disponible, cargue un video
+                        </p>
+                      </div>
+                    </ng-container>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="opcionFace === 'historia'">
+                  <div class="col-md-12 card" style="background-color: #000000">
+                    <div class="row">
+                      <div class="col-md-2"></div>
+                      <div class="col-md-10">
+                        <div class="row p-3">
+                          <div
+                            class="col-md-8 lista-botones"
+                            style="font-weight: bold; color: #ffffff"
+                          >
+                            {{ marca[0].name }}
+                          </div>
+                          <div
+                            class="col-md-4 lista-botones"
+                            style="color: #ffffff"
+                          >
+                            {{ fechaActual | date : "dd/MMMM" }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div
+                        class="col-md-12 justify-content-center align-content-center"
+                      >
+                        <ng-container *ngIf="image === true">
+                          <div class="historia">
+                            <div class="story-container">
+                              <!-- Capa de desenfoque -->
+                              <div class="story-overlay">
+                                <!-- Imagen de la historia -->
+                                <img
+                                  *ngIf="imagenUrl"
+                                  [src]="imagenUrl"
+                                  class="img-fluid story-image"
+                                  alt="Imagen de la publicación"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="video === true">
+                          <div class="video-container">
+                            <video
+                              #videoElement
+                              controls
+                              preload="metadata"
+                              loop
+                              muted
+                              (loadedmetadata)="onVideoMetadata($event)"
+                            >
+                              <source [src]="videoUrl" type="video/mp4" />
+                              Tu navegador no soporta el elemento de video.
+                            </video>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-2"></div>
+                      <div class="col-md-6 lista-botones">
+                        <input
+                          type="text"
+                          class="form-control border-rounded lista-botones"
+                          id="inputTransparent"
+                          disabled
+                          placeholder="Enviar mensaje"
+                        />
+                      </div>
+                      <div class="col-md-1 lista-botones fa-4x">
+                        <fa-icon [icon]="['fas', 'heart']"></fa-icon>
+                      </div>
+                      <div class="col-md-1 lista-botones fa-4x">
+                        <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
+                      </div>
+                    </div>
+                    <br />
+                  </div>
+                </ng-container>
+              </ng-container>
+              <!--Twitter-->
+              <ng-container *ngIf="this.selectedIcons1 === 'twitter'">
+              </ng-container>
+              <!--youtube-->
+              <ng-container *ngIf="this.selectedIcons1 === 'youtube'">
+                <ng-container *ngIf="opcionYoutube === 'video'">
+                  video
+                </ng-container>
+                <ng-container *ngIf="opcionYoutube === 'short'">
+                  short
+                </ng-container>
+              </ng-container>
+              <!--pinterest-->
+              <ng-container *ngIf="this.selectedIcons1 === 'pinterest'">
+              </ng-container>
+              <!--instagram-->
+              <ng-container *ngIf="this.selectedIcons1 === 'instagram'">
+                <ng-container *ngIf="opcionInsta === 'post'">
+                  <div class="col-md-12 card">
+                    <div class="row p-3">
+                      <div class="col-md-2"></div>
+                      <div class="col-md-10">
+                        <div class="row">
+                          <div
+                            class="col-md-12 lista-botones"
+                            style="font-weight: bold"
+                          >
+                            {{ marca[0].name }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div
+                        class="col-md-12 justify-content-center align-content-center"
+                      >
+                        <ng-container *ngIf="image === true">
+                          <img
+                            *ngIf="imagenUrl"
+                            [src]="imagenUrl"
+                            class="img-fluid"
+                            alt="Imagen de la publicación"
+                          />
+                        </ng-container>
+                        <ng-container *ngIf="video === true">
+                          <div class="video-container">
+                            <video
+                              #videoElement
+                              controls
+                              preload="metadata"
+                              loop
+                              muted
+                              (loadedmetadata)="onVideoMetadata($event)"
+                            >
+                              <source [src]="videoUrl" type="video/mp4" />
+                              Tu navegador no soporta el elemento de video.
+                            </video>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-1"></div>
+                      <div
+                        class="col-md-1 lista-botones fa-4x"
+                        style="color: #000000 !important"
+                      >
+                        <fa-icon [icon]="['fas', 'heart']"></fa-icon>
+                      </div>
+                      <div
+                        class="col-md-1 lista-botones fa-4x"
+                        style="color: #000000 !important"
+                      >
+                        <fa-icon [icon]="['fas', 'comment']"></fa-icon>
+                      </div>
+                      <div
+                        class="col-md-1 lista-botones fa-4x"
+                        style="color: #000000 !important"
+                      >
+                        <fa-icon [icon]="['fas', 'envelope']"></fa-icon>
+                      </div>
+                      <div
+                        class="col-md-1 lista-botones fa-4x"
+                        style="color: #000000 !important"
+                      >
+                        <fa-icon [icon]="['fas', 'bookmark']"></fa-icon>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-1 lista-botones"></div>
+                      <div class="col-md-10 lista-botones mt-3">
+                        <h6>{{ marca[0].name }}</h6>
+                        {{ contenidoTextarea }}
+                      </div>
+                    </div>
+                    <br />
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="opcionInsta === 'reel'">
+                  <div class="col-md-12 card" style="background-color: #000000">
+                    <ng-container *ngIf="video === true">
+                      <div class="col-md-12">
+                        <div class="row p-3">
+                          <div class="col-md-1 lista-botones"></div>
+                          <div class="col-md-1 lista-botones fa-4x">
+                            <fa-icon [icon]="['fas', 'arrow-left']"></fa-icon>
+                          </div>
+                          <div
+                            class="col-md-8 lista-botones fa-4x d-flex justify-content-center align-content-center"
+                          >
+                            Reels
+                          </div>
+
+                          <div class="col-md-1 lista-botones fa-4x">
+                            <fa-icon [icon]="['fas', 'camera']"></fa-icon>
+                          </div>
+                          <div class="col-md-1 lista-botones"></div>
+                        </div>
+                        <div class="row">
+                          <div
+                            class="col-md-12 p-2 justify-content-center align-content-center"
+                            style="width: 500px"
+                          >
+                            <div class="video-container">
+                              <video
+                                #videoElement
+                                controls
+                                preload="metadata"
+                                loop
+                                muted
+                                (loadedmetadata)="onVideoMetadata($event)"
+                              >
+                                <source [src]="videoUrl" type="video/mp4" />
+                                Tu navegador no soporta el elemento de video.
+                              </video>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-1"></div>
+                          <div class="col-md-8"></div>
+                        </div>
+                        <br />
+                      </div>
+                    </ng-container>
+                    <ng-container *ngIf="video === false">
+                      <div
+                        class="d-flex p-5 justify-content-center align-content-center"
+                      >
+                        <p class="lista-botones">
+                          Vista no disponible, cargue un video
+                        </p>
+                      </div>
+                    </ng-container>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="opcionInsta === 'historia'">
+                  <div class="col-md-12 card" style="background-color: #000000">
+                    <div class="row p-3">
+                      <div class="col-md-2"></div>
+                      <div class="col-md-10">
+                        <div class="row">
+                          <div
+                            class="col-md-7 lista-botones"
+                            style="font-weight: bold; color: #ffffff !important"
+                          >
+                            {{ marca[0].name }}
+                          </div>
+                          <div
+                            class="col-md-5 lista-botones"
+                            style="color: #ffffff !important"
+                          >
+                            {{ fechaActual | date : "dd/MMMM" }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div
+                        class="col-md-12 justify-content-center align-content-center"
+                      >
+                        <ng-container *ngIf="image === true">
+                          <div class="historia">
+                            <div class="story-container">
+                              <!-- Capa de desenfoque -->
+                              <div class="story-overlay">
+                                <!-- Imagen de la historia -->
+                                <img
+                                  *ngIf="imagenUrl"
+                                  [src]="imagenUrl"
+                                  class="img-fluid story-image"
+                                  alt="Imagen de la publicación"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="video === true">
+                          <div class="video-container">
+                            <video
+                              #videoElement
+                              controls
+                              preload="metadata"
+                              loop
+                              muted
+                              (loadedmetadata)="onVideoMetadata($event)"
+                            >
+                              <source [src]="videoUrl" type="video/mp4" />
+                              Tu navegador no soporta el elemento de video.
+                            </video>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-2"></div>
+                      <div class="col-md-6 lista-botones">
+                        <input
+                          type="text"
+                          class="form-control border-rounded lista-botones"
+                          id="inputTransparent"
+                          disabled
+                          placeholder="Enviar mensaje"
+                        />
+                      </div>
+                      <div class="col-md-1 lista-botones fa-4x">
+                        <fa-icon [icon]="['fas', 'heart']"></fa-icon>
+                      </div>
+                      <div class="col-md-1 lista-botones fa-4x">
+                        <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
+                      </div>
+                    </div>
+                    <br />
+                  </div>
+                </ng-container>
+              </ng-container>
+              <!--tiktok-->
+              <ng-container *ngIf="this.selectedIcons1 === 'tiktok'">
+                <div class="col-md-12 card" style="background-color: #000000">
+                  <div class="row">
+                    <div class="col-md-2 lista-botones"></div>
+                    <div
+                      class="col-md-5 lista-botones mt-3"
+                      style="color: #ffffff"
+                    >
+                      Siguiendo
+                    </div>
+                    <div
+                      class="col-md-5 lista-botones mt-3"
+                      style="color: #ffffff"
+                    >
+                      Para ti
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div
+                      class="col-md-12 justify-content-center align-content-center"
+                    >
+                      <ng-container *ngIf="video === true">
+                        <div class="video-container">
+                          <video
+                            #videoElement
+                            controls
+                            preload="metadata"
+                            loop
+                            muted
+                            (loadedmetadata)="onVideoMetadata($event)"
+                          >
+                            <source [src]="videoUrl" type="video/mp4" />
+                            Tu navegador no soporta el elemento de video.
+                          </video>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="video === false">
+                        <div
+                          class="video-container d-flex justify-content-center align-content-center"
+                          style="min-height: 65vh"
+                        >
+                          <h6 style="color: #ffffff">Video no disponible</h6>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-8"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-1"></div>
+                    <div
+                      class="col-md-2 lista-botones"
+                      style="color: #ffffff !important"
+                    >
+                      <div class="row">
+                        <div
+                          class="d-flex align-items-center justify-content-center"
+                        >
+                          <fa-icon [icon]="['fas', 'home']"></fa-icon>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          class="d-flex align-items-center justify-content-center"
+                        >
+                          Home
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="col-md-2 lista-botones"
+                      style="color: #ffffff !important"
+                    >
+                      <div class="row">
+                        <div
+                          class="d-flex align-items-center justify-content-center"
+                        >
+                          <fa-icon [icon]="['fas', 'bolt']"></fa-icon>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          class="d-flex align-items-center justify-content-center"
+                        >
+                          Now
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="col-md-2 lista-botones d-flex justify-content-center align-content-center"
+                      style="color: #ffffff !important"
+                    >
+                      <fa-icon [icon]="['fas', 'radiation']"></fa-icon>
+                    </div>
+                    <div
+                      class="col-md-2 lista-botones"
+                      style="color: #ffffff !important"
+                    >
+                      <div class="row">
+                        <div
+                          class="d-flex align-items-center justify-content-center"
+                        >
+                          <fa-icon [icon]="['fas', 'inbox']"></fa-icon>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          class="d-flex align-items-center justify-content-center"
+                        >
+                          Inbox
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="col-md-2 lista-botones"
+                      style="color: #ffffff !important"
+                    >
+                      <div class="row">
+                        <div
+                          class="d-flex align-items-center justify-content-center"
+                        >
+                          <fa-icon [icon]="['fas', 'user']"></fa-icon>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          class="d-flex align-items-center justify-content-center"
+                        >
+                          Me
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </div>
+                  <br />
+                </div>
+              </ng-container>
+              <!--linkedin-->
+              <ng-container *ngIf="this.selectedIcons1 === 'linkedin'">
+              </ng-container>
+            </div>
+          </div>
         </div>
       </div>
+      <br /><br />
     </div>
+    <br />
   </div>
 </div>
-
-<app-footer></app-footer>
+<!-- 
+<app-footer></app-footer> -->

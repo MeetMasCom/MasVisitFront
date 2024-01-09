@@ -1,0 +1,52 @@
+
+<div class="">
+  <!-- app.component.html -->
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+      <!-- Menú lateral -->
+      <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar h-100">
+        <div><hr class="my-4" /></div>
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="#"> <fa-icon [icon]="['fab', 'folder']"></fa-icon> Resumen </a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> <fa-icon [icon]="['fab', 'facebook']"></fa-icon> Facebook </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> <fa-icon [icon]="['fab', 'instagram']"></fa-icon>Instagram </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> <fa-icon [icon]="['fab', 'twitter']"></fa-icon>Twitter </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> <fa-icon [icon]="['fab', 'linkedin']"></fa-icon>LinkedIn </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> <fa-icon [icon]="['fab', 'pinterest']"></fa-icon>Pinterest </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" type="button" (click)="Conectar()"> <fa-icon [icon]="['fab', 'tiktok']"></fa-icon> TikTok </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> <fa-icon [icon]="['fab', 'youtube']"></fa-icon>Youtube </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Contenido principal -->
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 h-100">
+        <!-- Aquí irá el contenido de tu página -->
+        <div><hr class="my-4" /></div>
+        <h2>{{marca.name}}</h2>
+        <p>{{marca.slogan}}</p>
+      </main>
+    </div>
+  </div>
+</div>
+<!-- <div class="fixed-bottom">
+    <app-footer></app-footer>
+</div> -->
+

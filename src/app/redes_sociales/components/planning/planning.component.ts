@@ -71,30 +71,11 @@ export class PlanningComponent {
   ];
   detail: any[] = [];
   eventos: any[] = [];
-  //   { tema: 'Reunión de equipo', fecha: '2023-11-07', hora: '10:00' },
-  //   { tema: 'Entrenamiento', fecha: '2023-11-07', hora: '14:30' },
-  //   { tema: 'Presentación de proyectos', fecha: '2023-11-08', hora: '16:00' },
-  //   { tema: 'Sesión de lluvia de ideas', fecha: '2023-11-08', hora: '11:00' },
-  //   { tema: 'Almuerzo de equipo', fecha: '2023-11-09', hora: '12:30' },
-  //   { tema: 'Entrevistas de trabajo', fecha: '2023-11-09', hora: '09:00' },
-  //   {
-  //     tema: 'Taller de desarrollo personal',
-  //     fecha: '2023-11-10',
-  //     hora: '15:00',
-  //   },
-  //   { tema: 'Conferencia virtual', fecha: '2023-11-10', hora: '18:30' },
-  //   {
-  //     tema: 'Revisión de metas trimestrales',
-  //     fecha: '2023-11-11',
-  //     hora: '14:00',
-  //   },
-  //   { tema: 'Celebración de logros', fecha: '2023-11-11', hora: '05:00' },
-  //   { tema: 'Celebración de logros', fecha: '2023-11-12', hora: '09:00' },
-  //   { tema: 'Celebración de logros', fecha: '2023-11-13', hora: '02:00' },
-  // ... Otras 10 entradas ...
-  //];
+  marca: any[] = [];
+  
   id: string = '';
   token: any;
+  idMarca: any;
 
   constructor(
     private router: Router,
@@ -110,6 +91,11 @@ export class PlanningComponent {
       if (sessionStorage.getItem('token')!) {
         this.token = JSON.parse(sessionStorage.getItem('token')!);
       }
+      this.activatedRoute.queryParams.subscribe((params) => {
+        this.idMarca = params['marca'];
+        this.getMarca();
+      });
+
     } else {
       this.router.navigate(['/inicio']);
     }
@@ -124,7 +110,13 @@ export class PlanningComponent {
     this.horaActual = moment().format('HH:mm');
   }
   AddPublication() {
-    this.router.navigate(['/addPublication']);
+    this.router.navigate(['/addPublication'],{ queryParams: { marca: this.idMarca } });
+  }
+
+
+
+  Analitica(){
+    this.router.navigate(['/analitica'],{ queryParams: { marca: this.idMarca } });
   }
 
   calcularInicioSemana(): void {
@@ -151,12 +143,6 @@ export class PlanningComponent {
       this.fechasSemana.push(fecha);
     }
   }
-  // generarFechasSemana() {
-  //   const fechaActual = moment();
-  //   for (let i = 0; i < 7; i++) {
-  //     this.fechasSemana.push(fechaActual.clone().add(i, 'days').format('D MMM YYYY'));
-  //   }
-  // }
 
   esFechaActual(fecha: string): boolean {
     return fecha === this.fechaActual;
@@ -168,15 +154,14 @@ export class PlanningComponent {
   }
 
   esMismaFechaYHora(
-    eventDate: string,
-    eventHour: string,
+    eventFechaHora: string,
     cellDate: string,
     cellHour: string
   ): boolean {
-    const eventDateTime = new Date(eventDate + ' ' + eventHour);
+    const eventDateTime = new Date(eventFechaHora);
     const cellDateTime = new Date(cellDate + ' ' + cellHour);
     // Calcula la próxima hora
-    const proximaHora = new Date(eventDate + ' ' + eventHour);
+    const proximaHora = new Date(eventFechaHora);
     proximaHora.setHours(proximaHora.getHours() + 1);
     proximaHora.setMinutes(0);
     proximaHora.setSeconds(0);
@@ -226,17 +211,29 @@ export class PlanningComponent {
 
   guardarIconos() {}
 
+
   async getPublicaciones() {
     const resp = await lastValueFrom(
-      this.redesService.getPublicaciones(this.id)
+      this.redesService.getPublicaciones(this.id,this.idMarca)
     );
     if (resp.data.length > 0) {
       this.eventos = resp.data;
+      console.log("publicaciones",this.eventos);
+    }
+  }
+
+
+  async getMarca() {
+    const resp = await lastValueFrom(
+      this.redesService.getMarcaById(this.idMarca)
+    );
+    if (resp.data.length > 0) {
+      this.marca = resp.data;
+      console.log(this.marca);
     }
   }
 
   async detailPublication(id:string){
-      this.router.navigate(['/addPublication'],{ queryParams: { detail: id } });
-    
+      this.router.navigate(['/addPublication'],{ queryParams: { detail: id } });    
   }
 }

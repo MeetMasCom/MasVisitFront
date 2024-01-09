@@ -42,25 +42,43 @@ export class RedesSocialesService {
     return this.httpCLient.get<any>(`${this.constante.API_SERVER}/redes/getPostFacebook/${id}`);
   }
 
-  getPublicaciones(id: string): Observable<any> {
-    return this.httpCLient.get<any>(`${this.constante.API_SERVER}/publicaciones/getPublicacionesByIdUser/${id}`);
+  getPublicaciones(id: string,marca:string): Observable<any> {
+    return this.httpCLient.get<any>(`${this.constante.API_SERVER}/publicaciones/getPublicacionesByIdUser/${id}?marca=` + marca);
   }
 
   getPublicationById(id: string): Observable<any> {
     return this.httpCLient.get<any>(`${this.constante.API_SERVER}/publicaciones/publicationById/${id}`);
   }
 
-  createPublicacion(idUser:string,description:string,image:string,fecha:string,hora:string,redesS:any): Observable<any> {
-   
+saveImagen(file:File):Observable<any>{
+  const fd = new FormData();
+  fd.append('archivo', file);
+  console.log(file);
+  return this.httpCLient.post<any>(`${this.constante.API_SERVER}/publicaciones/saveArchivo`,fd);
+}
+
+saveArchivo(file:File,id_user:string):Observable<any>{
+  const fd = new FormData();
+  fd.append('archivo', file);
+  fd.append('user_id',id_user);
+  console.log("idUser",id_user);
+  return this.httpCLient.post<any>(`${this.constante.API_SERVER}/archivos/subir-archivo`,fd);
+}
+
+  createPublicacion(idUser:string,idMarca:string,description:string,fecha:string,configuracion:any,publicarR:boolean): Observable<any> {
     const body = {
       user_id:idUser,
-      description:description,
-      photo:image,
+      marca_id:idMarca,
+      descripcion:description,
       //video:video,
-      fecha:fecha,
-      hora:hora,
-      redesS:redesS
+      fechaHora:fecha,
+      configuracion:configuracion,
+      publicar:publicarR
     };
+
+    console.log("servicio", body);
+
+    console.log("datos",body);
     return this.httpCLient.post(`${this.constante.API_SERVER}/publicaciones/createPublicacion`, body);
   }
 
@@ -72,7 +90,12 @@ export class RedesSocialesService {
       user_id:idUser,
       name:form.value.name,
       url:form.value.url,
-      slogan:form.value.slogan
+      slogan:form.value.slogan,
+      correo:form.value.correo,
+      compania:form.value.compania,
+      representante:form.value.representante,
+      telefono:form.value.telefono,
+      direccion:form.value.direccion
     };
     return this.httpCLient.post(`${this.constante.API_SERVER}/marcas/createMarca`, body);
   }
@@ -90,9 +113,38 @@ export class RedesSocialesService {
     const body = {
       name:form.value.name,
       url:form.value.url,
-      slogan:form.value.slogan
+      slogan:form.value.slogan,
+      correo:form.value.correo,
+      compania:form.value.compania,
+      representante:form.value.representante,
+      telefono:form.value.telefono,
+      direccion:form.value.direccion
     };
     return this.httpCLient.post<any>(`${this.constante.API_SERVER}/marcas/updateMarca/${id}`,body);
   }
 
+  //link
+   createLink(idUser:string,acortador:string,link:string,url:string): Observable<any> {
+   
+    const body = {
+      user_id:idUser,
+      acortador:acortador,
+      link:link,
+      url:url,
+    };
+    return this.httpCLient.post(`${this.constante.API_SERVER}/link/createLink`, body);
+  }
+
+  getLinkByIdUser(id: string): Observable<any> {
+    return this.httpCLient.get<any>(`${this.constante.API_SERVER}/link/getLinkByIdUser/${id}`);
+  }
+
+  getLinkById(id: string): Observable<any> {
+    return this.httpCLient.get<any>(`${this.constante.API_SERVER}/link/linkById/${id}`);
+  }
+  
+  updateLink(id: string): Observable<any> {
+    return this.httpCLient.get<any>(`${this.constante.API_SERVER}/link/updateLink/${id}`);
+  }
+  
 }

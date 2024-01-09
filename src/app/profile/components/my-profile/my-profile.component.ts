@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
 import { ProfileServiceService } from '../../service/profile-service.service';
 import { AuthServiceService } from '../../../auth/services/auth-service.service';
+import { RedesSocialesService } from '../../../redes_sociales/services/redes-sociales.service';
 import { FriendsServiceService } from '../../../friends/services/friends-service.service';
 import { Router } from '@angular/router';
 import { User } from '../../../auth/interfaces/user';
@@ -128,6 +129,9 @@ export class MyProfileComponent {
   image: string='';
   selectedImage: any;
   state: number=0;
+  marcas: any;
+  selectMarca:string='';
+  publicaciones: any;
 
   constructor(
     private profileService: ProfileServiceService,
@@ -136,7 +140,8 @@ export class MyProfileComponent {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public constante: ConstantsSystem,
-    library: FaIconLibrary
+    library: FaIconLibrary,
+    public redesService: RedesSocialesService
   ) { library.addIconPacks(fas, far, fab);}
 
   ngOnInit(): void {
@@ -145,9 +150,10 @@ export class MyProfileComponent {
     if (sessionStorage.getItem('id')!) {
       this.id = sessionStorage.getItem('id')!;
       this.getUser();
-      this.getPostUser();
-      this.getmyLikes();
-      this.getLikesUser();
+      this.getMarcaUser();
+    
+      //this.getmyLikes();
+      //this.getLikesUser();
       this.album();
       if (sessionStorage.getItem('token')!) {
         this.token = JSON.parse(sessionStorage.getItem('token')!);
@@ -167,8 +173,8 @@ export class MyProfileComponent {
       this.state = this.dataUser.state[this.dataUser.state.length - 1];
       this.myProfile = this.dataUser.profile;
       this.getPostUser();
-        this.getCountPost();
-        this.onValidateUser();
+      //this.getCountPost();
+      this.onValidateUser();
     }
   }
 
@@ -179,6 +185,29 @@ export class MyProfileComponent {
     if (resp.data.length > 0) {
       this.Post = resp.data;
     } 
+  }
+
+  async getPublicaciones() {
+    const resp = await lastValueFrom(
+      this.redesService.getPublicaciones(this.id,this.val)
+    );
+    if (resp.data.length > 0) {
+      this.publicaciones = resp.data;
+      console.log("publicaciones",this.publicaciones);
+    }
+  }
+
+  async getMarcaUser() {
+    const resp = await lastValueFrom(
+      this.redesService.getMarcaByUser(this.id)
+    );
+    if (resp.data.length > 0) {
+      this.marcas = resp.data;
+      this.val=this.marcas[0]._id;
+      console.log("marcas",this.marcas);
+      console.log("select marcas",this.val);
+      this.getPublicaciones();
+    }
   }
 
   Update() {
@@ -302,7 +331,7 @@ export class MyProfileComponent {
       event.target.options[event.target.selectedIndex].text;
     this.valorSeleccionado = textoSeleccionado;
     this.val = event.target.options[event.target.selectedIndex].value;
-    this.getPostUser();
+    this.getPublicaciones();
     this.getCountPost();
   }
 
@@ -376,7 +405,7 @@ export class MyProfileComponent {
       this.cMyLike=this.myLikes.length;
     } 
   }
-
+  
   async getLikesUser() {
     const resp = await lastValueFrom(
       this.profileService.getLikesUser(this.id)
@@ -427,7 +456,8 @@ export class MyProfileComponent {
   }
 
   Nuevo() {
-    this.ban=2
+    this.ban=2;
+    this.router.navigate(['/addPublication'],{ queryParams: { marca: this.val } });   
   }
 
   album() {

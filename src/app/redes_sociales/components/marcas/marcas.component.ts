@@ -114,6 +114,9 @@ async detailMarca(id:string){
   }
 }
 
+async productos(id:string){
+  this.router.navigate(['/planning'],{ queryParams: { marca: id } });
+}
 
   async updateMarca(event:any){
   try{

@@ -7,7 +7,7 @@
     display: flex;
     min-height: 2vw;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly; /*space-around*/
     color: #ffffff;
   }
 
@@ -58,4 +58,23 @@ a {
     width: 100%; /* Hace que el textarea ocupe todo el ancho del div contenedor */
     box-sizing: border-box; 
   }
+  
+
+  .lista-botones {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    color: #333;
+  }
+
+  .lista-botones option {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    color: #333;
+  }
+
+ .btn-nuevo{
+  background-color: #12B9FF;
+  color: #ffffff;
+  }
+
   

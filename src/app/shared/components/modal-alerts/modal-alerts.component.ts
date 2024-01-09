@@ -29,7 +29,7 @@ export class ModalAlertsComponent {
   @Input() tipo: number = -1;
   @Input() data: any;
   @Input() references: any;
-  @Input() cuponS: any;
+  @Input() categoriaS: any;
   @Input() cupon: any;
   @Input() userId: any;
   @Input() cupoId: any;

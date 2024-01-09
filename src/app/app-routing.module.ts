@@ -6,7 +6,7 @@ import { AdminRechargsComponent } from './admin/components/admin-rechargs/admin-
 import { AdminRetreatComponent } from './admin/components/admin-retreat/admin-retreat.component';
 import { AdminUsersComponent } from './admin/components/admin-users/admin-users.component';
 import { AdminsComponent } from './admin/components/admins/admins.component';
-import { CuposComponent } from './admin/components/cupos/cupos.component';
+import { CategoriasComponent } from './admin/components/categorias/categorias.component';
 import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 import { FeedbackComponent } from './admin/components/feedback/feedback.component';
 import { ProfessionsComponent } from './admin/components/professions/professions.component';
@@ -35,14 +35,17 @@ import { AddPublicationComponent } from './redes_sociales/components/add-publica
 
 import { MyPostComponent } from './post/components/my-post/my-post.component';
 import {MarcasComponent} from './redes_sociales/components/marcas/marcas.component';
+import {AnaliticaComponent} from './redes_sociales/components/analitica/analitica.component';
+import { FeesComponent } from './shared/components/fees/fees.component';
+import { PoliticsComponent } from './shared/components/politics/politics.component';
+import { AgreementsComponent } from './shared/components/agreements/agreements.component';
+import { LinkComponent } from './redes_sociales/components/link/link.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegisterComponent },
-
   { path: 'home', component: HomeComponent },
-
   { path: 'dataUser', component: UserDataComponent },
   { path: 'dataUser/:estado', component: UserDataComponent },
 
@@ -59,7 +62,7 @@ const routes: Routes = [
   { path: 'options/:code', component: ProfessionsComponent },
   { path: 'retirosE', component: AdminRetreatComponent },
   { path: 'supUsers', component: AdminUsersComponent },
-  { path: 'cupones', component: CuposComponent },
+  { path: 'categorias', component: CategoriasComponent },
   { path: 'apis', component: ApisComponent },
 
   //billetera
@@ -82,6 +85,12 @@ const routes: Routes = [
   { path: 'addPublication', component: AddPublicationComponent },
   { path: 'post', component: MyPostComponent },
   { path: 'marcas', component: MarcasComponent },
+  { path: 'analitica', component: AnaliticaComponent },
+
+  { path: 'link', component: LinkComponent },  
+  { path: 'fees', component: FeesComponent },
+  { path: 'politicas', component: PoliticsComponent },
+  { path: 'acuerdo', component: AgreementsComponent },
 ];
 
 @NgModule({

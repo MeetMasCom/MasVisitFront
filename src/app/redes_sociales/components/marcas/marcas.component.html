@@ -74,6 +74,12 @@
                               Editar
                             </button>
                           </td>
+                          <td class="text-center">
+                            <button type="button" class="btn btn-outline-primary" (click)="productos(marca._id)">
+                              <fa-icon [icon]="['far', 'pen-to-square']"></fa-icon>
+                              Producctos
+                            </button>
+                          </td>
                         </tr>
                       </ng-container>
                        
@@ -152,6 +158,56 @@
                 </div>
                 <div class="col-12 containerInput mt-2 mb-3">
                   <div class="form-group col-md-6 col-sm-12 m-2 mt-4">
+                    <label>Nombre Compañia</label>
+                    <input
+                      id="compania"
+                      type="text"
+                      class="form-control"
+                      placeholder="Nombre Compañia"
+                      required
+                      ngModel
+                      name="compania"
+                      #compania="ngModel"
+                      [ngClass]="'input'"
+                    />
+                    <div
+                      *ngIf="
+                        compania.invalid && (compania.dirty || compania.touched)
+                      "
+                      class="text-danger form-group position-absolute"
+                    >
+                      <small *ngIf="compania.errors?.['required']">
+                        Ingrese el nombre de la compania.
+                      </small>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6 col-sm-12 m-2 mt-4">
+                    <label>Representante:</label>
+                    <input
+                      id="representante"
+                      type="text"
+                      class="form-control"
+                      placeholder="Nombre del representante"
+                      required
+                      ngModel
+                      name="representante"
+                      #representante="ngModel"
+                      [ngClass]="'input'"
+                    />
+                    <div
+                      *ngIf="
+                        representante.invalid && (representante.dirty || representante.touched)
+                      "
+                      class="text-danger form-group position-absolute"
+                    >
+                      <small *ngIf="representante.errors?.['required']">
+                        Ingrese el nombre del representante.
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 containerInput mt-2 mb-3">
+                  <div class="form-group col-md-6 col-sm-12 m-2 mt-4">
                     <label>Slogan</label>
                     <input
                       id="slogan"
@@ -175,7 +231,84 @@
                       </small>
                     </div>
                   </div>
+                  <div class="form-group col-md-6 col-sm-12 m-2 mt-4">
+                    <label>Correo:</label>
+                    <input
+                      id="correo"
+                      type="text"
+                      class="form-control"
+                      placeholder="correo"
+                      required
+                      ngModel
+                      name="correo"
+                      #correo="ngModel"
+                      [ngClass]="'input'"
+                    />
+                    <div
+                      *ngIf="
+                        correo.invalid && (correo.dirty || correo.touched)
+                      "
+                      class="text-danger form-group position-absolute"
+                    >
+                      <small *ngIf="correo.errors?.['required']">
+                        Ingrese el correo.
+                      </small>
+                    </div>
+                  </div>
                 </div>
+                <div class="col-12 containerInput mt-2 mb-3">
+                  <div class="form-group col-md-6 col-sm-12 m-2 mt-4">
+                    <label>Teléfono:</label>
+                    <input
+                      id="telefono"
+                      type="number"
+                      class="form-control"
+                      placeholder="telefono"
+                      required
+                      ngModel
+                      name="telefono"
+                      #telefono="ngModel"
+                      [ngClass]="'input'"
+                    />
+                    <div
+                      *ngIf="
+                        telefono.invalid && (telefono.dirty || telefono.touched)
+                      "
+                      class="text-danger form-group position-absolute"
+                    >
+                      <small *ngIf="telefono.errors?.['required']">
+                        Ingrese el número de teléfono.
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 containerInput mt-2 mb-3">
+                  <div class="form-group col-md-12 col-sm-12 m-2 mt-4">
+                    <label>Dirección:</label>
+                    <input
+                      id="direccion"
+                      type="text"
+                      class="form-control"
+                      placeholder="Dirección"
+                      required
+                      ngModel
+                      name="direccion"
+                      #direccion="ngModel"
+                      [ngClass]="'input'"
+                    />
+                    <div
+                      *ngIf="
+                        direccion.invalid && (direccion.dirty || direccion.touched)
+                      "
+                      class="text-danger form-group position-absolute"
+                    >
+                      <small *ngIf="direccion.errors?.['required']">
+                        Ingrese el slogan.
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                
                 <div class="form-group text-center">
                   <input
                     type="submit"

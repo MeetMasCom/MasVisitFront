@@ -45,13 +45,20 @@
             <a class="nav-item nav-link " href="login">Login</a>
           </ng-container>
           <ng-container *ngIf="token !== ''">
-            <a class="nav-item nav-link " href="home">Mas Visit</a>
-            <a class="nav-item nav-link " href="">Redes Sociales</a>
-            <a class="nav-item nav-link " href="planning">Productos</a>
-            <a class="nav-item nav-link " href="marketing">Novedades</a>
-            <a class="nav-item nav-link " href="post">Post</a>
-            <a class="nav-item nav-link " href="emprendedor">Precios</a>
-            <a class="nav-item nav-link " href="envivo">En vivo</a>
+            <fa-icon [icon]="['fas', 'home']"></fa-icon>
+            <a class="nav-item nav-link " href="marcas"><fa-icon [icon]="['fas', 'building']"></fa-icon>              
+            </a>
+            <a class="nav-item nav-link " href="link"> <fa-icon [icon]="['fas', 'link']"></fa-icon>
+            </a>
+           
+            <a class="nav-item nav-link " href="planning"><fa-icon [icon]="['fas', 'calendar']"></fa-icon><!--planificador -->
+            </a>
+            <a class="nav-item nav-link " href="">
+            <fa-icon [icon]="['fas', 'shopping-cart']"></fa-icon><!--tienda -->
+          </a>
+             <a class="nav-item nav-link " href="post"><fa-icon [icon]="['fas', 'pencil-alt']"></fa-icon>
+              <!--post -->
+            </a>
 
           <a class="nav-item nav-link d-none" href="search">Conocer Gente</a>
             <a class="nav-item nav-link d-none" href="moda">Moda</a>
@@ -98,10 +105,36 @@
             </a>
 
             <div class="dropdown">
-              <a class="btn dropdown-toggle border-0 nav-item nav-link" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                <fa-icon [icon]="['fas', 'user']"></fa-icon>
-                {{ user }}
-              </a>
+              <a class="btn dropdown-toggle border-0 nav-item nav-link" href="#" role="button" id="dropdownMenuLink"
+              data-bs-toggle="dropdown" aria-expanded="false">
+
+              <ng-container *ngIf="(this.verify === true) && (this.dataUser.type === 0) ">
+                <fa-icon [icon]="faUserCheck" style="color:#CD7F32"></fa-icon>
+              </ng-container>
+              <ng-container *ngIf="(this.verify === true) && (this.dataUser.type === 1) ">
+                <fa-icon [icon]="faUserCheck" style="color:#C0C0C0"></fa-icon>
+              </ng-container>
+              <ng-container *ngIf="(this.verify === true) && (this.dataUser.type === 2) ">
+                <fa-icon [icon]="faUserCheck" style="color:#EABE3F"></fa-icon>
+              </ng-container>
+              <ng-container *ngIf="(this.verify === true) && (this.dataUser.type === 3) ">
+                <fa-icon [icon]="faUserCheck" style="color:#5DADE2"></fa-icon>
+              </ng-container>
+
+              <ng-container *ngIf="(this.verify === false) && (this.dataUser.type===0) ">
+                <fa-icon [icon]="['fas', 'user']" style="color:#CD7F32"></fa-icon>
+              </ng-container>
+              <ng-container *ngIf="(this.verify === false) && (this.dataUser.type===1) ">
+                <fa-icon [icon]="['fas', 'user']" style="color:#C0C0C0"></fa-icon>
+              </ng-container>
+              <ng-container *ngIf="(this.verify === false) && (this.dataUser.type===2) ">
+                <fa-icon [icon]="['fas', 'user']" style="color:#EABE3F"></fa-icon>
+              </ng-container>
+              <ng-container *ngIf="(this.verify === false) && (this.dataUser.type===3) ">
+                <fa-icon [icon]="['fas', 'user']" style="color:#5DADE2"></fa-icon>
+              </ng-container>
+             {{ user }}
+            </a>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><a class="dropdown-item" href="myProfile">Mi Perfil</a></li>
                 <li><a class="dropdown-item"  [routerLink]="'/dataUser/' + estado" >Mis Datos</a></li>

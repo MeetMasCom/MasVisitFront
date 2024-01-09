@@ -294,78 +294,72 @@ export class AdminServiceService {
     return this.http.get(`${this.constante.API_SERVER}/admin/getverifyTeacher?typeUser=`+id);
   }
 
-  getCuponUser(id:string): Observable<any> {
+
+  getCategorias(): Observable<any> {
     return this.httpCLient.get<any>(
-      `${this.constante.API_SERVER}/cupon/getUserCupon/${id}`);
+      `${this.constante.API_SERVER}/categoria/getAllCategoria`);
   }
 
-  getCuponActivoUser(id:string): Observable<any> {
+
+  getCategoriaById(id:string): Observable<any> {
     return this.httpCLient.get<any>(
-      `${this.constante.API_SERVER}/cupon/getCuponActivoUser/${id}`);  }
-
-
-  
-
-  getCuponById(id:string): Observable<any> {
-    return this.httpCLient.get<any>(
-      `${this.constante.API_SERVER}/cupon/getByIdCupon/${id}`);
+      `${this.constante.API_SERVER}/categoria/getByIdCategoria/${id}`);
   }
 
-  updateStateCupon(id: string, state: number): Observable<any> {
+  updateStateCategoria(id: string, state: number): Observable<any> {
     const body = {
       state: state,
     };
-    return this.http.post(`${this.constante.API_SERVER}/cupon/updateState/${id}`, body);
+    return this.http.post(`${this.constante.API_SERVER}/categoria/updateState/${id}`, body);
   }
   
-  updatedCupo(idCupo:string,form: any,id:string): Observable<any> {
-    return this.httpCLient.post<any>(`${this.constante.API_SERVER}/cupon/updateCupon/${idCupo}`, {
-      cantidad:form.value.cantidad,
-      porcentaje:form.value.porcentaje,
-      user_id:id
+  updatedCategoria(idCategoria:string,form: any): Observable<any> {
+    return this.httpCLient.post<any>(`${this.constante.API_SERVER}/categoria/updateCategoria/${idCategoria}`, {
+      nombre:form.value.nombre,
+      descripcion:form.value.descripcion,
     });
   }
 
-  registerCupo(id:string,form: any): Observable<any> {
-    return this.httpCLient.post<any>(`${this.constante.API_SERVER}/cupon/addCupon`, {
-      cantidad: form.value.cantidad,
-      porcentaje:form.value.porcentaje,
-      user_id:id
-    });
-  }
-
-
-  //dar cupon al usuario
-  darCupo(admin:string,id:string,form: any): Observable<any> {
-    return this.httpCLient.post<any>(`${this.constante.API_SERVER}/cuponUser/addCupon`, {
-      user_id: admin,
-      user_cupon:id,
-      cupon_id:form.value.tipoCupon
-    });
-  }
-
-  getByIdAdminCupon(id:string): Observable<any> {
-    return this.httpCLient.get<any>(
-      `${this.constante.API_SERVER}/cuponUser/getByIdAdminCupon/${id}`);
-  }
-
-  deleteCupoUser(id:string): Observable<any> {
-    return this.httpCLient.delete<any>(
-      `${this.constante.API_SERVER}/cuponUser/deleteCupoUser/${id}`);
-  }
-
-  restarCupon(id:string,val:number): Observable<any> {
+  registerCategoria(form: any): Observable<any> {
     const body = {
-      cantidad: val,
+      name: form.value.nombre,
+      description: form.value.descripcion,
     };
-    return this.httpCLient.post<any>(
-      `${this.constante.API_SERVER}/cupon/restarCupon/${id}`,body);
+    return this.httpCLient.post<any>(`${this.constante.API_SERVER}/categoria/addCategoria`, body)
   }
 
-  getUsersincupo(): Observable<any> {
-    return this.httpCLient.get<any>(
-      `${this.constante.API_SERVER}/user/getUserSinCupon`);
-  }
+
+  // //dar cupon al usuario
+  // darCupo(admin:string,id:string,form: any): Observable<any> {
+  //   return this.httpCLient.post<any>(`${this.constante.API_SERVER}/cuponUser/addCupon`, {
+  //     user_id: admin,
+  //     user_cupon:id,
+  //     cupon_id:form.value.tipoCupon
+  //   });
+  // }
+
+  // getByIdAdminCupon(id:string): Observable<any> {
+  //   return this.httpCLient.get<any>(
+  //     `${this.constante.API_SERVER}/cuponUser/getByIdAdminCupon/${id}`);
+  // }
+
+  // deleteCupoUser(id:string): Observable<any> {
+  //   return this.httpCLient.delete<any>(
+  //     `${this.constante.API_SERVER}/cuponUser/deleteCupoUser/${id}`);
+  // }
+
+  // restarCupon(id:string,val:number): Observable<any> {
+  //   const body = {
+  //     cantidad: val,
+  //   };
+  //   return this.httpCLient.post<any>(
+  //     `${this.constante.API_SERVER}/cupon/restarCupon/${id}`,body);
+  // }
+
+  // getUsersincupo(): Observable<any> {
+  //   return this.httpCLient.get<any>(
+  //     `${this.constante.API_SERVER}/user/getUserSinCupon`);
+  // }
   
   
   validateCodigoCupo(codigo: string): Observable<any> {

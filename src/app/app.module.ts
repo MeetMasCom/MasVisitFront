@@ -81,7 +81,7 @@ import { AdminRetreatComponent } from './admin/components/admin-retreat/admin-re
 import { AdminUsersComponent } from './admin/components/admin-users/admin-users.component';
 import { RegistroUserComponent } from './auth/components/registro-user/registro-user.component';
 import { CountdownComponent } from './shared/components/countdown/countdown.component';
-import { CuposComponent } from './admin/components/cupos/cupos.component';
+import { CategoriasComponent } from './admin/components/categorias/categorias.component';
 
 import { StartLayoutComponent } from './layouts/components/start-layout/start-layout.component';
 import { AdsLayoutsComponent } from './layouts/components/ads-layouts/ads-layouts.component';
@@ -110,6 +110,9 @@ import { PlanningComponent } from './redes_sociales/components/planning/planning
 import { AddPublicationComponent } from './redes_sociales/components/add-publication/add-publication.component';
 import { MyPostComponent } from './post/components/my-post/my-post.component';
 import { MarcasComponent } from './redes_sociales/components/marcas/marcas.component';
+import { AnaliticaComponent } from './redes_sociales/components/analitica/analitica.component';
+import { LinkComponent } from './redes_sociales/components/link/link.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -182,7 +185,7 @@ export function urlValidator(
     AdminUsersComponent,
     RegistroUserComponent,
     CountdownComponent,
-    CuposComponent,
+    CategoriasComponent,
     StartLayoutComponent,
     AdsLayoutsComponent,
     AdminLayoutComponent,
@@ -196,8 +199,11 @@ export function urlValidator(
     AddPublicationComponent,
     MyPostComponent,
     MarcasComponent,
+    AnaliticaComponent,
+    LinkComponent,
   ],
   imports: [
+    NgxPaginationModule,
     CKEditorModule,
     CommonModule,
     BrowserModule,
@@ -231,6 +237,7 @@ export function urlValidator(
     }),
     FormlyBootstrapModule,
     ToastrModule.forRoot(), // ToastrModule added
+    
   ],
   providers: [
     AuthServiceService,

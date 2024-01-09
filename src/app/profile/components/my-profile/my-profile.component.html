@@ -221,7 +221,7 @@
             <select
               #selectElement
               type="text"
-              class="form-select d-none"
+              class="form-select"
               id="aprofile"
               required
               ngModel
@@ -231,7 +231,7 @@
               #aprofile="ngModel"
               [ngClass]="'input'"
             >
-              <option selected *ngFor="let p of perfil" [value]="p._id">
+              <option selected *ngFor="let p of marcas" [value]="p._id">
                 {{ p.name }}
               </option>
             </select>
@@ -720,7 +720,7 @@
         <div class="col-md-12">
           <ng-container *ngIf="Post?.length > 0">
             <div class="row d-flex justify-content-center">
-              <div class="col-md-4 p-2" *ngFor="let post of Post">
+              <div class="col-md-4 p-2" *ngFor="let post of publicaciones">
                 <div class="contenido rounded p-3">
                   <div class="container">
                     <div class="row">
